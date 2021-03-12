@@ -1,0 +1,40 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  background-color: black;
+}
+
+.header {
+  height: 10%;
+  background-color: #00ccff;
+}
+
+.header .logo {
+  height: 100%;
+  width: 400px;
+  min-width: 400px;
+  background-image: url(../img/LaPro.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 5px;
+}
+.contenu {
+  height: 75%;
+  background-color: #33ff99;
+}
+
+#creation {
+  background-color: red;
+}
+#modification {
+  background-color: blue;
+}
+#suppression {
+  background-color: green;
+}
+.footer {
+  height: 15%;
+  background-color: #ff4c00;
+}

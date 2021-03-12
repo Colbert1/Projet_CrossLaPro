@@ -1,0 +1,16 @@
+Apache
+192.168.65.78
+root
+root
+
+
+BDD
+192.168.65.183
+root
+root
+
+
+Samba
+192.168.65.137
+colbert/danel/garnon
+mdp mail la pro
