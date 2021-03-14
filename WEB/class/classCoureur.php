@@ -22,7 +22,6 @@ class Coureur
         $this->_bdd = $bdd;
     }
     
-    
     public function ajoutCoureur()
     {
         //Ajout d'un coureur à une course
