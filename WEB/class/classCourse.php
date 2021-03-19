@@ -21,15 +21,26 @@ class Course
     {
         $this->_bdd = $bdd;
     }
+    public function set()
+    {
+    }
+    public function set()
+    {
+    }
+    public function set()
+    {
+    }
+    public function get()
+    {
+    }
+    public function get()
+    {
+    }
+    public function get()
+    {
+    }
 
-    //Création de la course : paramètres de la course (Nom de la course, date de la course, les classes participantes, distance de la course, nombre de tours)
-    public function creationCourse($nom, $date, $classeP, $distance, $nbTour) //Création d'une course
-    {
-    }
-    public function modificationCourse() //Modification des informations d'une course
-    {
-    }
-    public function suppressionCourse() //Suppression d'une course
+    public function init()
     {
     }
 }

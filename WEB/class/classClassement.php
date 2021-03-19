@@ -26,21 +26,19 @@ class Classement {
     }
 
     public function getIdCourse() {
-        $req = $this->_bdd->query("SELECT `id_course` FROM `course` WHERE `course`.`nom` = '".$this->_nom_course."';");
-        $id  = $req->fetch();
-        $this->_id_course = $id['id_course'];
+        return $this->_id_course;
     }
 
     public function getDateCourse(){
-
+        return $this->_date_course;
     }
 
     public function getNomCourse(){
-
+        return $this->_nom_course;
     }
 
     public function getIdTour(){
-
+        
     }
 
     public function getDistance(){
