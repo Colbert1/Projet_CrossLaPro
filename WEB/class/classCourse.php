@@ -23,16 +23,13 @@ class Course
         $this->_distancecourse = $distancecourse;
         $this->_nmbretourcourse = $nmbretourcourse;
     }
-    public function creationCourse()
+    public function creationCourse() //Création d'une course
     {
-        //Création d'une course
     }
-    public function modificationCourse()
+    public function modificationCourse() //Modification des informations d'une course
     {
-        //Modification des informations d'une course
     }
-    public function suppressionCourse()
+    public function suppressionCourse() //Suppression d'une course
     {
-        //Suppression d'une course
     }
 }

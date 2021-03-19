@@ -16,9 +16,6 @@ require("class/classCoureur.php");
         <h2>Inscription</h2>
         <form id="inscription" action="" method="POST">
             <div>
-                <input type="text" name="username" placeholder="Nom d'utilisateur" required>
-            </div>
-            <div>
                 <input type="password" name="password" placeholder="Mot de passe" required>
             </div>
             <div>
@@ -45,20 +42,19 @@ require("class/classCoureur.php");
 </html>
 <?php
 if (
-    !empty($_POST['username']) && !empty($_POST['password'])
-    && !empty($_POST['Cpassword']) && !empty($_POST['nom'])
-    && !empty($_POST['prenom']) && !empty($_POST['email'])
+    !empty($_POST['password']) && !empty($_POST['Cpassword']) && !empty($_POST['nom'])
+    && !empty($_POST['prenom']) && !empty($_POST['mail'])
 ) {
-    $username  = $_POST['username'];
+
     $password  = $_POST['password'];
     $Cpassword = $_POST['Cpassword'];
-    $email     = $_POST['email'];
+    $mail     = $_POST['mail'];
     $nom       = $_POST['nom'];
     $prenom    = $_POST['prenom'];
 
     if ($password == $Cpassword) {
         $coureur = new Coureur($bdd);
-        $coureur->inscriptionSite($username, $password, $email, $nom, $prenom);
+        $coureur->inscriptionSite($password, $mail, $nom, $prenom);
     } else {
         echo "<div>Confirmation de mot de passe incorrect</div>";
     }
