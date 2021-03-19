@@ -21,16 +21,31 @@ class Coureur
     {
         $this->_bdd = $bdd;
     }
-    public function ajoutCoureur()
+    public function setIdParticipant($newIdParticipant)
     {
-        //Ajout d'un coureur à une course
     }
-    public function modifierCoureur()
+    public function setUser($newUser)
     {
-        //Modification des informations du coureur
     }
-    public function supprimerCoureur()
+    public function setCourse($newCourse)
     {
-        //Suppression d'un coureur à une course
+    }
+    public function setDossard($newDossard)
+    {
+    }
+    public function getIdParticipant()
+    {
+    }
+    public function getUser()
+    {
+    }
+    public function getCourse()
+    {
+    }
+    public function getDossard()
+    {
+    }
+    public function init()
+    {
     }
 }

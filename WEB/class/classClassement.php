@@ -8,7 +8,7 @@ class Classement {
     private $_bdd;
 
     public function __construct() {
-        $dsn      = "mysql:dbname=ProjetCross;host=192.168.65.183";
+        $dsn      = "mysql:dbname=Projet_CrossLaPro;host=192.168.65.183";
         $username = "root";
         $password = "root";
 
@@ -38,7 +38,7 @@ class Classement {
     }
 
     public function getIdTour(){
-        
+
     }
 
     public function getDistance(){

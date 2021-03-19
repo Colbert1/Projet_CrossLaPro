@@ -82,21 +82,27 @@ class User
     }
     public function getNom()
     {
+        return $this->_nom;
     }
     public function getPrenom()
     {
+        return $this->_prenom;
     }
     public function getMail()
     {
+        return $this->_mail;
     }
     public function getPasword()
     {
+        return $this->_password;
     }
     public function getStatus()
     {
+        return $this->_status;
     }
     public function getClasse()
     {
+        return $this->_classe;
     }
     public function init()
     {

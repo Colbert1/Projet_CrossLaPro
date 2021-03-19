@@ -3,6 +3,7 @@ class Classe
 {
     private $idclasse;
     private $nom;
+    private $bdd;
 
     public function __construct($bdd)
     {

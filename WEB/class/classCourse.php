@@ -21,25 +21,24 @@ class Course
     {
         $this->_bdd = $bdd;
     }
-    public function set()
+    public function setIdCourse($newIdCourse)
     {
     }
-    public function set()
+    public function setDate($newDate)
     {
     }
-    public function set()
+    public function setNom($newNom)
     {
     }
-    public function get()
+    public function getIdCourse()
     {
     }
-    public function get()
+    public function getDate()
     {
     }
-    public function get()
+    public function getNom()
     {
     }
-
     public function init()
     {
     }
