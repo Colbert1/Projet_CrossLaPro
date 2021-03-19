@@ -9,6 +9,10 @@ class User
     private $_motdepasse;
     private $_bdd;
 
+    public function __construct($bdd){
+        $this->_bdd = $bdd;
+    }
+
     public function inscriptionSite($password, $mail, $nom, $prenom)
     {
         $bdd = $this->_bdd;
@@ -16,33 +20,34 @@ class User
         $hashPasswd = password_hash($password, PASSWORD_ARGON2ID);
 
         try {
-            $req = $bdd->prepare("INSERT INTO `user` (`id_user`, `nom`, `prenom`, `password`, `mail`, `status`) VALUES (NULL, :nom, :prenom, :password, :mail, '0') ;");
+            $req = $bdd->prepare("INSERT INTO `user` (`id_user`, `nom`, `prenom`, `mail`, `password`, `status`, `id_classe`) 
+            VALUES (NULL, :nom, :prenom, :mail, :password, '0', NULL);");
             $req->bindParam('nom', $nom, PDO::PARAM_STR);
             $req->bindParam('prenom', $prenom, PDO::PARAM_STR);
-            $req->bindParam('password', $hashPasswd, PDO::PARAM_STR);
             $req->bindParam('mail', $mail, PDO::PARAM_STR);
+            $req->bindParam('password', $hashPasswd, PDO::PARAM_STR);
             $req->execute();
 
-            header("Location: ../index.php");
+            header("Location: index.php");
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
             echo "Les datas : ";
         }
     }
-    public function connexionSite($bdd)
+
+    public function connexionSite($mail,$passwd)
     {
-        if (!empty($_POST['nom']) && !empty($_POST['password'])) {
-            $nom = $_POST['nom'];
-            $password = $_POST['password'];
+
+        $bdd = $this->_bdd;
 
             try {
-                $req = $bdd->prepare("SELECT `nom`, `password` FROM `user` WHERE `user`.`nom` = :nom");
-                $req->bindParam('nom', $nom, PDO::PARAM_STR);
+                $req = $bdd->prepare("SELECT `mail`, `password` FROM `user` WHERE `user`.`mail` = :mail");
+                $req->bindParam('mail', $mail, PDO::PARAM_STR);
                 $req->execute();
                 $result = $req->fetch(PDO::FETCH_ASSOC);
 
-                if (password_verify($password, $result['password']) == TRUE) {
-                    header("Location: ../connexion.php");
+                if (password_verify($passwd, $result['password']) == TRUE) {
+                    header("Location: accueil.php");
                 } else {
                     echo "<div style='color:white'>Identifiants incorrects !</div>";
                 }
@@ -50,6 +55,5 @@ class User
                 echo "Erreur ! " . $e->getMessage();
                 echo "Les datas : ";
             }
-        }
     }
 }

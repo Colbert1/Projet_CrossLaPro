@@ -1,5 +1,5 @@
 <?php 
-$dsn = 'mysql:dbname=Projet_CrossLaPro;host=192.168.64.183';
+$dsn = 'mysql:dbname=Projet_CrossLaPro;host=192.168.65.183';
 $user = 'root';
 $password = 'root';
 
@@ -12,4 +12,3 @@ try {
 } catch (PDOException $e) {
     echo 'Connexion échouée : ' . $e->getMessage();
 }
-?>
