@@ -4,16 +4,18 @@ class User
     private $_id;
     private $_nom;
     private $_prenom;
-    private $_classe;
     private $_mail;
-    private $_motdepasse;
+    private $_password;
+    private $_status;
+    private $_classe;
     private $_bdd;
 
-    public function __construct($bdd){
+    public function __construct($bdd)
+    {
         $this->_bdd = $bdd;
     }
 
-    public function inscriptionSite($password, $mail, $nom, $prenom)
+    public function inscriptionUser($password, $mail, $nom, $prenom)
     {
         $bdd = $this->_bdd;
 
@@ -35,25 +37,77 @@ class User
         }
     }
 
-    public function connexionSite($mail,$passwd)
+    public function connexionUser($mail, $passwd)
     {
 
         $bdd = $this->_bdd;
 
-            try {
-                $req = $bdd->prepare("SELECT `mail`, `password` FROM `user` WHERE `user`.`mail` = :mail");
-                $req->bindParam('mail', $mail, PDO::PARAM_STR);
-                $req->execute();
-                $result = $req->fetch(PDO::FETCH_ASSOC);
+        try {
+            $req = $bdd->prepare("SELECT `mail`, `password` FROM `user` WHERE `user`.`mail` = :mail");
+            $req->bindParam('mail', $mail, PDO::PARAM_STR);
+            $req->execute();
+            $result = $req->fetch(PDO::FETCH_ASSOC);
 
-                if (password_verify($passwd, $result['password']) == TRUE) {
-                    header("Location: accueil.php");
-                } else {
-                    echo "<div style='color:white'>Identifiants incorrects !</div>";
-                }
-            } catch (Exception $e) {
-                echo "Erreur ! " . $e->getMessage();
-                echo "Les datas : ";
+            if (password_verify($passwd, $result['password']) == TRUE) {
+                header("Location: accueil.php");
+            } else {
+                echo "<div style='color:white'>Identifiants incorrects !</div>";
             }
+        } catch (Exception $e) {
+            echo "Erreur ! " . $e->getMessage();
+            echo "Les datas : ";
+        }
     }
+    public function setMail($newMail)
+    {
+    }
+    public function setPassword($newPassword)
+    {
+    }
+    public function setNom($newNom)
+    {
+    }
+    public function setPrenom($newPrenom)
+    {
+    }
+    public function setStatus($newStatus)
+    {
+    }
+    public function setClasse()
+    {
+    }
+    public function getId()
+    {
+        return $this->_id;
+    }
+    public function getNom()
+    {
+    }
+    public function getPrenom()
+    {
+    }
+    public function getMail()
+    {
+    }
+    public function getPasword()
+    {
+    }
+    public function getStatus()
+    {
+    }
+    public function getClasse()
+    {
+    }
+    public function init()
+    {
+        $requete = $this->_bdd->query("SELECT * FROM user WHERE id_user = " . $this->_id);
+        $data = $requete->fetch();
+        $this->_nom = $data['nom'];
+        $this->_prenom = $data['prenom'];
+        $this->_mail = $data['mail'];
+        $this->_password = $data['password'];
+        $this->_statut = $data['status'];
+        $this->_classe = $data['id_classe'];
+    }
+
 }

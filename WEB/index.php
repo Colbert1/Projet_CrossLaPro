@@ -54,9 +54,11 @@ require("class/classUser.php");
 
 </html>
 <?php
-if (!empty($_POST['password']) 
-&& !empty($_POST['Cpassword']) && !empty($_POST['nom']) 
-&& !empty($_POST['prenom']) && !empty($_POST['mail'])) {
+if (
+    !empty($_POST['password'])
+    && !empty($_POST['Cpassword']) && !empty($_POST['nom'])
+    && !empty($_POST['prenom']) && !empty($_POST['mail'])
+) {
 
     $password  = $_POST['password'];
     $Cpassword = $_POST['Cpassword'];
@@ -66,15 +68,15 @@ if (!empty($_POST['password'])
 
     if ($password == $Cpassword) {
         $user = new User($bdd);
-        $user->inscriptionSite($password, $mail, $nom, $prenom);
+        $user->inscriptionUser($password, $mail, $nom, $prenom);
     } else {
         echo "<div>Confirmation de mot de passe incorrect</div>";
     }
-}elseif(!empty($_POST['email2']) && !empty($_POST['password2'])){
+} elseif (!empty($_POST['email2']) && !empty($_POST['password2'])) {
     $email  = $_POST['email2'];
     $passwd = $_POST['password2'];
 
     $user = new User($bdd);
-    $user->connexionSite($email,$passwd);
+    $user->connexionUser($email, $passwd);
 }
 ?>

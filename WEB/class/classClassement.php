@@ -3,11 +3,9 @@ class Classement {
     private $_id_course;
     private $_date_course;
     private $_nom_course;
-    private $_id_tour;
-    private $_distance;
-    private $_tempsDepart;
-    private $_bdd;
     private $_participants;
+    private $_distance;
+    private $_bdd;
 
     public function __construct() {
         $dsn      = "mysql:dbname=ProjetCross;host=192.168.65.183";
@@ -28,7 +26,9 @@ class Classement {
     }
 
     public function getIdCourse() {
-
+        $req = $this->_bdd->query("SELECT `id_course` FROM `course` WHERE `course`.`nom` = '".$this->_nom_course."';");
+        $id  = $req->fetch();
+        $this->_id_course = $id['id_course'];
     }
 
     public function getDateCourse(){
