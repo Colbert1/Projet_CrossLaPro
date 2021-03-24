@@ -1,8 +1,15 @@
 <?php
 class Temps
 {
-    public function __construct()
+    private $_idtemps;
+    private $_participant;
+    private $_temps;
+    private $_tour;
+    private $_bdd;
+
+    public function __construct($bdd)
     {
+        $this->_bdd = $bdd;
     }
     public function setIdTemps($newIdTemps)
     {
@@ -18,15 +25,19 @@ class Temps
     }
     public function getIdTemps()
     {
+        return $this->_idtemps;
     }
     public function getParticipant()
     {
+        return $this->_participant;
     }
     public function getTemps()
     {
+        return $this->_temps;
     }
     public function getTour()
     {
+        return $this->_tour;
     }
     public function init()
     {

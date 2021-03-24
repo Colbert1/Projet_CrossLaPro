@@ -8,13 +8,10 @@
 ----------------------------------------*/
 class Course
 {
-    private $idcourse;
-    private $nom;
-    private $date;
-    private $classeP; //Classe participante
-    private $distance;
-    private $nbTour;
-    private $bdd;
+    private $_idcourse;
+    private $_nom;
+    private $_date;
+    private $_bdd;
 
     //Constructeur : Stockage du PDO
     public function __construct($bdd)
@@ -32,12 +29,15 @@ class Course
     }
     public function getIdCourse()
     {
+        return $this->_idcourse;
     }
     public function getDate()
     {
+        return $this->_date;
     }
     public function getNom()
     {
+        return $this->_nom;
     }
     public function init()
     {

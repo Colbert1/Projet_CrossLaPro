@@ -1,8 +1,14 @@
 <?php
 class Tour
 {
-    public function __construct()
+    private $_idtour;
+    private $_distance;
+    private $_course;
+    private $_bdd;
+
+    public function __construct($bdd)
     {
+        $this->_bdd = $bdd;
     }
     public function setIdTour($newIdTour)
     {
@@ -15,12 +21,15 @@ class Tour
     }
     public function getIdTour()
     {
+        return $this->_idtour;
     }
     public function getDistance()
     {
+        return $this->_distance;
     }
-    public function getsetCourse()
+    public function getCourse()
     {
+        return $this->_course;
     }
     public function init()
     {

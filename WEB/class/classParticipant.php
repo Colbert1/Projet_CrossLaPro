@@ -9,12 +9,10 @@ require_once("bdd.php");
 ----------------------------------------*/
 class Coureur
 {
-    private $_id;
-    private $_nom;
-    private $_prenom;
-    private $_classe;
-    private $_mail;
-    private $_motdepasse;
+    private $_idparticipant;
+    private $_user;
+    private $_course;
+    private $_dossard;
     private $_bdd;
 
     public function __construct($bdd)
@@ -35,15 +33,19 @@ class Coureur
     }
     public function getIdParticipant()
     {
+        return $this->_idparticipant;
     }
     public function getUser()
     {
+        return $this->_user;
     }
     public function getCourse()
     {
+        return $this->_course;
     }
     public function getDossard()
     {
+        return $this->_dossard;
     }
     public function init()
     {

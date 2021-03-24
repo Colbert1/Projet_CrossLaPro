@@ -1,9 +1,9 @@
 <?php
 class Classe
 {
-    private $idclasse;
-    private $nom;
-    private $bdd;
+    private $_idclasse;
+    private $_nom;
+    private $_bdd;
 
     public function __construct($bdd)
     {
@@ -18,9 +18,11 @@ class Classe
     }
     public function getIdClasse()
     {
+        return $this->_idclasse;
     }
     public function getNom()
     {
+        return $this->_nom;
     }
     public function init()
     {

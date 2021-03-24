@@ -68,11 +68,12 @@ class Classement {
     }
 
     public function triTempsC() {
- 
+        $tabCoureursAlph = $this->_participants;
+        //A continuer
     }
 
     public function triTempsD() {
-
+        //A continuer
     }
 }
 ?>

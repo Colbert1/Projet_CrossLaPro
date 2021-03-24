@@ -1,8 +1,12 @@
 <?php
 class Dossard
 {
-    public function __construct()
+    private $_iddossard;
+    private $_numdossard;
+    private $_bdd;
+    public function __construct($bdd)
     {
+        $this->_bdd = $bdd;
     }
 
     public function setIdDossard($newIdDossard)
@@ -15,12 +19,14 @@ class Dossard
 
     public function getIdDossard()
     {
+        return $this->_iddossard;
     }
 
     public function getNumDossard()
     {
+        return $this->_numdossard;
     }
-    
+
     public function init()
     {
     }
