@@ -12,12 +12,15 @@ class Tour
     }
     public function setIdTour($newIdTour)
     {
+        $this->_idtour = $newIdTour;
     }
     public function setDistance($newDistance)
     {
+        $this->_distance = $newDistance;
     }
     public function setCourse($newCourse)
     {
+        $this->_course = $newCourse;
     }
     public function getIdTour()
     {

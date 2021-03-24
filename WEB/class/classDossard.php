@@ -11,10 +11,12 @@ class Dossard
 
     public function setIdDossard($newIdDossard)
     {
+        $this->_iddossard = $newIdDossard;
     }
 
     public function setNumDossard($newNumDossard)
     {
+        $this->_numdossard = $newNumDossard;
     }
 
     public function getIdDossard()

@@ -12,9 +12,11 @@ class Classe
 
     public function setIdClasse($newId)
     {
+        $this->_idclasse = $newId;
     }
     public function setNom($newNom)
     {
+        $this->_nom = $newNom;
     }
     public function getIdClasse()
     {

@@ -21,15 +21,19 @@ class Coureur
     }
     public function setIdParticipant($newIdParticipant)
     {
+        $this->_idparticipant = $newIdParticipant;
     }
     public function setUser($newUser)
     {
+        $this->_user = $newUser;
     }
     public function setCourse($newCourse)
     {
+        $this->_course = $newCourse;
     }
     public function setDossard($newDossard)
     {
+        $this->_dossard = $newDossard;
     }
     public function getIdParticipant()
     {

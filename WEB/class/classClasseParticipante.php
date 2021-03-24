@@ -13,12 +13,15 @@ class ClasseParticipante
     }
     public function setIdClasseParticipante($newIdClasseParticipante)
     {
+        $this->_idclasseparticipante = $newIdClasseParticipante;
     }
     public function setClasse($newClasse)
     {
+        $this->_classe = $newClasse;
     }
     public function setCourse($newCourse)
     {
+        $this->_course = $newCourse;
     }
     public function getIdClasseParticipante()
     {
