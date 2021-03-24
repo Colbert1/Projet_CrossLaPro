@@ -17,15 +17,6 @@
     <div class="contenu">
         <!-- contenu de la page de course -->
 
-        <!-- Appel de la fonction creationCourse-->
-        <button id="creation">Création</button>
-
-        <!-- Appel de la fonction modificationCourse-->
-        <button id="modification">Modification</button>
-
-        <!-- Appel de la fonction suppressionCourse-->
-        <button id="suppression">Suppression</button>
-
     </div>
 
     <div class="footer">
