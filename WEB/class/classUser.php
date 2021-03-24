@@ -60,21 +60,27 @@ class User
     }
     public function setMail($newMail)
     {
+        $this->_mail = $newMail;
     }
     public function setPassword($newPassword)
     {
+        $this->_password = $newPassword;
     }
     public function setNom($newNom)
     {
+        $this->_nom = $newNom;
     }
     public function setPrenom($newPrenom)
     {
+        $this->_prenom = $newPrenom;
     }
     public function setStatus($newStatus)
     {
+        $this->_status = $newStatus;
     }
-    public function setClasse()
+    public function setClasse($newClasse)
     {
+        $this->_classe = $newClasse;
     }
     public function getId()
     {
@@ -115,5 +121,4 @@ class User
         $this->_statut = $data['status'];
         $this->_classe = $data['id_classe'];
     }
-
 }

@@ -20,12 +20,15 @@ class Course
     }
     public function setIdCourse($newIdCourse)
     {
+        $this->_idcourse = $newIdCourse;
     }
     public function setDate($newDate)
     {
+        $this->_date = $newDate;
     }
     public function setNom($newNom)
     {
+        $this->_nom = $newNom;
     }
     public function getIdCourse()
     {

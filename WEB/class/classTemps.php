@@ -13,15 +13,19 @@ class Temps
     }
     public function setIdTemps($newIdTemps)
     {
+        $this->_idtemps = $newIdTemps;
     }
     public function setParticipant($newParticipant)
     {
+        $this->_participant = $newParticipant;
     }
     public function setTemps($newTemps)
     {
+        $this->_temps = $newTemps;
     }
     public function setTour($newTour)
     {
+        $this->_tour = $newTour;
     }
     public function getIdTemps()
     {
