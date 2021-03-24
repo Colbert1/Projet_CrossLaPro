@@ -5,24 +5,12 @@ class Classement {
     private $_nom_course;
     private $_participants;
     private $_distance;
+    private $_classement;
+    private $_online;
     private $_bdd;
 
-    public function __construct() {
-        $dsn      = "mysql:dbname=Projet_CrossLaPro;host=192.168.65.183";
-        $username = "root";
-        $password = "root";
-
-        try {
-            $bdd = new PDO($dsn, $username, $password);
-            // Activation des erreurs PDO
-            $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // mode de fetch par défaut : FETCH_ASSOC / FETCH_OBJ / FETCH_BOTH
-            $bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            
-            $this->_bdd = $bdd;
-        } catch (PDOException $e) {
-            echo 'Connexion échouée : ' . $e->getMessage();
-        }
+    public function __construct($bdd) {
+        $this->_bdd = $bdd;
     }
 
     public function getIdCourse() {
@@ -37,23 +25,27 @@ class Classement {
         return $this->_nom_course;
     }
 
-    public function getIdTour(){
-
+    public function getParticipants(){
+        return $this->_participants;
     }
 
     public function getDistance(){
-
+        return $this->_distance;
     }
 
-    public function getTempsDepart(){
+    public function getClassement(){
+        return $this->_classement;
+    }
 
+    public function getOnline(){
+        return $this->_online;
     }
 
     public function setParticipants(){
 
     }
 
-    public function triAlphabetique(){
+    public function triAlphabetiqueC(){
         $tabCoureursAlph = $this->_participants;
         $verif = sort($tabCoureursAlph,SORT_STRING);
 
@@ -64,7 +56,7 @@ class Classement {
         }
     }
 
-    public function triAlphabetiqueDec(){
+    public function triAlphaD(){
         $tabCoureursAlph2 = $this->_participants;
         $verif = rsort($tabCoureursAlph2,SORT_STRING);
 
@@ -76,11 +68,11 @@ class Classement {
     }
 
     public function triTempsC() {
-
+ 
     }
 
     public function triTempsD() {
-        
+
     }
 }
 ?>
