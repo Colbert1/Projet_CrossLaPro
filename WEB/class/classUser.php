@@ -22,7 +22,7 @@ class User
         $hashPasswd = password_hash($password, PASSWORD_ARGON2ID);
 
         try {
-            $req = $bdd->prepare("INSERT INTO `user` (`id_user`, `nom`, `prenom`, `mail`, `password`, `status`, `id_classe`) 
+            $req = $bdd->prepare("INSERT INTO `user` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) 
             VALUES (NULL, :nom, :prenom, :mail, :password, '0', NULL);");
             $req->bindParam('nom', $nom, PDO::PARAM_STR);
             $req->bindParam('prenom', $prenom, PDO::PARAM_STR);
@@ -43,12 +43,12 @@ class User
         $bdd = $this->_bdd;
 
         try {
-            $req = $bdd->prepare("SELECT `mail`, `password` FROM `user` WHERE `user`.`mail` = :mail");
+            $req = $bdd->prepare("SELECT `us_mail`, `us_password` FROM `user` WHERE `user`.`us_mail` = :mail");
             $req->bindParam('mail', $mail, PDO::PARAM_STR);
             $req->execute();
             $result = $req->fetch(PDO::FETCH_ASSOC);
 
-            if (password_verify($passwd, $result['password']) == TRUE) {
+            if (password_verify($passwd, $result['us_passwd']) == TRUE) {
                 header("Location: accueil.php");
             } else {
                 echo "<div style='color:white'>Identifiants incorrects !</div>";
@@ -112,13 +112,13 @@ class User
     }
     public function init()
     {
-        $requete = $this->_bdd->query("SELECT * FROM user WHERE id_user = " . $this->_id);
+        $requete = $this->_bdd->query("SELECT * FROM `user` WHERE `us_id` = " . $this->_id);
         $data = $requete->fetch();
-        $this->_nom = $data['nom'];
-        $this->_prenom = $data['prenom'];
-        $this->_mail = $data['mail'];
-        $this->_password = $data['password'];
-        $this->_statut = $data['status'];
-        $this->_classe = $data['id_classe'];
+        $this->_nom = $data['us_nom'];
+        $this->_prenom = $data['us_prenom'];
+        $this->_mail = $data['us_mail'];
+        $this->_password = $data['us_passwd'];
+        $this->_statut = $data['us_status'];
+        $this->_classe = $data['cl_id'];
     }
 }

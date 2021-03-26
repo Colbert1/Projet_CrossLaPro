@@ -41,11 +41,30 @@ class Classement {
         return $this->_online;
     }
 
-    public function setParticipants(){
-
+    public function setParticipants($nCourse){
+        try {
+            $req = $this->_bdd->prepare("SELECT `user`.`us_nom`, `dossard`.`ds_numero`, `classe`.`cl_nom`, `course`.`cr_nom` 
+                                        FROM `participant`, `user`, `classe`, `course`, `dossard` 
+                                        WHERE `user`.`us_id` = `participant`.`us_id` 
+                                                AND `dossard`.`ds_id` = `participant`.`ds_id` 
+                                                AND `user`.`cl_id` = `classe`.`cl_id` 
+                                                AND `course`.`cr_id` = `participant`.`cr_id`
+                                                AND `course`.`cr_nom` = :course");
+            $req->bindParam("course",$nCourse,PDO::PARAM_STR);
+            $req->execute();
+            $data = $req->fetchAll();
+            $req->closeCursor();
+            $this->_participants = $data;
+            
+        } catch (Exception $e) {
+            echo "Erreur ! " . $e->getMessage();
+            echo "Les datas : ";
+        }
+        
     }
 
-    public function triAlphabetiqueC(){
+    //SetParticipants avant de triAlphaC
+    public function triAlphaC(){
         $tabCoureursAlph = $this->_participants;
         $verif = sort($tabCoureursAlph,SORT_STRING);
 
@@ -56,6 +75,7 @@ class Classement {
         }
     }
 
+    //SetParticipants avant de triAlphaD
     public function triAlphaD(){
         $tabCoureursAlph2 = $this->_participants;
         $verif = rsort($tabCoureursAlph2,SORT_STRING);

@@ -42,12 +42,19 @@ class Course
     {
         return $this->_nom;
     }
-    public function init($_idcourse, $_nom, $_date)
+    public function init()
     {
-        $requete = $this->_bdd->query("INSERT INTO course(id_course, nom, date) VALUES('$_idcourse','$_nom','$_date')");
-        $creacourse = $requete->fetch();
-        $this->_idcourse = $creacourse['id_course'];
-        $this->_nom = $creacourse['nom'];
-        $this->_date = $creacourse['date'];
+        $requete = $this->_bdd->query("SELECT * FROM course WHERE id_course = ".$this->_idcourse);
+        $dataCourse = $requete->fetch();
+        $this->_idcourse = $dataCourse['id_course'];
+        $this->_nom = $dataCourse['nom'];
+        $this->_date = $dataCourse['date'];
+    }
+    public function create()
+    {
+        if(!empty($this->_date) && !empty($this->_nom))
+        {
+            $requete = $this->_bdd->query("INSERT INTO course ('id_course','nom','date') VALUES (NULL, ".$this->_nom.", ".$this->_date.")");
+        }
     }
 }
