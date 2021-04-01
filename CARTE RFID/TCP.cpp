@@ -9,48 +9,48 @@
 
 HANDLE TCPServeur::mutex = CreateMutex(NULL, false, NULL);
 std::vector<SOCKET> TCPServeur::connectedClients;
-TCPServeurEventListener * TCPServeur::listener = NULL;
+TCPServeurEventListener *TCPServeur::listener = NULL;
 
-TCPServeur::TCPServeur(){
-
+TCPServeur::TCPServeur()
+{
 }
 
-int TCPServeur::createsocket()     //Cette fonction va créer la socket
+int TCPServeur::createsocket() //Cette fonction va crï¿½er la socket
 {
 
 	WSADATA wsaData;
-	WSAStartup(MAKEWORD(2,2), &wsaData);
+	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
 	int sock = socket(AF_INET, SOCK_STREAM, 0);
 
-	if(sock==INVALID_SOCKET)
+	if (sock == INVALID_SOCKET)
 	{
 
-	   return -1;
+		return -1;
 	}
 	else
 	{
-	   socketL = sock;
-	   return sock;
+		socketL = sock;
+		return sock;
 	}
 }
 
 void TCPServeur::setinterface()
 {
-	SOCKADDR_IN sin = { 0 };
-	const unsigned short port = 1050;          //On met le serveur en écoute sur le port 1050
+	SOCKADDR_IN sin = {0};
+	const unsigned short port = 1050; //On met le serveur en ï¿½coute sur le port 1050
 	sin.sin_addr.s_addr = INADDR_ANY;
 	sin.sin_family = AF_INET;
 	sin.sin_port = htons(port);
 
-	if(bind(socketL, (SOCKADDR *) &sin, sizeof sin) == SOCKET_ERROR)
+	if (bind(socketL, (SOCKADDR *)&sin, sizeof sin) == SOCKET_ERROR)
 	{
 		perror("bind()");
 		exit(errno);
 	}
 }
 
-void TCPServeur::ecoute()      //Cette fonction va nous permettre d'accepter la connexion au serveur d'un client
+void TCPServeur::ecoute() //Cette fonction va nous permettre d'accepter la connexion au serveur d'un client
 {
 	DWORD threadId;
 	CreateThread(NULL, 0, &TCPServeur::ListeningThread, this, 0, &threadId);
@@ -79,40 +79,38 @@ return true;
 }
 */
 
-bool TCPServeur::envoie(char *buffer,int taille) //On pourra envoyer dans un socket la valeur que l'on veut
+bool TCPServeur::envoie(char *buffer, int taille) //On pourra envoyer dans un socket la valeur que l'on veut
 {
 	WaitForSingleObject(mutex, INFINITE);
 
-	for(int i = 0; i < connectedClients.size(); i++)
+	for (int i = 0; i < connectedClients.size(); i++)
 	{
 		int sendLen = 0;
 		SOCKET socket_to_send = connectedClients[i];
 
-		 do
-		 {
-			 int send_socket = ((send(socket_to_send,buffer + sendLen,taille,0)));
+		do
+		{
+			int send_socket = ((send(socket_to_send, buffer + sendLen, taille, 0)));
 
-			 if(send_socket == SOCKET_ERROR)
-			 {
+			if (send_socket == SOCKET_ERROR)
+			{
 				continue;
-			 }
-			 sendLen += send_socket;
+			}
+			sendLen += send_socket;
 
-		 }while(sendLen < taille);
+		} while (sendLen < taille);
+	}
 
-	 }
-
-	 ReleaseMutex(mutex);
-return true;
+	ReleaseMutex(mutex);
+	return true;
 }
 //---------------------------------------------------------------------------
 
-
-DWORD WINAPI TCPServeur::ListeningThread(LPVOID params)  //Cette fonction va permettre de verifier a qui est la socket que l'on envoie
+DWORD WINAPI TCPServeur::ListeningThread(LPVOID params) //Cette fonction va permettre de verifier a qui est la socket que l'on envoie
 {
-	TCPServeur * serveur = (TCPServeur*)params;
+	TCPServeur *serveur = (TCPServeur *)params;
 
-	if(listen(serveur->socketL,5) == SOCKET_ERROR)
+	if (listen(serveur->socketL, 5) == SOCKET_ERROR)
 	{
 		perror("listen()");
 		exit(errno);
@@ -121,11 +119,11 @@ DWORD WINAPI TCPServeur::ListeningThread(LPVOID params)  //Cette fonction va per
 	SOCKADDR_IN csin = {0};
 	int sinsize = sizeof csin;
 
-	while(true)
+	while (true)
 	{
-		SOCKET socket_to_send = accept(serveur->socketL,(SOCKADDR *)&csin,&sinsize);
+		SOCKET socket_to_send = accept(serveur->socketL, (SOCKADDR *)&csin, &sinsize);
 
-		if(socket_to_send == INVALID_SOCKET)
+		if (socket_to_send == INVALID_SOCKET)
 		{
 			perror("accept()");
 			break;
@@ -139,33 +137,32 @@ DWORD WINAPI TCPServeur::ListeningThread(LPVOID params)  //Cette fonction va per
 			DWORD threadId;
 			CreateThread(NULL, 0, &TCPServeur::ClientThread, &socket_to_send, 0, &threadId);
 
-			if(listener != NULL)
+			if (listener != NULL)
 			{
-                listener->onClientConnected();
-            }
+				listener->onClientConnected();
+			}
 		}
 	}
 
 	return 0;
 }
 
-DWORD WINAPI TCPServeur::ClientThread(LPVOID params)  //On créer un thread pour chaque client dans cette fonction
+DWORD WINAPI TCPServeur::ClientThread(LPVOID params) //On crï¿½er un thread pour chaque client dans cette fonction
 {
 	char buf;
-	SOCKET socket_to_send = *((SOCKET*) params);
+	SOCKET socket_to_send = *((SOCKET *)params);
 
-	while(recv(socket_to_send, &buf, 1, 0) > 0)
+	while (recv(socket_to_send, &buf, 1, 0) > 0)
 	{
-
 	}
 
-	WaitForSingleObject(mutex, INFINITE);  //On attends a l'infini la connexion du client
-	std::vector<SOCKET>::iterator it = std::find(connectedClients.begin(), connectedClients.end(), socket_to_send);   //On regarde si celui ci est encore connecté ou non
-	if(it != connectedClients.end())   //Si il est déconnecté alors on ecrase sa socket
+	WaitForSingleObject(mutex, INFINITE);																			//On attends a l'infini la connexion du client
+	std::vector<SOCKET>::iterator it = std::find(connectedClients.begin(), connectedClients.end(), socket_to_send); //On regarde si celui ci est encore connectï¿½ ou non
+	if (it != connectedClients.end())																				//Si il est dï¿½connectï¿½ alors on ecrase sa socket
 	{
 		connectedClients.erase(it);
 	}
 	ReleaseMutex(mutex);
 
-    return 0;
+	return 0;
 }

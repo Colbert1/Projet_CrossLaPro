@@ -8,8 +8,8 @@
 
 class TCPServeurEventListener
 {
- public:
- 	virtual void onClientConnected() = 0;
+public:
+	virtual void onClientConnected() = 0;
 };
 
 class TCPServeur
@@ -24,20 +24,19 @@ class TCPServeur
 	static DWORD WINAPI ClientThread(LPVOID params);
 	static HANDLE mutex;
 	static std::vector<SOCKET> connectedClients;
-	static TCPServeurEventListener * listener;
+	static TCPServeurEventListener *listener;
 
-	public:
-		TCPServeur();
-		int createsocket();
-		void setinterface();
-		void ecoute();
-		//bool receivsocket(char* buffer, int taille);
-		bool envoie(char* buffer,int lenght);
-		void setEventListener(TCPServeurEventListener * l)
-		{
-			listener = l;
-		}
-
+public:
+	TCPServeur();
+	int createsocket();
+	void setinterface();
+	void ecoute();
+	//bool receivsocket(char* buffer, int taille);
+	bool envoie(char *buffer, int lenght);
+	void setEventListener(TCPServeurEventListener *l)
+	{
+		listener = l;
+	}
 };
 #define Unit1H
 //---------------------------------------------------------------------------
