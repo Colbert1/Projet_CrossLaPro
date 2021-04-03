@@ -5,10 +5,10 @@
     
 
     //Création du classement
-    $classement = new Classement($bdd);
+    $objClas = new Classement($bdd);
     
-    $course       = $_SESSION['course'];
-    $participants = $classement->setParticipants($course);
+    $course = $_SESSION['course'];
+    $classement = $objClas->getClassement($course);
 
 
 ?>

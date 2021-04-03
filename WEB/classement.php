@@ -15,6 +15,9 @@ require_once("classClassement.php");
     </div>
     <!--Milieu de page-->
     <div class="mid">
+        <script>
+            var classement = <?php echo json_encode($classement); ?>;
+        </script>
         <table>
             <tr>
                 <th>Rang</th>

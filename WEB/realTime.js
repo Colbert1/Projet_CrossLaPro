@@ -8,13 +8,9 @@ function next()
 
 }
 
-function fetchapi()
+function recvData()
 {
-    var url = "request.php";
-    var req = new Request(url);
-
-    //Target req then execute local function next()
-    fetch(req).then(next());
+    var classement =
 }
 
 function classement()
