@@ -1,14 +1,10 @@
 <?php
-    session_start();
-    require_once("classClassement.php");
-    require_once("bdd.php");
-    
+session_start();
+include('bdd.php');
+include('class/classClassement.php');
 
-    //Création du classement
-    $objClas = new Classement($bdd);
-    
-    $course = $_SESSION['course'];
-    $classement = $objClas->getClassement($course);
-
-
+//Continuer l'appel API
+$classement = new Classement($bdd);
+$tab = $classement->getClassement();
+echo json_encode($tab);
 ?>
