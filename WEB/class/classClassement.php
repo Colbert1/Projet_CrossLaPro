@@ -33,10 +33,6 @@ class Classement {
         return $this->_distance;
     }
 
-    public function getClassement(){
-        return $this->_classement;
-    }
-
     public function getOnline(){
         return $this->_online;
     }
@@ -65,24 +61,20 @@ class Classement {
 
     public function getClassement(){
         try{
-           /*On appelle en bdd : 
-            *Nom, Prénom, Temps total, Meilleur temps
-            *    Meilleur temps : select dans l'ordre décroissant et prendre la premiere valeur retournée
-            */
-            //Requête en construction
             $req = $this->_bdd->prepare("SELECT `participant_tbl`.`us_nom`, `participant_tbl`.`us_prenom`, `ts_temps` 
             FROM `participant_tbl`, `user_tbl`, `temps_tbl`, `course_tbl` 
                 WHERE 
-                    `participant_tbl`.`us_nom` = `participant_tbl`.`crs_id` 
-                AND
-                    `participant_tbl`.`us_prenom` = `participant_tbl`.`crs_id`
-                AND
-                    `participant_tbl`.`crs_id` = `course_tbl.`.`crs_nom`
-                AND
-                    `course_tbl`.`crs_nom` = --Nom course-- 
-                AND
-                    `temps_tbl`.`ts_temps` = `participant`.`pt_id`");
+                    `participant_tbl`.`us_nom` = `user_tbl`.`us_nom`
+                    AND
+                    `participant_tbl`.`prenom` = `user_tbl`.`us_prenom`
+                    AND
+                    `participant_tbl`.`crs_id` = --id de la course--
+                    ORDER BY `temps_tbl`.`ts_temps` DESC");
             $req->execute();
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
+            $req->closeCursor();
+
+            return $data;
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
             echo "Les datas : ";

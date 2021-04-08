@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once("classClassement.php");
+require_once("class/classClassement.php");
+require("test.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,6 +16,9 @@ require_once("classClassement.php");
     </div>
     <!--Milieu de page-->
     <div class="mid">
+    <div id="affiche">
+        <script>setInterval(callApiRand(),500);</script>
+    </div>
         <table>
             <tr>
                 <th>Rang</th>
