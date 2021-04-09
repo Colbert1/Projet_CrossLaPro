@@ -23,6 +23,9 @@ require("class/classUser.php");
                 <input type="text" name="prenom" placeholder="Prenom" required>
             </div>
             <div>
+                <input type="text" name="classe" placeholder="Classe" required>
+            </div>
+            <div>
                 <input type="mail" name="mail" placeholder="Adresse mail" required>
             </div>
             <div>
@@ -57,7 +60,8 @@ require("class/classUser.php");
 if (
     !empty($_POST['password'])
     && !empty($_POST['Cpassword']) && !empty($_POST['nom'])
-    && !empty($_POST['prenom']) && !empty($_POST['mail'])
+    && !empty($_POST['prenom']) && !empty($_POST['mail']) 
+    && !empty($_POST['classe'])
 ) {
 
     $password  = $_POST['password'];
@@ -65,10 +69,11 @@ if (
     $mail      = $_POST['mail'];
     $nom       = $_POST['nom'];
     $prenom    = $_POST['prenom'];
+    $classe    = $_POST['classe'];
 
     if ($password == $Cpassword) {
         $user = new User($bdd);
-        $user->inscriptionUser($password, $mail, $nom, $prenom);
+        $user->inscriptionUser($password, $mail, $nom, $prenom, $classe);
     } else {
         echo "<div>Confirmation de mot de passe incorrect</div>";
     }

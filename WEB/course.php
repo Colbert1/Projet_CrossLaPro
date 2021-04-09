@@ -16,7 +16,7 @@
     </div>
     <div class="contenu">
         <!-- contenu de la page de course -->
-
+        <button><a href="inscriptionCourse.php">Inscription Course</a></button>
     </div>
 
     <div class="footer">
