@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once("class/classClassement.php");
-require("test.php");
+require_once("classClassement.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,9 +15,13 @@ require("test.php");
     </div>
     <!--Milieu de page-->
     <div class="mid">
-    <div id="affiche">
-        <script>setInterval(callApiRand(),500);</script>
-    </div>
+<script>
+    function classement(){
+    var classement = <?php echo json_encode($classement); ?>; 
+    }
+
+    setInterval(classement(),30000);
+</script>
         <table>
             <tr>
                 <th>Rang</th>
