@@ -33,6 +33,10 @@ class Classement {
         return $this->_distance;
     }
 
+    public function getClassement(){
+        return $this->_classement;
+    }
+
     public function getOnline(){
         return $this->_online;
     }
