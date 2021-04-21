@@ -1,6 +1,6 @@
 <?php
 if(session_start() == TRUE){
-    header("Accueil.php");
+    header("accueil.php");
 }
 require_once("bdd.php");
 ?>
@@ -29,7 +29,7 @@ require_once("bdd.php");
                 <input type="password" name="password" required="">
                 <label>Mot de passe</label>
             </div>
-            <a href="Inscription.php" class="inscription">S'inscrire</a>
+            <a href="inscription.php" class="inscription">S'inscrire</a>
             <a href="#" onclick='document.getElementById("login").submit()'>
             <span></span>
             <span></span>

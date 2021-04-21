@@ -17,6 +17,9 @@
     <div class="contenu">
         <!-- contenu de la page de course -->
         <button><a href="inscriptionCourse.php">Inscription Course</a></button>
+        <button><a href="creationCourse.php">Création Course</a></button>
+        <button><a href="infoCourse.php">Information Course</a></button>
+
     </div>
 
     <div class="footer">
