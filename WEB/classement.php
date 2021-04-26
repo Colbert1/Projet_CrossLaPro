@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("classClassement.php");
+require_once("class/classClassement.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,11 +17,15 @@ require_once("classClassement.php");
     <div class="mid">
 <script>
     function classement(){
-    var classement = <?php echo json_encode($classement); ?>; 
+        var classement = <?php echo json_encode($classement); ?>; 
     }
 
     setInterval(classement(),30000);
 </script>
+        <!--Formulaire sélection classe-->
+        <form method="GET" action="">
+            <!--Récupération classes-->
+        </form>
         <table>
             <tr>
                 <th>Rang</th>
@@ -30,7 +34,11 @@ require_once("classClassement.php");
                 <th>Classe</th>
                 <th>Tour</th>
             </tr>
-            <?php
+            <?php if(isset($_GET['classe'])){
+                //Vérification input classe
+            }else{
+                echo "Sélectionnez une classe";
+            }
             //Création du classement 
             ?>
         </table>

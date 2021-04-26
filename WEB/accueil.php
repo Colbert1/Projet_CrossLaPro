@@ -14,6 +14,10 @@ require("class/classUser.php");
 
 <body>
     <p>Vous êtes connectés</p>
+    <p>Où souhaitez-vous aller ?</p>
+    <ul>
+        <li><a href="classement.php">Page classement</a></li>
+    </ul>
 </body>
 
 </html>
