@@ -17,6 +17,7 @@ require("class/classUser.php");
     <p>Où souhaitez-vous aller ?</p>
     <ul>
         <li><a href="classement.php">Page classement</a></li>
+        <li><a href="course.php">Page course</a></li>
     </ul>
 </body>
 

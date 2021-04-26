@@ -18,6 +18,13 @@ class Course
     {
         $this->_bdd = $bdd;
     }
+    public function createCourse()
+    {
+        if(!empty($this->_date) && !empty($this->_nom))
+        {
+            $requete = $this->_bdd->query("INSERT INTO course ('id_course','nom','date') VALUES (NULL, ".$this->_nom.", ".$this->_date.")");
+        }
+    }
     public function setIdCourse($newIdCourse)
     {
         $this->_idcourse = $newIdCourse;
@@ -50,12 +57,5 @@ class Course
         $this->_nom = $dataCourse['nom'];
         $this->_date = $dataCourse['date'];
     }
-    public function createCourse($dataCourse)
-    {
-        if(!empty($this->_date) && !empty($this->_nom))
-        {
-            $requete = $this->_bdd->query("INSERT INTO course ('id_course','nom','date') VALUES (NULL, ".$this->_nom.", ".$this->_date.")");
-
-        }
-    }
+    
 }
