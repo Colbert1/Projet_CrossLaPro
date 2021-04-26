@@ -1,4 +1,4 @@
-<?php 
+<?php
 $dsn = 'mysql:dbname=projetcross_lapro;host=192.168.1.64';
 $user = 'root';
 $password = 'root';

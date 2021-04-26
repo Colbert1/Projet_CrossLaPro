@@ -134,4 +134,3 @@ SELECT `participant_tbl`.`us_nom`, `participant_tbl`.`us_prenom`, `classe_tbl`.`
         //A continuer
     }
 }
-?>

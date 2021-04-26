@@ -9,6 +9,3 @@
     
     $course = $_SESSION['course'];
     $classement = $objClas->getClassement($course);
-
-
-?>

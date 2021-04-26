@@ -60,7 +60,7 @@ require("class/classUser.php");
 if (
     !empty($_POST['password'])
     && !empty($_POST['Cpassword']) && !empty($_POST['nom'])
-    && !empty($_POST['prenom']) && !empty($_POST['mail']) 
+    && !empty($_POST['prenom']) && !empty($_POST['mail'])
     && !empty($_POST['classe'])
 ) {
 
