@@ -15,7 +15,7 @@ class User
         $this->_bdd = $bdd;
     }
 
-    public function inscriptionUser($password, $mail, $nom, $prenom, $classe)
+    public function inscriptionUser($password, $mail, $nom, $prenom)
     {
         $bdd = $this->_bdd;
 
@@ -23,12 +23,11 @@ class User
 
         try {
             $req = $bdd->prepare("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) 
-            VALUES (NULL, :nom, :prenom, :mail, :password, '0', :classe);");
+            VALUES (NULL, :nom, :prenom, :mail, :password, '0', NULL);");
             $req->bindParam('nom', $nom, PDO::PARAM_STR);
             $req->bindParam('prenom', $prenom, PDO::PARAM_STR);
             $req->bindParam('mail', $mail, PDO::PARAM_STR);
             $req->bindParam('password', $hashPasswd, PDO::PARAM_STR);
-            $req->bindParam('classe', $classe, PDO::PARAM_STR);
             $req->execute();
 
             header("Location: index.php");
@@ -44,7 +43,7 @@ class User
         $bdd = $this->_bdd;
 
         try {
-            $req = $bdd->prepare("SELECT `us_mail`, `us_password` FROM `user_tbl` WHERE `user_tbl`.`us_mail` = :mail");
+            $req = $bdd->prepare("SELECT `us_mail`, `us_passwd` FROM `user_tbl` WHERE `user_tbl`.`us_mail` = :mail");
             $req->bindParam('mail', $mail, PDO::PARAM_STR);
             $req->execute();
             $result = $req->fetch(PDO::FETCH_ASSOC);

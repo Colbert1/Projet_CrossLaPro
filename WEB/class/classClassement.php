@@ -63,7 +63,7 @@ class Classement {
         
     }
 
-    public function getClassement(){
+    public function setClassement(){
         try{
             $req = $this->_bdd->prepare("SELECT `participant_tbl`.`us_nom`, `participant_tbl`.`us_prenom`, `ts_temps` 
             FROM `participant_tbl`, `user_tbl`, `temps_tbl`, `course_tbl` 
