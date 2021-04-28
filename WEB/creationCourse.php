@@ -40,9 +40,9 @@ if (
     $date  = $_POST['date'];
     $nom   = $_POST['nom'];
 
-    if ($creacourse == NULL) {
+    if ($creacourse == 0) {
         $creacourse = new Course($bdd);
-        $creacourse->createCourse($nom, $date);
+        $creacourse->createCourse();
     } else {
         echo "<div>Echec création de la course</div>";
     }
