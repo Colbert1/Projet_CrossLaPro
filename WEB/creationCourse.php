@@ -32,3 +32,19 @@ require("class/classCourse.php");
 </body>
 
 </html>
+<?php
+if (
+    !empty($_POST['nom']) && !empty($_POST['date'])
+) {
+
+    $date  = $_POST['date'];
+    $nom   = $_POST['nom'];
+
+    if ($creacourse == NULL) {
+        $creacourse = new Course($bdd);
+        $creacourse->createCourse($nom, $date);
+    } else {
+        echo "<div>Echec création de la course</div>";
+    }
+}
+?>
