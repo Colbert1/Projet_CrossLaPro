@@ -20,5 +20,4 @@ require("class/classUser.php");
         <li><a href="course.php">Page course</a></li>
     </ul>
 </body>
-test
 </html>
