@@ -15,7 +15,7 @@ require("class/classCourse.php");
 <body>
     <div class="login-box">
         <h2>Création Course</h2>
-        <form id="création" action="" method="POST">
+        <form id="creation" action="" method="POST">
             <div>
                 <input type="text" name="nom" placeholder="Nom" required>
             </div>
@@ -37,8 +37,12 @@ require("class/classCourse.php");
 $_nom   = $_POST['nom'];
 $_date  = $_POST['date'];
 
+
 if (!empty($_POST['nom']) && !empty($_POST['date'])) {
+
     $creacourse = new Course($bdd);
+    $creacourse->setDate($_date);
+    $creacourse->setNom($_nom);
     $creacourse->createCourse();
     echo $_POST['nom'];
 } else {
