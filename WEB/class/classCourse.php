@@ -21,15 +21,16 @@ class Course
     public function createCourse()
     {
         if (!empty($this->_date) && !empty($this->_nom)) {
-            $req = $this->_bdd->query("INSERT INTO `course_tbl`(`crs_id`, `crs_nom`, `crs_date`) VALUES  (NULL, " . $this->_nom . ", " . $this->_date . ")");
+            $req = $this->_bdd->query("INSERT INTO `course_tbl`(`crs_id`, `crs_date`, `crs_nom`) VALUES (NULL, " . $this->_date . ", " . $this->_nom . ")");
         }
     }
     public function modifCourse()
     {
         /*----------------------------------------
 
-        Modifier la date ou/et le nom de la course
-        
+        Modifier la date ou/et le nom de la course, la distance
+        Depuis la table Tour et Course
+
         ------------------------------------------*/
     }
     public function setIdCourse($newIdCourse)
