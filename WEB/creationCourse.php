@@ -34,11 +34,9 @@ require("class/classCourse.php");
 </html>
 <?php
 
-$_nom   = $_POST['nom'];
-$_date  = $_POST['date'];
-
-
 if (!empty($_POST['nom']) && !empty($_POST['date'])) {
+    $_nom   = $_POST['nom'];
+    $_date  = $_POST['date'];
 
     $creacourse = new Course($bdd);
     $creacourse->setDate($_date);
