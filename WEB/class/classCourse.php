@@ -23,7 +23,7 @@ class Course
         $bdd = $this->_bdd;
 
         if (!empty($this->_date) && !empty($this->_nom)) {
-            $req = $this->_bdd->prepare("INSERT INTO `course_tbl`(`crs_id`, `crs_date`, `crs_nom`) VALUES (NULL, " . $this->_date . ", " . $this->_nom . ")");
+            $req = $this->$bdd->prepare("INSERT INTO `course_tbl`(`crs_id`, `crs_date`, `crs_nom`) VALUES (NULL, '".$this->_date."', ".$this->_nom.")");
             $req->execute();
         }
     }
