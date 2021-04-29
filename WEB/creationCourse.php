@@ -15,7 +15,7 @@ require("class/classCourse.php");
 <body>
     <div class="login-box">
         <h2>Création Course</h2>
-        <form id="creation" action="" method="POST">
+        <form action="" method="POST">
             <div>
                 <input type="text" name="nom" placeholder="Nom" required>
             </div>
@@ -42,7 +42,6 @@ if (!empty($_POST['nom']) && !empty($_POST['date'])) {
     $creacourse->setDate($_date);
     $creacourse->setNom($_nom);
     $creacourse->createCourse();
-    echo $_POST['nom'];
 } else {
     echo "<div>Echec création de la course</div>";
 }

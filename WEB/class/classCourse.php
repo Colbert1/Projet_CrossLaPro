@@ -20,10 +20,12 @@ class Course
     }
     public function createCourse()
     {
-        $bdd = $this->_bdd;
-        
-        $req = $this->$bdd->prepare("INSERT INTO `course_tbl`(`crs_id`, `crs_date`, `crs_nom`) VALUES (NULL, '".$this->_date."', ".$this->_nom.")");
+        try{
+        $req = $this->_bdd->prepare("INSERT INTO `course_tbl`(`crs_id`, `crs_date`, `crs_nom`) VALUES (NULL, '".$this->_date."', '".$this->_nom."')");
         $req->execute();
+        }catch(Exception $e){
+            echo "Error : ".$e->getMessage();
+        }
     }
     public function modifCourse()
     {
