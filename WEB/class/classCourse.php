@@ -24,6 +24,14 @@ class Course
             $req = $this->_bdd->query("INSERT INTO `course_tbl`(`crs_id`, `crs_nom`, `crs_date`) VALUES  (NULL, " . $this->_nom . ", " . $this->_date . ")");
         }
     }
+    public function modifCourse()
+    {
+        /*----------------------------------------
+
+        Modifier la date ou/et le nom de la course
+        
+        ------------------------------------------*/
+    }
     public function setIdCourse($newIdCourse)
     {
         $this->_idcourse = $newIdCourse;
