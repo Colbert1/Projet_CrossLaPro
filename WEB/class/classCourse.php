@@ -18,11 +18,23 @@ class Course
     {
         $this->_bdd = $bdd;
     }
-    public function createCourse($nom, $date)
+    public function createCourse()
     {
+        $bdd = $this->_bdd;
+
         if (!empty($this->_date) && !empty($this->_nom)) {
-            $requete = $this->_bdd->query("INSERT INTO `course_tbl`(`crs_id`, `crs_nom`, `crs_date`) VALUES  (NULL, " . $this->_nom . ", " . $this->_date . ")");
+            $req = $this->_bdd->prepare("INSERT INTO `course_tbl`(`crs_id`, `crs_date`, `crs_nom`) VALUES (NULL, " . $this->_date . ", " . $this->_nom . ")");
+            $req->execute();
         }
+    }
+    public function modifCourse()
+    {
+        /*----------------------------------------
+
+        Modifier la date ou/et le nom de la course, la distance
+        Depuis la table Tour et Course
+
+        ------------------------------------------*/
     }
     public function setIdCourse($newIdCourse)
     {

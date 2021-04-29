@@ -36,5 +36,10 @@ class Tour
     }
     public function init()
     {
+        $requete = $this->_bdd->query("SELECT `tr_id`, `tr_distance`, `crs_id` FROM `tour_tbl` WHERE crs_id = " . $this->_idcourse);
+        $dataTour = $requete->fetch();
+        $this->_idtemps = $dataTour['tr_id'];
+        $this->_distance = $dataTour['tr_distance'];
+        $this->_course = $dataTour['crs_id'];
     }
 }
