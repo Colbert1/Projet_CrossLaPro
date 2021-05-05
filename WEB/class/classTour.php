@@ -10,6 +10,15 @@ class Tour
     {
         $this->_bdd = $bdd;
     }
+    public function ajoutDistanceTour()
+    {
+        try {
+            $req = $this->_bdd->prepare("INSERT INTO `tour_tbl`(`tr_id`, `tr_distance`, `crs_id`) VALUES (NULL, '" . $this->_distance . "', '" . $this->_course . "')");
+            $req->execute();
+        } catch (Exception $e) {
+            echo "Error : " . $e->getMessage();
+        }
+    }
     public function setIdTour($newIdTour)
     {
         $this->_idtour = $newIdTour;
