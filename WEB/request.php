@@ -8,4 +8,6 @@
     $objClas = new Classement($bdd);
     
     $course = $_SESSION['course'];
-    $classement = $objClas->getClassement($course);
+    $classement = $objClas->setClassement($course);
+
+?>
