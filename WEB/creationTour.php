@@ -9,12 +9,28 @@ require("class/classTour.php");
 ?>
 <html>
 <?php
-$req = $this->_bdd->query("SELECT crs_nom FROM course_tbl");
-echo '<select name="nomCourse">';
-while ($donnees->fetch($req)) {
-    echo '<option value="' . $donnees["crs_nom"] . '"></option>';
+// Récupère les données de la table clients
+$requete = 'SELECT crs_nom FROM course_tbl';
+$resultat = $bdd->prepare($requete);
+$resultat->execute();
+
+if (!$resultat) {
+echo "Problème de requete";
+} else {
+?>
+
+<select>
+<?php
+while($ligne = $resultat->fetch()) {
+echo "<option value='".$ligne['crs_id']."'>".$ligne['crs_nom']."</option>";
 }
-echo '</select>';
+?>
+
+</select>
+
+<?php
+} // fin du else
+$resultat->closeCursor(); // libère le résultat
 ?>
 
 </html>
