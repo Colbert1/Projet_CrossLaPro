@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("class/classClassement.php");
+require_once("request.php")
 ?>
 <!DOCTYPE html>
 <html lang="fr">
