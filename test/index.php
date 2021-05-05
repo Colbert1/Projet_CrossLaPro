@@ -21,5 +21,5 @@ if (!empty($_POST['id']) && !empty($_POST['NumDossard'])) {
     $participant->setParticipant($_POST['id']);
     //$_POST['NumDossard'] est le scan
     $participant->setDossard($_POST['NumDossard']);
-    
+    echo "test";
 }
