@@ -65,20 +65,34 @@ class Classement {
 
     /****************************************
     *Mise en place du classement :
-    *Sélection du NOM, PRENOM, CLASSE, TEMPS.
+    *Sélection du N° de DOSSARD, NOM, PRENOM, CLASSE, TEMPS.
     *Triage DECROISSANT par le temps
-    *****************************************/
-    public function setClassement(){
+    ***************************************
+    
+    
+    SELECT
+		`dossard_tbl`.`ds_num`
+		`user_tbl`.`us_nom`,
+		`user_tbl`.`us_prenom`,
+        `classe_tbl`.`cl_nom`,
+        `temps_tbl`.`ts_temps`
+FROM 
+    `classeparticipante_tbl`,
+    `classe_tbl`,
+    `course_tbl`,
+    `dossard_tbl`,
+    `participants_tbl`,
+    `temps_tbl`,
+    `tour_tbl`,
+    `user_tbl`
+WHERE
+	`participant_tbl`.`crs_id` = --course--
+ORDER BY
+DESC**/
+    public function setClassement($course){
         try{
-            $req = $this->_bdd->prepare("SELECT `participant_tbl`.`us_nom`, `participant_tbl`.`us_prenom`, `ts_temps` 
-            FROM `participant_tbl`, `user_tbl`, `temps_tbl`, `course_tbl` 
-                WHERE 
-                    `participant_tbl`.`us_nom` = `user_tbl`.`us_nom`
-                    AND
-                    `participant_tbl`.`prenom` = `user_tbl`.`us_prenom`
-                    AND
-                    `participant_tbl`.`crs_id` = --id de la course--
-                    ORDER BY `temps_tbl`.`ts_temps` DESC");
+            $req = $this->_bdd->prepare("");
+            $req->bindParam("course",$course,PDO::PARAM_INT);
             $req->execute();
             $data = $req->fetchAll(PDO::FETCH_ASSOC);
             $req->closeCursor();

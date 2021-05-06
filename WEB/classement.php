@@ -24,10 +24,6 @@ require_once("request.php")
 
             setInterval(classement(), 30000);
         </script>
-        <!--Formulaire sélection classe-->
-        <form method="GET" action="">
-            <!--Récupération classes-->
-        </form>
         <table>
             <tr>
                 <th>Rang</th>
@@ -36,13 +32,6 @@ require_once("request.php")
                 <th>Classe</th>
                 <th>Tour</th>
             </tr>
-            <?php if (isset($_GET['classe'])) {
-                //Vérification input classe
-            } else {
-                echo "Sélectionnez une classe";
-            }
-            //Création du classement 
-            ?>
         </table>
     </div>
     <!--Bas de page-->
