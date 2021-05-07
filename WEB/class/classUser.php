@@ -8,7 +8,6 @@ class User
     private $_password;
     private $_status;
     private $_classe;
-    private $_idClasse;
     private $_bdd;
 
     public function __construct($bdd)
@@ -16,20 +15,18 @@ class User
         $this->_bdd = $bdd;
     }
 
-    public function inscriptionUser($password, $mail, $nom, $prenom, $classe)
+    public function inscriptionUser($password, $mail, $nom, $prenom, $idClasse)
     {
-        $bdd = $this->_bdd;
-
         $hashPasswd = password_hash($password, PASSWORD_ARGON2ID);
 
         try {
-            $req = $bdd->prepare("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) 
+            $req = $this->_bdd->prepare("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) 
             VALUES (NULL, :nom, :prenom, :mail, :password, '0', :classe);");
             $req->bindParam('nom', $nom, PDO::PARAM_STR);
             $req->bindParam('prenom', $prenom, PDO::PARAM_STR);
             $req->bindParam('mail', $mail, PDO::PARAM_STR);
             $req->bindParam('password', $hashPasswd, PDO::PARAM_STR);
-            $req->bindParam('classe', $classe, PDO::PARAM_INT);
+            $req->bindParam('classe', $idClasse, PDO::PARAM_INT);
             $req->execute();
             $req->closeCursor();
 
@@ -42,11 +39,8 @@ class User
 
     public function connexionUser($mail, $passwd)
     {
-
-        $bdd = $this->_bdd;
-
         try {
-            $req = $bdd->prepare("SELECT `us_mail`, `us_passwd` FROM `user_tbl` WHERE `user_tbl`.`us_mail` = :mail");
+            $req = $this->_bdd->prepare("SELECT `us_mail`, `us_passwd` FROM `user_tbl` WHERE `user_tbl`.`us_mail` = :mail");
             $req->bindParam('mail', $mail, PDO::PARAM_STR);
             $req->execute();
             $result = $req->fetch(PDO::FETCH_ASSOC);
@@ -112,15 +106,6 @@ class User
     public function getClasse()
     {
         return $this->_classe;
-    }
-    public function getIdClasse($classe)
-    {
-        $requete = $this->_bdd->prepare("SELECT cl_id FROM classe_tbl WHERE cl_nom = :classe");
-        $requete->bindParam('classe', $classe, PDO::PARAM_STR);
-        $requete->execute();
-        $_idClasse = $requete->fetch();
-        echo $_idClasse['cl_id'];
-        return $_idClasse['cl_id'];
     }
     public function init()
     {
