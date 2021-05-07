@@ -8,6 +8,7 @@ class User
     private $_password;
     private $_status;
     private $_classe;
+    private $_idClasse;
     private $_bdd;
 
     public function __construct($bdd)
@@ -15,7 +16,7 @@ class User
         $this->_bdd = $bdd;
     }
 
-    public function inscriptionUser($password, $mail, $nom, $prenom)
+    public function inscriptionUser($password, $mail, $nom, $prenom, $classe)
     {
         $bdd = $this->_bdd;
 
@@ -23,12 +24,14 @@ class User
 
         try {
             $req = $bdd->prepare("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) 
-            VALUES (NULL, :nom, :prenom, :mail, :password, '0', NULL);");
+            VALUES (NULL, :nom, :prenom, :mail, :password, '0', :classe);");
             $req->bindParam('nom', $nom, PDO::PARAM_STR);
             $req->bindParam('prenom', $prenom, PDO::PARAM_STR);
             $req->bindParam('mail', $mail, PDO::PARAM_STR);
             $req->bindParam('password', $hashPasswd, PDO::PARAM_STR);
+            $req->bindParam('classe', $classe, PDO::PARAM_INT);
             $req->execute();
+            $req->closeCursor();
 
             header("Location: index.php");
         } catch (Exception $e) {
@@ -51,7 +54,7 @@ class User
             if (password_verify($passwd, $result['us_passwd']) == TRUE) {
                 header("Location: accueil.php");
             } else {
-                echo "<div style='color:white'>Identifiants incorrects !</div>";
+                echo "<div style='color:red>Identifiants incorrects !</div>";
             }
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
@@ -109,6 +112,15 @@ class User
     public function getClasse()
     {
         return $this->_classe;
+    }
+    public function getIdClasse($classe)
+    {
+        $requete = $this->_bdd->prepare("SELECT cl_id FROM classe_tbl WHERE cl_nom = :classe");
+        $requete->bindParam('classe', $classe, PDO::PARAM_STR);
+        $requete->execute();
+        $_idClasse = $requete->fetch();
+        echo $_idClasse['cl_id'];
+        return $_idClasse['cl_id'];
     }
     public function init()
     {

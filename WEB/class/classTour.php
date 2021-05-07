@@ -3,6 +3,7 @@ class Tour
 {
     private $_idtour;
     private $_distance;
+    private $_nbTour;
     private $_course;
     private $_bdd;
 
@@ -38,6 +39,14 @@ class Tour
     public function getDistance()
     {
         return $this->_distance;
+    }
+    public function setNbTour($newNbTour)
+    {
+        $this->_idtour = $newNbTour;
+    }
+    public function getNbTour()
+    {
+        return $this->_nbTour;
     }
     public function getCourse()
     {

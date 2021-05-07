@@ -22,9 +22,28 @@ require("class/classUser.php");
             <div>
                 <input type="text" name="prenom" placeholder="Prenom" required>
             </div>
-            <div>
-                <input type="text" name="classe" placeholder="Classe" required>
-            </div>
+            <?php
+            // Récupère les nom des classes dans la table classe
+            $requete = 'SELECT cl_nom FROM classe_tbl';
+            $resultat = $bdd->prepare($requete);
+            $resultat->execute();
+
+            if (!$resultat) {
+                echo "Problème de requete";
+            } else {
+            ?>
+                <!-- Menu déroulant avec les noms -->
+                <select name="listeClasse">
+                    <?php
+                    while ($ligne = $resultat->fetch()) {
+                        echo "<option value=classe'" . $ligne['cl_id'] . "'>" . $ligne['cl_nom'] . "</option>";
+                    }
+                    ?>
+                </select>
+            <?php
+            } // fin du else
+            $resultat->closeCursor(); // libère le résultat
+            ?>
             <div>
                 <input type="mail" name="mail" placeholder="Adresse mail" required>
             </div>
@@ -73,7 +92,8 @@ if (
 
     if ($password == $Cpassword) {
         $user = new User($bdd);
-        $user->inscriptionUser($password, $mail, $nom, $prenom, $classe);
+        $idClasse = $user->getIdClasse($classe);
+        $user->inscriptionUser($password, $mail, $nom, $prenom, $idClasse);
     } else {
         echo "<div>Confirmation de mot de passe incorrect</div>";
     }

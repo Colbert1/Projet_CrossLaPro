@@ -70,24 +70,27 @@ class Classement {
     ***************************************
     
     
-    SELECT
-		`dossard_tbl`.`ds_num`
-		`user_tbl`.`us_nom`,
-		`user_tbl`.`us_prenom`,
-        `classe_tbl`.`cl_nom`,
-        `temps_tbl`.`ts_temps`
+SELECT
+	`dossard_tbl`.`ds_num`,
+	`user_tbl`.`us_nom`,
+	`user_tbl`.`us_prenom`,
+    `classe_tbl`.`cl_nom`,
+    `temps_tbl`.`ts_temps`
 FROM 
     `classeparticipante_tbl`,
     `classe_tbl`,
     `course_tbl`,
     `dossard_tbl`,
-    `participants_tbl`,
+    `participant_tbl`,
     `temps_tbl`,
     `tour_tbl`,
     `user_tbl`
 WHERE
-	`participant_tbl`.`crs_id` = --course--
-ORDER BY
+	`participant_tbl`.`crs_id` = --id course--
+    AND `user_tbl`.`us_id` = `participant_tbl`.`us_id`
+    AND `dossard_tbl`.`ds_id` = `participant_tbl`.`ds_id`
+    AND `classeparticipante_tbl`.`crs_id` = `participant_tbl`.`crs_id`
+ORDER BY `temps_tbl`.`ts_temps`
 DESC**/
     public function setClassement($course){
         try{

@@ -43,6 +43,9 @@ require("class/classTour.php");
         </div>
     </div>
     <div>
+        <input type="number" name="nombre de tour" placeholder="NbTour" required>
+    </div>
+    <div>
         <input type="submit">
     </div>
 </form>
