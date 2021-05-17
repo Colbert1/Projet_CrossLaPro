@@ -26,7 +26,11 @@ class Classe
     {
         return $this->_nom;
     }
-    public function init()
+    public function initById()
     {
+        $requete = $this->_bdd->query('SELECT * FROM `classe_tbl` WHERE `cl_id` = '.$this->_idclasse);
+        $data = $requete->fetch();
+        $data['cl_id'] = $this->_idclasse;
+        $data['cl_nom'] = $this->_nom;
     }
 }

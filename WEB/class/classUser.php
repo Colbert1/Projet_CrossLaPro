@@ -15,20 +15,10 @@ class User
         $this->_bdd = $bdd;
     }
 
-    public function inscriptionUser($password, $mail, $nom, $prenom, $idClasse)
+    public function inscriptionUser()
     {
-        $hashPasswd = password_hash($password, PASSWORD_ARGON2ID);
-
         try {
-            $req = $this->_bdd->prepare("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) 
-            VALUES (NULL, :nom, :prenom, :mail, :password, '0', :classe);");
-            $req->bindParam('nom', $nom, PDO::PARAM_STR);
-            $req->bindParam('prenom', $prenom, PDO::PARAM_STR);
-            $req->bindParam('mail', $mail, PDO::PARAM_STR);
-            $req->bindParam('password', $hashPasswd, PDO::PARAM_STR);
-            $req->bindParam('classe', $idClasse, PDO::PARAM_INT);
-            $req->execute();
-            $req->closeCursor();
+            $req = $this->_bdd->query("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) VALUES (NULL, '".$this->_nom."', '".$this->_prenom."', '".$this->_mail."', '".$this->_password."', '0', '".$this->_classe->getIdClasse()."')");
 
             header("Location: index.php");
         } catch (Exception $e) {
