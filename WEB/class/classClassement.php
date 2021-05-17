@@ -94,7 +94,7 @@ ORDER BY `temps_tbl`.`ts_temps`
 DESC**/
     public function setClassement($course){
         try{
-            $req = $this->_bdd->prepare("SELECT
+            $req = $this->_bdd->prepare("`SELECT DISTINCT
             `dossard_tbl`.`ds_num`,
             `user_tbl`.`us_nom`,
             `user_tbl`.`us_prenom`,
@@ -105,13 +105,35 @@ DESC**/
             `dossard_tbl`,
             `temps_tbl`,
             `user_tbl`,
-            `participant_tbl`
+            `participant_tbl`,
+            `classeparticipante_tbl`,
+            `course_tbl`
         WHERE
             `participant_tbl`.`crs_id` = :course
-            /*AND `user_tbl`.`us_id` = `participant_tbl`.`us_id`
-            AND `dossard_tbl`.`ds_id` = `participant_tbl`.`ds_id`
-            AND `classeparticipante_tbl`.`crs_id` = `participant_tbl`.`crs_id`*/
+            AND `participant_tbl`.`us_id` = `user_tbl`.`us_id`
+            AND `participant_tbl`.`ds_id` = `dossard_tbl`.`ds_id`
+            AND `classeparticipante_tbl`.`crs_id` = `course_tbl`.`crs_id`
+            AND `classeparticipante_tbl`.`cl_id` = `classe_tbl`.`cl_id`
+            AND `participant_tbl`.`crs_id` = `course_tbl`.`crs_id`  
         ORDER BY `temps_tbl`.`ts_temps`");
+
+        /*
+        SELECT
+            `dossard_tbl`.`ds_num`,
+            `user_tbl`.`us_nom`,
+            `user_tbl`.`us_prenom`,
+            `classe_tbl`.`cl_nom`,
+            `temps_tbl`.`ts_temps`
+        FROM 
+            `classe_tbl`,
+            `dossard_tbl`,
+            `temps_tbl`,
+            `user_tbl`,
+            `participant_tbl`,
+            `classeparticipante_tbl`,
+            `course_tbl`
+        INNER JOIN
+        */
             $req->bindParam("course",$course,PDO::PARAM_INT);
             $req->execute();
             $data = $req->fetchAll(PDO::FETCH_ASSOC);

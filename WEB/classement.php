@@ -20,6 +20,7 @@ require_once("request.php")
         <script>
             function classement() {
                 const classement = <?php echo json_encode($classement); ?>;
+                console.log(classement);
             }
 
             setInterval(classement(), 30000);
