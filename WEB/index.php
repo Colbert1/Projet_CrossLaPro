@@ -2,7 +2,7 @@
 session_start();
 require_once("bdd.php");
 require("class/classUser.php");
-$requete = 'SELECT cl_nom FROM classe_tbl';
+$requete = 'SELECT  FROM user_tbl';
 $resultat = $bdd->prepare($requete);
 $resultat->execute();
 if(isset($_POST['subInscription'])){

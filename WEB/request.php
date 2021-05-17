@@ -7,7 +7,7 @@
     //Création du classement
     $objClas = new Classement($bdd);
     
-    $course = $_SESSION['course'];
+    $course = 1;
     $classement = $objClas->setClassement($course);
 
 ?>
