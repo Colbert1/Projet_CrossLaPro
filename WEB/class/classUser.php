@@ -18,7 +18,7 @@ class User
     public function inscriptionUser()
     {
         try {
-            $req = $this->_bdd->query("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) VALUES (NULL, '".$this->_nom."', '".$this->_prenom."', '".$this->_mail."', '".$this->_password."', '0', '".$this->_classe->getIdClasse()."')");
+            $req = $this->_bdd->query("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) VALUES (NULL, '" . $this->_nom . "', '" . $this->_prenom . "', '" . $this->_mail . "', '" . $this->_password . "', '0', '" . $this->_classe->getIdClasse() . "')");
 
             header("Location: index.php");
         } catch (Exception $e) {
@@ -30,10 +30,8 @@ class User
     public function connexionUser($mail, $passwd)
     {
         try {
-            $req = $this->_bdd->prepare("SELECT `us_mail`, `us_passwd` FROM `user_tbl` WHERE `user_tbl`.`us_mail` = :mail");
-            $req->bindParam('mail', $mail, PDO::PARAM_STR);
-            $req->execute();
-            $result = $req->fetch(PDO::FETCH_ASSOC);
+            $req = $this->_bdd->query("SELECT `us_mail`, `us_passwd` FROM `user_tbl` WHERE `user_tbl`.`us_mail` = '" . $this->_mail . "'");
+            $result = $req->fetch();
 
             if (password_verify($passwd, $result['us_passwd']) == TRUE) {
                 header("Location: accueil.php");
@@ -85,7 +83,7 @@ class User
     {
         return $this->_mail;
     }
-    public function getPasword()
+    public function getPassword()
     {
         return $this->_password;
     }

@@ -7,7 +7,8 @@ $requete = 'SELECT * FROM classe_tbl';
 $resultat = $bdd->prepare($requete);
 $resultat->execute();
 if (isset($_POST['subInscription'])) {
-    if (!empty($_POST['nomInscription']) && !empty($_POST['prenomInscription']) && !empty($_POST['listeClasseInscription']) && !empty($_POST['mailInscription']) && !empty($_POST['passwordInscription']) && !empty($_POST['confirmPasswordInscription'])) {
+    if (!empty($_POST['nomInscription']) && !empty($_POST['prenomInscription']) && !empty($_POST['listeClasseInscription']) &&
+        !empty($_POST['mailInscription']) && !empty($_POST['passwordInscription']) && !empty($_POST['confirmPasswordInscription'])) {
         if ($_POST['passwordInscription'] == $_POST['confirmPasswordInscription']) {
             $user = new User($bdd);
             $classe = new Classe($bdd);
@@ -35,18 +36,15 @@ if (isset($_POST['subInscription'])) {
 }
 if (isset($_POST['subConnect'])) {
     if (!empty($_POST['emailConnexion']) && !empty($_POST['passwordConnexion'])) {
-            $user = new User($bdd);
-            $user->getMail($_POST['emailConnexion']);
-            $user->getPasword($_POST['passwordConnexion']);
-            $user->connexionUser();
-        } else {
-            $message = "Problème de connexion";
-        }
+        $user = new User($bdd);
+        $user->getMail($_POST['emailConnexion']);
+        $user->getPassword($_POST['passwordConnexion']);
+        $user->connexionUser($mail, $passwd);
     } else {
-        echo $_POST['emailConnexion'] . "<br>";
-        echo $_POST['passwordConnexion'] . "<br>";
-        $message = "Des champs ne sont pas remplis";
+        $message = "Problème de connexion";
     }
+} else {
+    $message = "Des champs ne sont pas remplis";
 }
 ?>
 <!DOCTYPE html>
