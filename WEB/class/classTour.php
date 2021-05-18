@@ -14,8 +14,7 @@ class Tour
     public function ajoutDistanceTour()
     {
         try {
-            $req = $this->_bdd->prepare("INSERT INTO `tour_tbl`(`tr_id`, `tr_distance`, `crs_id`) VALUES (NULL, '" . $this->_distance . "', '" . $this->_course . "')");
-            $req->execute();
+            $this->_bdd->query("INSERT INTO `tour_tbl`(`tr_id`, `tr_distance`, `crs_id`) VALUES (NULL, '" . $this->_distance . "', '" . $this->_course . "')");
         } catch (Exception $e) {
             echo "Error : " . $e->getMessage();
         }

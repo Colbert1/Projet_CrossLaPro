@@ -1,39 +1,35 @@
 <?php
-
-/*********************************
-Paramétrage du tour : Distance selon le nom de la course
- ********************************/
 session_start();
 require_once("bdd.php");
 require("class/classTour.php");
+// Récupère les nom des courses dans la table course
+$requete = 'SELECT crs_nom FROM course_tbl';
+$resultat = $bdd->prepare($requete);
+$resultat->execute();
 ?>
 <html>
+<!-- 
+    SELECTIONNER LA COURSE 
+    GRACE A LA SESSION ON CHOISIT ET MEMORISE L'ID DE LA COURSE
+    APRES ON SELECTIONNE LA DISTANCE DU TOUR 1
+    APRES ON SELECTIONNE LA DISTANCE DU TOUR 2
+    APRES ON SELECTIONNE LA DISTANCE DU TOUR 3
+    ET AINSI DE SUITE...
+    DES QUE L'ON A FINI ON APPUIE SUR TERMINER
+ -->
 <form action="" method="post">
     <div>
         Selectionnez la course que vous souhaitez configurée
         <div>
-            <?php
-            // Récupère les nom des courses dans la table course
-            $requete = 'SELECT crs_nom FROM course_tbl';
-            $resultat = $bdd->prepare($requete);
-            $resultat->execute();
 
-            if (!$resultat) {
-                echo "Problème de requete";
-            } else {
-            ?>
-                <!-- Menu déroulant avec les noms -->
-                <select name="listeCourse">
-                    <?php
-                    while ($ligne = $resultat->fetch()) {
-                        echo "<option value=course'" . $ligne['crs_id'] . "'>" . $ligne['crs_nom'] . "</option>";
-                    }
-                    ?>
-                </select>
-            <?php
-            } // fin du else
-            $resultat->closeCursor(); // libère le résultat
-            ?>
+            <!-- Menu déroulant avec les noms -->
+            <select name="listeCourse">
+                <?php
+                while ($ligne = $resultat->fetch()) {
+                    echo "<option value=course'" . $ligne['crs_id'] . "'>" . $ligne['crs_nom'] . "</option>";
+                }
+                ?>
+            </select>
         </div>
     </div>
     <div>
@@ -43,7 +39,7 @@ require("class/classTour.php");
         </div>
     </div>
     <div>
-        <input type="number" name="nombre de tour" placeholder="NbTour" required>
+        <!-- BOUTON " + "  AVEC LA POSSIBILITE D'AJOUT LA DISTANCE -->
     </div>
     <div>
         <input type="submit">
