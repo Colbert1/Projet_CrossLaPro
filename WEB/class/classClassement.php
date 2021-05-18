@@ -94,7 +94,7 @@ ORDER BY `temps_tbl`.`ts_temps`
 DESC**/
     public function setClassement($course){
         try{
-            $req = $this->_bdd->prepare("`SELECT DISTINCT
+            $req = $this->_bdd->prepare("SELECT DISTINCT
             `dossard_tbl`.`ds_num`,
             `user_tbl`.`us_nom`,
             `user_tbl`.`us_prenom`,

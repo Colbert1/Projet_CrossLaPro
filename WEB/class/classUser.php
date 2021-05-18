@@ -23,7 +23,6 @@ class User
             header("Location: index.php");
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
-            echo "Les datas : ";
         }
     }
 
@@ -31,16 +30,15 @@ class User
     {
         try {
             $req = $this->_bdd->query("SELECT `us_mail`, `us_passwd` FROM `user_tbl` WHERE `user_tbl`.`us_mail` = '" . $this->_mail . "'");
-            $result = $req->fetch();
+            $req->fetch();
 
-            if (password_verify($passwd, $result['us_passwd']) == TRUE) {
+            if ($passwd == $this->_password) {
                 header("Location: accueil.php");
             } else {
                 echo "<div style='color:red>Identifiants incorrects !</div>";
             }
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
-            echo "Les datas : ";
         }
     }
     public function setMail($newMail)
