@@ -33,7 +33,7 @@ class User
             $req->fetch();
 
             if ($passwd == $this->_password) {
-                header("Location: accueil.php");
+                return TRUE;
             } else {
                 echo "<div style='color:red>Identifiants incorrects !</div>";
             }

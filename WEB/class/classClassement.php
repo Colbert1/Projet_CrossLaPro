@@ -109,13 +109,13 @@ DESC**/
             `classeparticipante_tbl`,
             `course_tbl`
         WHERE
-            `participant_tbl`.`crs_id` = :course
+            `participant_tbl`.`crs_id` = 1 
             AND `participant_tbl`.`us_id` = `user_tbl`.`us_id`
             AND `participant_tbl`.`ds_id` = `dossard_tbl`.`ds_id`
             AND `classeparticipante_tbl`.`crs_id` = `course_tbl`.`crs_id`
             AND `classeparticipante_tbl`.`cl_id` = `classe_tbl`.`cl_id`
-            AND `participant_tbl`.`crs_id` = `course_tbl`.`crs_id`  
-        ORDER BY `temps_tbl`.`ts_temps`");
+            AND `participant_tbl`.`crs_id` = `course_tbl`.`crs_id`
+        GROUP BY `user_tbl`.`us_id` ORDER BY `temps_tbl`.`tr_id` DESC");
 
         /*
         SELECT

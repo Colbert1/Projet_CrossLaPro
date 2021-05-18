@@ -2,13 +2,12 @@
 session_start();
 require_once("bdd.php");
 require("class/classUser.php");
-require("class/classClasse.php");
-$requete = 'SELECT * FROM classe_tbl';
-$resultat = $bdd->prepare($requete);
-$resultat->execute();
+//Inscription
 if (isset($_POST['subInscription'])) {
-    if (!empty($_POST['nomInscription']) && !empty($_POST['prenomInscription']) && !empty($_POST['listeClasseInscription']) &&
-        !empty($_POST['mailInscription']) && !empty($_POST['passwordInscription']) && !empty($_POST['confirmPasswordInscription'])) {
+    if (
+        !empty($_POST['nomInscription']) && !empty($_POST['prenomInscription']) && !empty($_POST['listeClasseInscription']) &&
+        !empty($_POST['mailInscription']) && !empty($_POST['passwordInscription']) && !empty($_POST['confirmPasswordInscription'])
+    ) {
         if ($_POST['passwordInscription'] == $_POST['confirmPasswordInscription']) {
             $user = new User($bdd);
             $classe = new Classe($bdd);
@@ -34,18 +33,24 @@ if (isset($_POST['subInscription'])) {
         $message = "Des champs ne sont pas remplis";
     }
 }
+//Connexion
 if (isset($_POST['subConnect'])) {
     if (!empty($_POST['emailConnexion']) && !empty($_POST['passwordConnexion'])) {
         $user = new User($bdd);
         $user->getMail($_POST['emailConnexion']);
         $user->getPassword($_POST['passwordConnexion']);
-        $user->connexionUser($mail, $passwd);
+        $connexion = $user->connexionUser($mail, $passwd);
+        if($connexion == TRUE){
+            $_SESSION['mail'] = $_POST['emailConnexion'];
+            header("Location: accueil.php");
+        }
     } else {
         $message = "Problème de connexion";
     }
 } else {
     $message = "Des champs ne sont pas remplis";
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -53,7 +58,7 @@ if (isset($_POST['subConnect'])) {
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css">
-    <title>Index</title>
+    <title>Page Principale</title>
 </head>
 
 <body>
@@ -69,6 +74,9 @@ if (isset($_POST['subConnect'])) {
             </div>
             <select name="listeClasseInscription">
                 <?php
+                $requete = 'SELECT * FROM classe_tbl';
+                $resultat = $bdd->prepare($requete);
+                $resultat->execute();
                 while ($ligne = $resultat->fetch()) {
                     echo "<option value='" . $ligne['cl_id'] . "'>" . $ligne['cl_nom'] . "</option>";
                 }
