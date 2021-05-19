@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/09/21 09:51:56.000.855,=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\Project1PCH1.h</Transaction>
+    <Transaction>2020/09/21 09:51:57.000.121,=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\File1.cpp</Transaction>
+    <Transaction>2020/09/21 09:52:24.000.839,C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\main.cpp=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\File1.cpp</Transaction>
+    <Transaction>2020/09/21 09:52:33.000.136,=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\Unit1.cpp</Transaction>
+    <Transaction>2020/09/21 09:52:50.000.948,C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\rs232.h=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\Unit1.h</Transaction>
+    <Transaction>2020/09/21 09:52:50.000.948,C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\rs232.cpp=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\Unit1.cpp</Transaction>
+    <Transaction>2020/09/21 09:53:23.000.246,F:\exoC_SN2\cpp\tp2\rs232.h=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\rs232.h</Transaction>
+    <Transaction>2020/09/21 09:53:23.000.246,F:\exoC_SN2\cpp\tp2\rs232.cpp=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\rs232.cpp</Transaction>
+    <Transaction>2020/09/21 11:58:24.000.215,=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\Unit1.cpp</Transaction>
+    <Transaction>2020/09/21 11:58:34.000.339,C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\rs.cpp=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\Unit1.cpp</Transaction>
+    <Transaction>2020/09/21 11:58:34.000.339,C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\rs.h=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\Unit1.h</Transaction>
+    <Transaction>2020/09/21 12:08:12.000.151,F:\exoC_SN2\cpp\tp2\main.cpp=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\main.cpp</Transaction>
+    <Transaction>2020/09/21 12:08:15.000.900,F:\exoC_SN2\cpp\tp2\Project1PCH1.h=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\Project1PCH1.h</Transaction>
+    <Transaction>2020/09/21 12:08:18.000.800,F:\exoC_SN2\cpp\tp2\Project1.cbproj=C:\Users\Mathis\Documents\Embarcadero\Studio\Projets\Project1.cbproj</Transaction>
+  </Transactions>
+</BorlandProject>
