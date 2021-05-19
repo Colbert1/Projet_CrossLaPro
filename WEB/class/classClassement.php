@@ -89,6 +89,7 @@ SELECT DISTINCT
                                         AND `participant_tbl`.`us_id` = `user_tbl`.`us_id`
                                         AND `participant_tbl`.`crs_id` = `course_tbl`.`crs_id`
                                         AND `participant_tbl`.`crs_id` = 1
+                                        AND
 
             ");
             $req->bindParam("course",$course,PDO::PARAM_INT);
