@@ -44,8 +44,11 @@ if (!empty($_POST['distance']) && !empty($_POST['listeCourse'])) {
     </label>
     <select name="listeCourse">
         <?php
+        echo '<option value="0" selected>Sélectionner la course</option>';
         foreach ($result as $ligne) {
-            echo "<option value='{$ligne['crs_id']}' selected >" . $ligne['crs_nom'] . "</option>";
+
+            echo "<option value='{$ligne['crs_id']} - {$ligne['crs_nom']}'>"
+                . $ligne['crs_nom'] . "</option>";
         }
         ?>
     </select>
@@ -53,6 +56,10 @@ if (!empty($_POST['distance']) && !empty($_POST['listeCourse'])) {
 </form>
 <div>
     <p>
+    <!------------------------------------------------------------------------------
+        Selectionnez la distance en metres du tour //* PAS ENCORE CONFIGURE EN BASE 
+        De la course //* RECUPERE DANS LE FORM JUSTE AVANT 
+     ------------------------------------------------------------------------------->
         Selectionnez la distance en metres du tour de la course <?php echo $course ?>
     </p>
 </div>
