@@ -40,7 +40,7 @@ if (isset($_POST['subConnect'])) {
         $user->getMail($_POST['emailConnexion']);
         $user->getPassword($_POST['passwordConnexion']);
         $connexion = $user->connexionUser($mail, $passwd);
-        if($connexion == TRUE){
+        if ($connexion == TRUE) {
             $_SESSION['mail'] = $_POST['emailConnexion'];
             header("Location: accueil.php");
         }
@@ -50,7 +50,12 @@ if (isset($_POST['subConnect'])) {
 } else {
     $message = "Des champs ne sont pas remplis";
 }
-
+//Classe
+$sql = 'SELECT cl_nom, cl_id FROM classe_tbl';
+$req = $bdd->prepare($sql);
+$req->execute();
+$result = $req->fetchAll();
+$req->closeCursor();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -74,11 +79,11 @@ if (isset($_POST['subConnect'])) {
             </div>
             <select name="listeClasseInscription">
                 <?php
-                $requete = 'SELECT * FROM classe_tbl';
-                $resultat = $bdd->prepare($requete);
-                $resultat->execute();
-                while ($ligne = $resultat->fetch()) {
-                    echo "<option value='" . $ligne['cl_id'] . "'>" . $ligne['cl_nom'] . "</option>";
+                echo '<option value="0" selected>Sélectionner la classe</option>';
+                foreach ($result as $ligne) {
+        
+                    echo "<option value='{$ligne['cl_id']} - {$ligne['cl_nom']}'>"
+                        . $ligne['cl_nom'] . "</option>";
                 }
                 ?>
             </select>
