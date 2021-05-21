@@ -13,11 +13,11 @@ if (isset($_POST['subInscription'])) {
             $classe = new Classe($bdd);
             $classe->setIdClasse($_POST['listeClasseInscription']);
             $classe->initById();
-            $user->setNom($_POST['nomInscription']);
+            $_SESSION['nom'] = $user->setNom($_POST['nomInscription']);
             $user->setPrenom($_POST['prenomInscription']);
             $user->setClasse($classe);
-            $user->setMail($_POST['mailInscription']);
-            $user->setPassword($_POST['passwordInscription']);
+            $_SESSION['mail'] =$user->setMail($_POST['mailInscription']);
+            $_SESSION['password'] =$user->setPassword($_POST['passwordInscription']);
             $user->inscriptionUser();
             $message = "Inscription réussie";
         } else {

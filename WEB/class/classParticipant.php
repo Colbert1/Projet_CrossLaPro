@@ -1,12 +1,12 @@
 <?php
 require_once("bdd.php");
-/* -------------------------------------
-        Class Coureur
-        Avec la possibilité de :
-        Ajouter un coureur à une course
-        Modifier ses informations
-        Supprimer un coureur à une course
-----------------------------------------*/
+/***********************************************************************
+    ON RECUPERE ET AFFICHE LE NOM GRACE A L'ID DU USER
+    ENSUITE
+    ON RECUPERE ET AFFICHE LE NOM DE LA COURSE GRACE A L'ID DE LA COURSE
+    (POUR QUE LE USER 10 PARTICIPE A LA COURSE 2) 
+    ET CA ON L'AFFICHE SUR L'IHM POUR CONFIRMER L'INSCRIPTION
+ ***********************************************************************/
 class Coureur
 {
     private $_idparticipant;
@@ -18,6 +18,14 @@ class Coureur
     public function __construct($bdd)
     {
         $this->_bdd = $bdd;
+    }
+    public function inscriptionCoureur()
+    {
+        try {
+            $req = $this->_bdd->query("INSERT INTO `participant_tbl` (`pt_id`, `us_id`, `crs_id`, `ds_id`) VALUES (NULL, '" . $this->_user . "','" . $this->_course . "', NULL)");
+        } catch (Exception $e) {
+            echo "Erreur ! " . $e->getMessage();
+        }
     }
     public function setIdParticipant($newIdParticipant)
     {
