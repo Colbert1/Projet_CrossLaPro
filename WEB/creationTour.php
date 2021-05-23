@@ -11,15 +11,17 @@ $result = $req->fetchAll();
 $req->closeCursor();
 
 //Action des formulaires de la page
-if (!empty($_POST['distance']) && !empty($_POST['listeCourse'])) {
+if (!empty($_POST['distanceTour']) && !empty($_POST['listeCourse'])) {
     $course     = $_POST['listeCourse'];
-    $distance   = $_POST['distance'];
+    $distance   = $_POST['distanceTour'];
     $creacourse = new Tour($bdd);
     $creacourse->getCourse($course);
     $creacourse->getDistance($distance);
     $creacourse->ajoutDistanceTour();
-} elseif (empty($_POST['distance']) && !empty($_POST['listeCourse'])) {
+} elseif (empty($_POST['distanceTour']) && !empty($_POST['listeCourse'])) {
     $course     = $_POST['listeCourse'];
+} elseif (!empty($_POST['distanceTour']) && empty($_POST['listeCourse'])) {
+    $distance   = $_POST['distanceTour'];
 } else {
     echo "<div>Echec de la configuration du tour</div>";
 }
@@ -54,20 +56,29 @@ if (!empty($_POST['distance']) && !empty($_POST['listeCourse'])) {
     </select>
     <button type="submit">Confirmer</button>
 </form>
-<div>
-    <p>
-    <!------------------------------------------------------------------------------
+<form action="" method="post">
+    <div>
+        <p>
+            <!------------------------------------------------------------------------------
         Selectionnez la distance en metres du tour //* PAS ENCORE CONFIGURE EN BASE 
         De la course //* RECUPERE DANS LE FORM JUSTE AVANT 
      ------------------------------------------------------------------------------->
-        Selectionnez la distance en metres du tour de la course <?php echo $course ?>
-    </p>
-</div>
-<div>
-</div>
-<div>
-    <input type="submit">
-</div>
+            Selectionnez la distance en metres du tour de la course <?php echo $course ?>
+        </p>
+        <input type="number" name="distanceTour" placeholder="Distance du tour" required>
+        <button type="submit">Confirmer</button>
+        <p>Le tour N°
+            <!-- Num du tour recupéré juste avant --> de la course <?php echo $course ?> est de
+            <?php echo $distance ?> m
+        </p>
+    </div>
+    <div>
+    </div>
+</form>
+<form action="" method="post">
+    <div>
+        <input type="submit">
+    </div>
 </form>
 
 </html>
