@@ -56,6 +56,7 @@ if (!empty($_POST['distanceTour']) && !empty($_POST['listeCourse'])) {
     </select>
     <button type="submit">Confirmer</button>
 </form>
+<!--Distance tour-->
 <form action="" method="post">
     <div>
         <p>

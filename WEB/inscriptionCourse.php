@@ -42,7 +42,6 @@ $req->closeCursor();
                     ?>
                 </select>
             </div>
-
             <button name="subInscriptCourse" type="submit">Confirmer</button>
         </form>
     </div>
