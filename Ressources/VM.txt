@@ -1,0 +1,17 @@
+Apache
+192.168.65.78
+debian
+debian
+
+
+BDD
+192.168.65.183
+debian
+debian
+
+
+Samba
+192.168.65.137
+colbert/danel/garnon
+mdp mail la pro
+
