@@ -102,7 +102,9 @@ $req->closeCursor();
                 <div class="mb-4-text-gray-700 text-center">
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" type="password" name="confirmPasswordInscription" placeholder="Confirmation mot de passe" required>
                 </div>
-                <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" name="subInscription" type="submit">Confirmer</button>
+                <div class="mb-4-text-gray-700 text-center">
+                    <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" name="subInscription" type="submit">Confirmer</button>
+                </div>
                 <h4><?php if (!empty($message)) {
                         echo $message;
                     } ?></h4>
@@ -120,8 +122,9 @@ $req->closeCursor();
                 <div class="mb-4-text-gray-700 text-center">
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" type="password" name="passwordConnexion" placeholder="Mot de passe" required>
                 </div>
-
-                <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" name="subConnect" type="submit">Confirmer</button>
+                <div class="mb-4-text-gray-700 text-center">
+                    <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" name="subConnect" type="submit">Confirmer</button>
+                </div>
             </form>
         </div>
     </div>
