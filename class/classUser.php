@@ -1,0 +1,107 @@
+<?php
+class User
+{
+    private $_id;
+    private $_nom;
+    private $_prenom;
+    private $_mail;
+    private $_password;
+    private $_status;
+    private $_classe;
+    private $_bdd;
+
+    public function __construct($bdd)
+    {
+        $this->_bdd = $bdd;
+    }
+
+    public function inscriptionUser()
+    {
+        try {
+            $req = $this->_bdd->query("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) VALUES (NULL, '" . $this->_nom . "', '" . $this->_prenom . "', '" . $this->_mail . "', '" . $this->_password . "', '0', '" . $this->_classe->getIdClasse() . "')");
+
+            header("Location: index.php");
+        } catch (Exception $e) {
+            echo "Erreur ! " . $e->getMessage();
+        }
+    }
+
+    public function connexionUser($mail, $passwd)
+    {
+        try {
+            $req = $this->_bdd->query("SELECT `us_mail`, `us_passwd` FROM `user_tbl` WHERE `user_tbl`.`us_mail` = '" . $this->_mail . "'");
+            $req->fetch();
+
+            if ($passwd == $this->_password) {
+                return TRUE;
+            } else {
+                echo "<div style='color:red>Identifiants incorrects !</div>";
+            }
+        } catch (Exception $e) {
+            echo "Erreur ! " . $e->getMessage();
+        }
+    }
+    public function setMail($newMail)
+    {
+        $this->_mail = $newMail;
+    }
+    public function setPassword($newPassword)
+    {
+        $this->_password = $newPassword;
+    }
+    public function setNom($newNom)
+    {
+        $this->_nom = $newNom;
+    }
+    public function setPrenom($newPrenom)
+    {
+        $this->_prenom = $newPrenom;
+    }
+    public function setStatus($newStatus)
+    {
+        $this->_status = $newStatus;
+    }
+    public function setClasse($newClasse)
+    {
+        $this->_classe = $newClasse;
+    }
+    public function getId()
+    {
+        return $this->_id;
+    }
+    public function getNom()
+    {
+        return $this->_nom;
+    }
+    public function getPrenom()
+    {
+        return $this->_prenom;
+    }
+    public function getMail()
+    {
+        return $this->_mail;
+    }
+    public function getPassword()
+    {
+        return $this->_password;
+    }
+    public function getStatus()
+    {
+        return $this->_status;
+    }
+    public function getClasse()
+    {
+        return $this->_classe;
+    }
+    public function init()
+    {
+        $requete = $this->_bdd->query("SELECT * FROM `user_tbl` WHERE `us_id` = " . $this->_id);
+        $data = $requete->fetch();
+        $this->_nom = $data['us_nom'];
+        $this->_prenom = $data['us_prenom'];
+        $this->_mail = $data['us_mail'];
+        $this->_password = $data['us_passwd'];
+        $this->_statut = $data['us_status'];
+        $this->_classe = $data['cl_id'];
+    }
+}

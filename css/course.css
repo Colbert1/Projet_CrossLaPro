@@ -1,0 +1,29 @@
+body {
+  background-color: #2649bbf6;
+}
+
+.header {
+  height: 7%;
+  background-color: #a2a5ad;
+}
+
+.header .logo {
+  height: 100%;
+  width: 400px;
+  min-width: 400px;
+  background-image: url(../img/LaPro.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 5px;
+}
+.contenu {
+  height: 88%;
+  margin-left: 1%;
+  margin-right: 1%;
+  background-color: #16cacac0;
+}
+
+.footer {
+  height: 5%;
+  background-color: #2649bbf6;
+}
