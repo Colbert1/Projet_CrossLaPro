@@ -1,13 +1,12 @@
 <?php
-session_start();
 require_once("bdd.php");
 require("class/classParticipant.php");
 include "header.php";
-$sql = 'SELECT cr_nom, cr_id FROM course_tbl';
+$sql = 'SELECT crs_nom, crs_id FROM course_tbl';
 $req = $bdd->prepare($sql);
 $req->execute();
 $result = $req->fetchAll();
-$req->closeCursor();
+$req->closeCursor()
 ?>
 
 <!DOCTYPE html>
@@ -15,36 +14,40 @@ $req->closeCursor();
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css">
     <title>Page Principale</title>
 </head>
 
-<body>
-
-    <!-- FORMULAIRE INSCRIPTION COURSE -->
-    <div class="login-box">
-        <h2>Inscription Course</h2>
-        <form id="inscriptionCourse" action="" method="POST">
-            <div>
-                <!------------------------------------------------------------ 
+<body class="bg-blue-300 h-screen">
+    <div class="container mx-auto flex justify-center grid justify-items-start m-40">
+        <!-- FORMULAIRE INSCRIPTION COURSE -->
+        <div class="w-full max-w-xs pt-6">
+            <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gray-400" id="inscriptionCourse" action="" method="POST">
+                <div class="mb-4 text-center">
+                    <p>Inscription Course</p>
+                </div>
+                <div class="mb-4-text-gray-700 text-center">
+                    <!------------------------------------------------------------ 
                     Ici on affiche le $session lorsque l'on est connecté
                     Il faut que l'on insert en base l'id de la session du user connecté                
                  ------------------------------------------------------------->
-            </div>
-            <div>
-                <select name="listeCourseInscription">
-                    <?php
-                    echo '<option value="0" selected>Sélectionner la course</option>';
-                    foreach ($result as $ligne) {
+                </div>
+                <div>
+                    <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" name="listeCourseInscription">
+                        <?php
+                        echo '<option value="0" selected>Sélectionner la course</option>';
+                        foreach ($result as $ligne) {
 
-                        echo "<option value='{$ligne['cr_id']} - {$ligne['cr_nom']}'>"
-                            . $ligne['cr_nom'] . "</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-            <button name="subInscriptCourse" type="submit">Confirmer</button>
-        </form>
+                            echo "<option value='{$ligne['crs_id']} - {$ligne['crs_nom']}'>"
+                                . $ligne['crs_nom'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="mb-4-text-gray-700 text-center">
+                    <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" name="subInscriptCourse" type="submit">Confirmer</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 

@@ -1,5 +1,4 @@
 <?php
-    session_start();
     //require_once("class/classClassement.php");
     //require_once("bdd.php");   
 
@@ -11,10 +10,13 @@
     //$objClas->setNomCourse($course);
     //$objClass->setIdCourse();
     //$classement = $objClas->setClassement($course);
-    $tab['ds_num'] = 3;
+    $tab['ds_num'] = '{3}';
     $tab['us_nom'] = "Test";
     $tab['us_prenom'] = "Jean";
     $tab['cl_nom'] = "SN2";
     $tab['ts_temps'] = "04h23m35s";  
-?>
-<script>const data = <?php echo $tab; ?></script>
+
+    $classement = json_encode($tab);
+
+    header("Content-type: application/json");
+    echo $classement;

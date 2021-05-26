@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once("bdd.php");
 require("class/classCourse.php");
 include "header.php";
@@ -27,7 +26,7 @@ if (isset($_POST['subCreaCourse'])) {
 </head>
 
 <body class="bg-blue-300 h-screen">
-    <div class="container mx-auto flex justify-center grid justify-items-start">
+    <div class="container mx-auto flex justify-center grid justify-items-start m-40">
         <div class="w-full max-w-xs pt-6">
             <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gray-400" action="" method="POST">
                 <div class="mb-4 text-center">
@@ -39,7 +38,10 @@ if (isset($_POST['subCreaCourse'])) {
                 <div>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" type="date" name="dateCourse" placeholder="Date" required>
                 </div>
-                <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" name="subCreaCourse" type="submit">Confirmer</button>
+
+                <div class="mb-4-text-gray-700 text-center">
+                    <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2" name="subCreaCourse" type="submit">Confirmer</button>
+                </div>
             </form>
         </div>
     </div>

@@ -42,6 +42,7 @@ if (isset($_POST['subConnect'])) {
         $user->getPassword($_POST['passwordConnexion']);
         $connexion = $user->connexionUser($mail, $passwd);
         if ($connexion == TRUE) {
+            $_SESSION['connexion']=true;
             $_SESSION['mail'] = $_POST['emailConnexion'];
             header("Location: accueil.php");
         }
@@ -51,6 +52,7 @@ if (isset($_POST['subConnect'])) {
 } else {
     $message = "Des champs ne sont pas remplis";
 }
+
 //Classe
 $sql = 'SELECT cl_nom, cl_id FROM classe_tbl';
 $req = $bdd->prepare($sql);

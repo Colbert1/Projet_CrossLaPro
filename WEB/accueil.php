@@ -1,15 +1,9 @@
 <?php
-session_start();
-if (isset($_POST['destroy'])) {
-    session_destroy();
-}
+include "header.php";
 
-if (!isset($_SESSION['mail'])) {
-    header("Location:index.php");
-}
 require_once("bdd.php");
 require("class/classUser.php");
-include "header.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

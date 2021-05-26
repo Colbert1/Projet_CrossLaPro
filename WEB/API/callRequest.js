@@ -1,19 +1,18 @@
-
 function getClassement() {
-    const table = document.getElementById('tab');
+    const table = document.querySelector('table');
 
     fetch('API/request.php')
-        .then((resp) => {
-            document.createElement('tr');
-            document.innerHTML = "<td>" + resp['ds_num'] + "</td>";
-            /*row.createElement('td').textContent = resp['ds_num'];
-            row.createElement('td').textContent = resp['us_nom'];
-            row.createElement('td').textContent = resp['us_prenom'];
-            row.createElement('td').textContent = resp['cl_nom'];
-            row.createElement('td').textContent = resp['ts_temps'];*/
+        .then(resp => {
+            resp.json().then(data => {
+                console.log(data);
+            });
+            const jsonTab = JSON.parse(resp.responseText);
+            document.getElementById('tab').innerHTML = jsonTab;
         }).catch(function (error) {
             console.log(error);
         });
 }
 
+
 setInterval(getClassement(), 5000);
+

@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once("bdd.php");
 require("class/classTour.php");
 include "header.php";
