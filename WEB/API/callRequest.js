@@ -5,9 +5,13 @@ function getClassement() {
         .then(resp => {
             resp.json().then(data => {
                 console.log(data);
+                console.log(data.length);
+                for(let i=0;i<data.length;i++){
+                    for(let j=0;j<6;j++){
+                        let value = data[i][j];
+                    }
+                }
             });
-            const jsonTab = JSON.parse(resp.responseText);
-            document.getElementById('tab').innerHTML = jsonTab;
         }).catch(function (error) {
             console.log(error);
         });

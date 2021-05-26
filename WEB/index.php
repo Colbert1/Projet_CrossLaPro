@@ -2,6 +2,7 @@
 session_start();
 require_once("bdd.php");
 require("class/classUser.php");
+
 //Inscription
 if (isset($_POST['subInscription'])) {
     if (
@@ -42,7 +43,6 @@ if (isset($_POST['subConnect'])) {
         $user->getPassword($_POST['passwordConnexion']);
         $connexion = $user->connexionUser($mail, $passwd);
         if ($connexion == TRUE) {
-            $_SESSION['connexion']=true;
             $_SESSION['mail'] = $_POST['emailConnexion'];
             header("Location: accueil.php");
         }

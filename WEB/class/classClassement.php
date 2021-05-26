@@ -23,7 +23,7 @@ class Classement {
         $req->execute();
         $id = $req->fetch(PDO::FETCH_ASSOC);
         $req->closeCursor();
-        
+
         $this->_id_course = $id['crs_id'];
     }
 
@@ -179,7 +179,7 @@ SELECT
             $req->execute();
             $data = $req->fetchAll(PDO::FETCH_ASSOC);
             $req->closeCursor();
-
+                
             return $data;
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();

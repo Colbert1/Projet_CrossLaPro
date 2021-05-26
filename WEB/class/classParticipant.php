@@ -5,7 +5,6 @@ require_once("bdd.php");
     ENSUITE
     ON RECUPERE ET AFFICHE LE NOM DE LA COURSE GRACE A L'ID DE LA COURSE
     (POUR QUE LE USER 10 PARTICIPE A LA COURSE 2) 
-    ET CA ON L'AFFICHE SUR L'IHM POUR CONFIRMER L'INSCRIPTION
  ***********************************************************************/
 class Coureur
 {
@@ -22,7 +21,8 @@ class Coureur
     public function inscriptionCoureur()
     {
         try {
-            $req = $this->_bdd->query("INSERT INTO `participant_tbl` (`pt_id`, `us_id`, `crs_id`, `ds_id`) VALUES (NULL, '" . $this->_user . "','" . $this->_course . "', NULL)");
+            $req = $this->_bdd->query("INSERT INTO `participant_tbl` (`pt_id`, `us_id`, `crs_id`, `ds_id`) 
+            VALUES (NULL, '" . $this->_user . "','" . $this->_course . "', NULL)");
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
         }
@@ -59,7 +59,10 @@ class Coureur
     {
         return $this->_dossard;
     }
-    public function init()
+    public function initById()
     {
+        $requete = $this->_bdd->query('SELECT * FROM `user_tbl` WHERE `us_id` = ' . $this->_user);
+        $data = $requete->fetch();
+        $data['us_id'] = $this->_user;
     }
 }

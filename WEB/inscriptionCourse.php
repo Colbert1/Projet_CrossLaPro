@@ -6,7 +6,16 @@ $sql = 'SELECT crs_nom, crs_id FROM course_tbl';
 $req = $bdd->prepare($sql);
 $req->execute();
 $result = $req->fetchAll();
-$req->closeCursor()
+$req->closeCursor();
+
+if (isset($_POST['subInscriptCourse'])) {
+    if (!empty($_POST['listeCourseInscription'])) {
+        $paticipant = new Participant($bdd);
+        $paticipant->setCourse($_POST['listeCourseInscription']);
+        //$participant->initById();
+    } else {
+        $message = "Problème d'inscription à la course";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -24,12 +33,6 @@ $req->closeCursor()
             <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gray-400" id="inscriptionCourse" action="" method="POST">
                 <div class="mb-4 text-center">
                     <p>Inscription Course</p>
-                </div>
-                <div class="mb-4-text-gray-700 text-center">
-                    <!------------------------------------------------------------ 
-                    Ici on affiche le $session lorsque l'on est connecté
-                    Il faut que l'on insert en base l'id de la session du user connecté                
-                 ------------------------------------------------------------->
                 </div>
                 <div>
                     <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" name="listeCourseInscription">
