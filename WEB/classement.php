@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once("request.php");
 include "header.php";
 
 ?>
@@ -9,7 +8,6 @@ include "header.php";
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="classement.css">
     <title>Classement</title>
 </head>
 
@@ -19,8 +17,8 @@ include "header.php";
     </div>
     <!--Milieu de page-->
     <div class="mid">
-        <script src="API/callRequest.php"></script>
-        <table>
+        <script src="API/callRequest.js"></script>
+        <table id="tab">
             <tr>
                 <th>Rang</th>
                 <th>Nom</th>
