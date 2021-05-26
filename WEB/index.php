@@ -5,6 +5,7 @@ require("class/classUser.php");
 //Inscription
 if (isset($_POST['subInscription'])) {
     if (
+        //test
         !empty($_POST['nomInscription']) && !empty($_POST['prenomInscription']) && !empty($_POST['listeClasseInscription']) &&
         !empty($_POST['mailInscription']) && !empty($_POST['passwordInscription']) && !empty($_POST['confirmPasswordInscription'])
     ) {
