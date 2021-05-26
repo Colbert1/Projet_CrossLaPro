@@ -37,10 +37,11 @@ class Course
     }
     public function afficheInfoCourse()
     {
-        $requete = $this->_bdd->query("SELECT DISTINCT `crs_nom`,`crs_date` FROM `course_tbl`");
-        $dataCourse = $requete->fetch();
-        $this->_nom = $dataCourse['crs_nom'];
-        $this->_date = $dataCourse['crs_date'];
+        $req = $this->_bdd->query("SELECT DISTINCT `crs_nom`,`crs_date` FROM `course_tbl`");
+        foreach ($req as  $infoCourse) {
+            echo "<div class='text-blue-700'><br> Nom de la course: </div>" . $infoCourse['crs_nom'] .
+                "<br> <div class='text-blue-800'>Date de la course: </div>" . $infoCourse['crs_date'];
+        }
     }
     public function setIdCourse($newIdCourse)
     {
