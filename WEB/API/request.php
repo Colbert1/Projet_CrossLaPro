@@ -11,5 +11,6 @@
     //$objClas->setNomCourse($course);
     //$objClass->setIdCourse();
     $classement = $objClas->setClassement($course);
-
+    
+    return json_encode($classement);
 ?>

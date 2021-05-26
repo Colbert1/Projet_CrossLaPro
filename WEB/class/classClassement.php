@@ -22,6 +22,8 @@ class Classement {
         $req->bindParam("course",$this->_nom_course,PDO::PARAM_STR);
         $req->execute();
         $id = $req->fetch(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        
         $this->_id_course = $id['crs_id'];
     }
 
