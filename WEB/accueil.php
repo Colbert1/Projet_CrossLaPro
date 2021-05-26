@@ -16,21 +16,27 @@ include "header.php";
 
 <head>
     <meta charset="utf-8">
-    <title>Index</title>
+    <title>Accueil</title>
 </head>
 
-<body>
-    <header>
-        <form method="POST" action="">
-            <button name="destroy" type="submit">Deconnexion</button>
-        </form>
-    </header>
-    <p>Vous êtes connectés</p>
-    <p>Où souhaitez-vous aller ?</p>
-    <ul>
-        <li><a href="classement.php">Page classement</a></li>
-        <li><a href="course.php">Page course</a></li>
-    </ul>
+<body class="bg-blue-300 h-screen">
+    <div class="mb-8 text-center">
+        <p class="text-black text-opacity-100 text-xl">Où souhaitez-vous aller ?</p>
+    </div>
+    <div class="container mx-auto flex justify-center grid justify-items-start m-56">
+
+        <ul>
+            <div class="text-center">
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2">
+                    <a href="course.php">Page course
+                </button>
+            </div>
+            <div class="text-center">
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2">
+                    <a href="classement.php">Page classement</a>
+                </button>
+            </div>
+    </div>
 </body>
 
 </html>

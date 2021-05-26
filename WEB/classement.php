@@ -19,14 +19,7 @@ include "header.php";
     </div>
     <!--Milieu de page-->
     <div class="mid">
-        <script>
-            function classement() {
-                const classement = <?php echo json_encode($classement); ?>;
-                console.log(classement);
-            }
-
-            setInterval(classement(), 30000);
-        </script>
+        <script src="API/callRequest.php"></script>
         <table>
             <tr>
                 <th>Rang</th>

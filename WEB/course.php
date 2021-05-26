@@ -12,26 +12,28 @@ include "header.php";
 
 <body class="bg-blue-300 h-screen">
     <div class="container mx-auto flex justify-center grid justify-items-start m-56">
-        <div class="">
-            <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold px-8 py-2 m-2 rounded">
-                <a href="inscriptionCourse.php">Inscription Course</a>
-            </button>
-        </div>
-        <div class="">
-            <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold px-8 py-2 m-2 rounded">
-                <a href="creationCourse.php">Création Course</a>
-            </button>
-        </div>
-        <div class="">
-            <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold px-8 py-2 m-2 rounded">
-                <a href="creationTour.php">Création Tour</a>
-            </button>
-        </div>
-        <div class="">
-            <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold px-8 py-2 m-2 rounded">
-                <a href="infoCourse.php">Information Course</a>
-            </button>
-        </div>
+        <ul>
+            <div class="text-center">
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2">
+                    <a href="inscriptionCourse.php">Inscription Course</a>
+                </button>
+            </div>
+            <div class="text-center">
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2">
+                    <a href="creationCourse.php">Création Course</a>
+                </button>
+            </div>
+            <div class="text-center">
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2">
+                    <a href="creationTour.php">Création Tour</a>
+                </button>
+            </div>
+            <div class="text-center">
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2">
+                    <a href="infoCourse.php">Information Course</a>
+                </button>
+            </div>
+        </ul>
     </div>
 </body>
 
