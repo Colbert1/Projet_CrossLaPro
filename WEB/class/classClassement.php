@@ -124,9 +124,11 @@ SELECT
             f.`us_nom`,
             f.`us_prenom`,
             e.`cl_nom`,
-            aa.`ts_temps`
+            aa.`ts_temps`,
+            cc.`crs_id`
     FROM
         `temps_tbl` aa,
+        `course_tbl` cc,
         `classeparticipante_tbl` a
             INNER JOIN `course_tbl` b
                 ON b.`crs_id` = a.`crs_id`
@@ -149,6 +151,7 @@ SELECT
                                     WHERE aa.`pt_id` = c.`pt_id`
                                     AND cc.`crs_id` = a.`crs_id`
                     )
+    AND cc.`crs_id` = 1
      GROUP BY `ts_temps`");
             $req->bindParam("course",$this->_id_course,PDO::PARAM_INT);
             $req->execute();
