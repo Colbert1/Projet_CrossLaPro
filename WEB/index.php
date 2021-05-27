@@ -3,53 +3,31 @@ session_start();
 require_once("bdd.php");
 require("class/classUser.php");
 
-//Inscription
-if (isset($_POST['subInscription'])) {
-    if (
-        //test
-        !empty($_POST['nomInscription']) && !empty($_POST['prenomInscription']) && !empty($_POST['listeClasseInscription']) &&
-        !empty($_POST['mailInscription']) && !empty($_POST['passwordInscription']) && !empty($_POST['confirmPasswordInscription'])
-    ) {
-        if ($_POST['passwordInscription'] == $_POST['confirmPasswordInscription']) {
-            $user = new User($bdd);
-            $classe = new Classe($bdd);
-            $classe->setIdClasse($_POST['listeClasseInscription']);
-            $classe->initById();
-            $user->setNom($_POST['nomInscription']);
-            $user->setPrenom($_POST['prenomInscription']);
-            $user->setClasse($classe);
-            $user->setMail($_POST['mailInscription']);
-            $user->setPassword($_POST['passwordInscription']);
-            $user->inscriptionUser();
-        } else {
-            $message = "Les mots de passe ne correspondent pas";
-        }
-    } else {
-        echo $_POST['nomInscription'] . "<br>";
-        echo $_POST['prenomInscription'] . "<br>";
-        echo $_POST['listeClasseInscription'] . "<br>";
-        echo $_POST['mailInscription'] . "<br>";
-        echo $_POST['passwordInscription'] . "<br>";
-        echo $_POST['confirmPasswordInscription'] . "<br>";
-        $message = "Des champs ne sont pas remplis";
-    }
-}
-//Connexion
-if (isset($_POST['subConnect'])) {
-    if (!empty($_POST['emailConnexion']) && !empty($_POST['passwordConnexion'])) {
+if (
+    !empty($_POST['passwordInscription'])
+    && !empty($_POST['confirmPasswordInscription']) && !empty($_POST['nomInscription'])
+    && !empty($_POST['prenomInscription']) && !empty($_POST['mailInscription']) && !empty($_POST['listeClasseInscription'])
+) {
+
+    $password  = $_POST['passwordInscription'];
+    $Cpassword = $_POST['confirmPasswordInscription'];
+    $mail      = $_POST['mailInscription'];
+    $nom       = $_POST['nomInscription'];
+    $prenom    = $_POST['prenomInscription'];
+    $classe    = $_POST['listeClasseInscription'];
+
+    if ($password == $Cpassword) {
         $user = new User($bdd);
-        $user->getMail($_POST['emailConnexion']);
-        $user->getPassword($_POST['passwordConnexion']);
-        $connexion = $user->connexionUser($mail, $passwd);
-        if ($connexion == TRUE) {
-            echo $_POST['emailConnexion'];
-            header("Location: accueil.php");
-        }
+        $user->inscriptionUser();
     } else {
-        $message = "Problème de connexion";
+        echo "<div>Confirmation de mot de passe incorrect</div>";
     }
-} else {
-    $message = "Des champs ne sont pas remplis";
+} elseif (!empty($_POST['emailConnexion']) && !empty($_POST['passwordConnexion'])) {
+    $email  = $_POST['emailConnexion'];
+    $passwd = $_POST['passwordConnexion'];
+
+    $user = new User($bdd);
+    $user->connexionUser($mail, $passwd);
 }
 
 //Classe

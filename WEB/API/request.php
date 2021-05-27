@@ -1,16 +1,19 @@
 <?php
-require_once("class/classClassement.php");
-require_once("bdd.php");   
+require_once("../class/classClassement.php");
+require_once("../bdd.php");   
 
 //Création du classement
 $objClas = new Classement($bdd);
 
-$course = 1;
+$course = "SN2";
 //$course = $_SESSION['nom_course'];
-$objClas->setNomCourse($course);
-$objClass->setIdCourse();
-$users = $objClas->setClassement();
-
+try{
+    $objClas->setNomCourse($course);
+    $objClas->setIdCourse();
+    $users = $objClas->setClassement();
+} catch (PDOException $e) {
+    echo 'Connexion échouée : ' . $e->getMessage();
+}
 /*
 //['classement']['ds_num']['us_nom']['us_prenom']['cl_nom']['cl_nom']
 $user[x][0] : $nUser (classement)

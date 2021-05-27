@@ -19,6 +19,9 @@ void setup() {
     // Print a message to the LCD.
     lcd.print("Chrono(hh:mm:ss)");
 
+    pinMode(2, OUTPUT);  //On défini Trig comme une sortie
+    pinMode(3, INPUT);   //On défini Echo comme une entrée
+
     delay(1000);
 }
 
