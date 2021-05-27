@@ -8,15 +8,14 @@ $req->execute();
 $result = $req->fetchAll();
 $req->closeCursor();
 
-//if (isset($_POST['subInscriptCourse'])) {
-    //if (!empty($_POST['listeCourseInscription'])) {
-        //$paticipant = new Participant($bdd);
-        //$paticipant->setCourse($_POST['listeCourseInscription']);
-        //$participant->initById();
-   // } else {
-   //     $message = "Problème d'inscription à la course";
-   // }
-   echo $_SESSION['mail'];
+if (isset($_POST['subInscriptCourse'])) {
+    if (!empty($_POST['listeCourseInscription'])) {
+        $paticipant = new Participant($bdd);
+        $paticipant->setCourse($_POST['listeCourseInscription']);
+    } else {
+        $message = "Problème d'inscription à la course";
+    }
+   echo $_SESSION['id'];
 ?>
 
 <!DOCTYPE html>

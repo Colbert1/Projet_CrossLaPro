@@ -18,13 +18,18 @@ class Coureur
     {
         $this->_bdd = $bdd;
     }
-    public function inscriptionCoureur()
+    public function inscriptionCoureur($course)
     {
+        $bdd = $this->_bdd;
         try {
-            $req = $this->_bdd->query("INSERT INTO `participant_tbl` (`pt_id`, `us_id`, `crs_id`, `ds_id`) 
-            VALUES (NULL, '" . $this->_user . "','" . $this->_course . "', NULL)");
+            $req = $bdd->prepare("INSERT INTO `participant_tbl` (`pt_id`, `us_id`, `crs_id`, `ds_id`) 
+            VALUES (NULL, '" . $_SESSION['id'] . "',:course, NULL)");
+            $req->bindParam('course', $course, PDO::PARAM_STR);
+            $req->execute();
+            header("Location: accueil.php");
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
+            echo "Les datas : ";
         }
     }
     public function setIdParticipant($newIdParticipant)

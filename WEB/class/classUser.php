@@ -40,14 +40,15 @@ class User
     public function connexionUser($mail, $passwd)
     {
         try {
-            $req = $this->_bdd->prepare("SELECT `us_passwd` FROM `user_tbl` us WHERE us.`us_mail` = :mail");
-
+            $req = $this->_bdd->prepare("SELECT `us_id`,`us_passwd`,`us_nom`,`us_prenom` FROM `user_tbl` us WHERE us.`us_mail` = :mail");
             $req->bindParam('mail', $mail, PDO::PARAM_STR);
             $req->execute();
             $result = $req->fetch(PDO::FETCH_ASSOC);
 
             if (password_verify($passwd, $result['us_passwd']) === TRUE) {
-                $_SESSION['mail'] = $mail;
+                $_SESSION['id'] = $result['us_id'];
+                $_SESSION['nom'] = $result['us_nom'];
+                $_SESSION['prenom'] = $result['us_prenom'];
                 header("Location: accueil.php");
             } else {
                 echo "<div style='color:red'>Identifiants incorrects !</div>";
@@ -56,6 +57,19 @@ class User
             echo "Erreur ! " . $e->getMessage();
             echo "Les datas : ";
         }
+    }
+    public function verifMail($verifMail)
+    {/*
+
+        try {
+            $req = $this->_bdd->prepare("SELECT us_mail FROM user_tbl WHERE us_mail = :mail");
+            $req->bindParam('mail', $verifMail, PDO::PARAM_STR);
+            $req->execute();
+            $result = $req->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            echo "Erreur ! " . $e->getMessage();
+            echo "Les datas : ";
+        }*/
     }
     public function setMail($newMail)
     {

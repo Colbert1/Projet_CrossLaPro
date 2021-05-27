@@ -44,15 +44,10 @@ bool liaison::ouvrirport(int portCOM){
 	return true;
 }
 
-void liaison::ecrireport(){
+void liaison::ecrireport(char buffer){
 
 	unsigned long sendLenght;
-	char buffer[50];
-	buffer[0] = 0x02;
-	buffer[1] = '0';
-	buffer[2] = '1';
-	buffer[3] = 0x0D;
-	WriteFile(this->hcom,buffer, 4,&sendLenght,NULL);
+	WriteFile(this->hcom,buffer, strlen(buffer),&sendLenght,NULL);
 
 }
 
