@@ -30,8 +30,7 @@ class User
             $req->bindParam('password', $hashPasswd, PDO::PARAM_STR);
             $req->bindParam('classe', $classe, PDO::PARAM_STR);
             $req->execute();
-
-            header("Location: index.php");
+            header("Location: accueil.php");
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
             echo "Les datas : ";
@@ -40,17 +39,15 @@ class User
 
     public function connexionUser($mail, $passwd)
     {
-        $bdd = $this->_bdd;
-
         try {
-            $req = $bdd->prepare("SELECT `us_mail`, `us_passwd` FROM `user_tbl`");
+            $req = $this->_bdd->prepare("SELECT `us_passwd` FROM `user_tbl` us WHERE us.`us_mail` = :mail");
 
             $req->bindParam('mail', $mail, PDO::PARAM_STR);
-            $req->bindParam('password', $passwd, PDO::PARAM_STR);
             $req->execute();
             $result = $req->fetch(PDO::FETCH_ASSOC);
 
-            if (password_verify($passwd, $result['us_passwd']) == TRUE) {
+            if (password_verify($passwd, $result['us_passwd']) === TRUE) {
+                $_SESSION['mail'] = $mail;
                 header("Location: accueil.php");
             } else {
                 echo "<div style='color:red'>Identifiants incorrects !</div>";

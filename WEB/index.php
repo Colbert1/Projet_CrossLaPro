@@ -29,7 +29,7 @@ if (
     $passwd = $_POST['passwordConnexion'];
 
     $user = new User($bdd);
-    $user->connexionUser($mail, $passwd);
+    $user->connexionUser($email, $passwd);
 }
 //Classe
 $sql = 'SELECT cl_nom, cl_id FROM classe_tbl';

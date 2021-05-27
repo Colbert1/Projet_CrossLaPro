@@ -6,7 +6,7 @@ function getClassement() {
             resp.json().then(data => {
                 console.log(data);
                 console.log(data.length);
-                let value = Array();
+                let value = Array(data.length);
                 for(let i=0;i<data.length;i++){
                     for(let j=0;j<6;j++){
                         value[i][j] = data[j];
