@@ -15,30 +15,47 @@ class User
         $this->_bdd = $bdd;
     }
 
-    public function inscriptionUser()
+    public function inscriptionUser($password, $mail, $nom, $prenom, $classe)
     {
+        $bdd = $this->_bdd;
+
+        $hashPasswd = password_hash($password, PASSWORD_ARGON2ID);
+
         try {
-            $req = $this->_bdd->query("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) VALUES (NULL, '" . $this->_nom . "', '" . $this->_prenom . "', '" . $this->_mail . "', '" . $this->_password . "', '0', '" . $this->_classe->getIdClasse() . "')");
+            $req = $bdd->prepare("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) 
+            VALUES (NULL, :nom, :prenom, :mail, :password, '0', :classe);");
+            $req->bindParam('nom', $nom, PDO::PARAM_STR);
+            $req->bindParam('prenom', $prenom, PDO::PARAM_STR);
+            $req->bindParam('mail', $mail, PDO::PARAM_STR);
+            $req->bindParam('password', $hashPasswd, PDO::PARAM_STR);
+            $req->bindParam('classe', $classe, PDO::PARAM_STR);
+            $req->execute();
 
             header("Location: index.php");
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
+            echo "Les datas : ";
         }
     }
 
     public function connexionUser($mail, $passwd)
     {
-        try {
-            $req = $this->_bdd->query("SELECT `us_mail`, `us_passwd` FROM `user_tbl` WHERE `user_tbl`.`us_mail` = '" . $this->_mail . "'");
-            $req->fetch();
+        $bdd = $this->_bdd;
 
-            if ($passwd == $this->_password) {
-                return TRUE;
+        try {
+            $req = $bdd->prepare("SELECT `us_mail`, `us_passwd` FROM `user_tbl` WHERE `user_tbl`.`us_mail` = :mail");
+            $req->bindParam('mail', $mail, PDO::PARAM_STR);
+            $req->execute();
+            $result = $req->fetch(PDO::FETCH_ASSOC);
+
+            if (password_verify($passwd, $result['us_passwd']) == TRUE) {
+                header("Location: accueil.php");
             } else {
-                echo "<div style='color:red>Identifiants incorrects !</div>";
+                echo "<div style='color:white'>Identifiants incorrects !</div>";
             }
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
+            echo "Les datas : ";
         }
     }
     public function setMail($newMail)

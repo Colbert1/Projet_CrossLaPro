@@ -16,6 +16,7 @@ $req->closeCursor();
    // } else {
    //     $message = "Problème d'inscription à la course";
    // }
+   echo $_SESSION['mail'];
 ?>
 
 <!DOCTYPE html>

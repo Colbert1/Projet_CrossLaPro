@@ -3,10 +3,11 @@ session_start();
 require_once("bdd.php");
 require("class/classUser.php");
 
+//Inscription
 if (
     !empty($_POST['passwordInscription'])
     && !empty($_POST['confirmPasswordInscription']) && !empty($_POST['nomInscription'])
-    && !empty($_POST['prenomInscription']) && !empty($_POST['mailInscription']) && !empty($_POST['listeClasseInscription'])
+    && !empty($_POST['prenomInscription']) && !empty($_POST['mailInscription'] && !empty($_POST['listeClasseInscription']))
 ) {
 
     $password  = $_POST['passwordInscription'];
@@ -18,10 +19,11 @@ if (
 
     if ($password == $Cpassword) {
         $user = new User($bdd);
-        $user->inscriptionUser();
+        $user->inscriptionUser($password, $mail, $nom, $prenom, $classe);
     } else {
         echo "<div>Confirmation de mot de passe incorrect</div>";
     }
+    //Connexion
 } elseif (!empty($_POST['emailConnexion']) && !empty($_POST['passwordConnexion'])) {
     $email  = $_POST['emailConnexion'];
     $passwd = $_POST['passwordConnexion'];
@@ -29,7 +31,6 @@ if (
     $user = new User($bdd);
     $user->connexionUser($mail, $passwd);
 }
-
 //Classe
 $sql = 'SELECT cl_nom, cl_id FROM classe_tbl';
 $req = $bdd->prepare($sql);
@@ -67,7 +68,7 @@ $req->closeCursor();
                         echo '<option value="0" selected>Sélectionner la classe</option>';
                         foreach ($result as $ligne) {
 
-                            echo "<option value='{$ligne['cl_id']} - {$ligne['cl_nom']}'>"
+                            echo "<option value='{$ligne['cl_id']}'>"
                                 . $ligne['cl_nom'] . "</option>";
                         }
                         ?>
@@ -85,9 +86,6 @@ $req->closeCursor();
                 <div class="mb-4-text-gray-700 text-center">
                     <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" name="subInscription" type="submit">Confirmer</button>
                 </div>
-                <!--<h4><php if (!empty($message)) {
-                        echo $message;
-                    } ?></h4>-->
             </form>
         </div>
         <!-- FORMULAIRE CONNEXION -->

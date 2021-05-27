@@ -13,10 +13,6 @@ class Classement {
         $this->_bdd = $bdd;
     }
 
-    public function setNomCourse($nomCourse){
-        $this->_nom_course = $nomCourse;
-    }
-
     public function setIdCourse(){
         $req = $this->_bdd->prepare("SELECT `crs_id` FROM `course_tbl` WHERE `crs_nom` = :course");
         $req->bindParam("course",$this->_nom_course,PDO::PARAM_STR);
@@ -25,6 +21,55 @@ class Classement {
         $req->closeCursor();
 
         $this->_id_course = $id['crs_id'];
+    }
+
+    public function setDateCourse(){
+        $req = $this->_bdd->prepare("SELECT `crs_date` FROM `course_tbl` WHERE `crs_id` = :id");
+        $req->bindParam("id",$this->_id_course,PDO::PARAM_INT);
+        $req->execute();
+        $date = $req->fetch(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        
+        $this->_date_course = $date['crs_date'];
+    }
+
+    public function setNomCourse($nomCourse){
+        $this->_nom_course = $nomCourse;
+    }
+
+    public function setParticipants(){
+        $req = $this->_bdd->prepare("SELECT us.`us_id` 
+        FROM 
+            `user_tbl` us
+            INNER JOIN `participant_tbl` pt
+                ON us.`us_id` = pt.`us_id`
+            INNER JOIN `course_tbl` crs
+                ON crs.`crs_id` = pt.`crs_id`
+        WHERE
+            crs.`crs_id` = :course
+        ORDER BY 1");
+        $req->bindParam("course",$this->_id_course,PDO::PARAM_INT);
+        $req->execute();
+        $participants = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+
+        $this->_participants = $participants['us_id'];
+    }
+
+    public function setDistance(){
+        $req = $this->_bdd->prepare("SELECT `tr_distance`
+        FROM 
+            `tour_tbl` tr
+            INNER JOIN `course_tbl` crs
+                ON tr.`crs_id` = crs.`crs_id`
+        WHERE
+            crs.`crs_id` = :course");
+        $req->bindParam("course",$this->_id_course,PDO::PARAM_INT);
+        $req->execute();
+        $distance = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+
+        $this->_distance = $distance['tr_distance'];
     }
 
     public function getIdCourse() {
@@ -63,7 +108,8 @@ class Classement {
  
     public function setClassement(){
         try{
-            $req = $this->_bdd->prepare("SELECT
+            /* 
+            SELECT
             d.`ds_num`,
             f.`us_nom`,
             f.`us_prenom`,
@@ -96,13 +142,16 @@ class Classement {
                                     AND cc.`crs_id` = a.`crs_id`
                     )
     AND cc.`crs_id` = :course
-    GROUP BY `ts_temps`");
+    GROUP BY `ts_temps`
+            */
+            $req = $this->_bdd->prepare("");
             $req->bindParam("course",$this->_id_course,PDO::PARAM_INT);
             $req->execute();
             $data = $req->fetchAll(PDO::FETCH_NUM);
             $req->closeCursor();
             
-            return $data;
+            $this->_classement = $data;
+            return $this->_classement;
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
             echo "Les datas : ";
@@ -111,11 +160,11 @@ class Classement {
 
     //SetParticipants avant de triAlphaC
     public function triAlphaC(){
-        $tabCoureursAlph = $this->_participants;
-        $verif = sort($tabCoureursAlph,SORT_STRING);
+        $tab = $this->_classement;
+        $verif = sort($tab,SORT_STRING);
 
         if($verif == TRUE){
-            return $tabCoureursAlph;
+            return $tab;
         }else{
             echo "Erreur du tri alphabétique croissant";
         }
