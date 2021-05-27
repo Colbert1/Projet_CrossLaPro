@@ -72,6 +72,16 @@ class Classement {
         $this->_distance = $distance['tr_distance'];
     }
 
+    public function setOnline(){
+        $socket = fsockopen("localhost",3306);
+
+        if(!$socket){
+            $this->_online = FALSE;
+        }else{
+            $this->_online = TRUE;
+        }
+    }
+
     public function getIdCourse() {
         return $this->_id_course;
     }

@@ -43,15 +43,17 @@ class User
         $bdd = $this->_bdd;
 
         try {
-            $req = $bdd->prepare("SELECT `us_mail`, `us_passwd` FROM `user_tbl` WHERE `user_tbl`.`us_mail` = :mail");
+            $req = $bdd->prepare("SELECT `us_mail`, `us_passwd` FROM `user_tbl`");
+
             $req->bindParam('mail', $mail, PDO::PARAM_STR);
+            $req->bindParam('password', $passwd, PDO::PARAM_STR);
             $req->execute();
             $result = $req->fetch(PDO::FETCH_ASSOC);
 
             if (password_verify($passwd, $result['us_passwd']) == TRUE) {
                 header("Location: accueil.php");
             } else {
-                echo "<div style='color:white'>Identifiants incorrects !</div>";
+                echo "<div style='color:red'>Identifiants incorrects !</div>";
             }
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
