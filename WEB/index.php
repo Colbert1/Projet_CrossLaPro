@@ -15,13 +15,12 @@ if (isset($_POST['subInscription'])) {
             $classe = new Classe($bdd);
             $classe->setIdClasse($_POST['listeClasseInscription']);
             $classe->initById();
-            $_SESSION['nom'] = $user->setNom($_POST['nomInscription']);
+            $user->setNom($_POST['nomInscription']);
             $user->setPrenom($_POST['prenomInscription']);
             $user->setClasse($classe);
-            $_SESSION['mail'] = $user->setMail($_POST['mailInscription']);
-            $_SESSION['password'] = $user->setPassword($_POST['passwordInscription']);
+            $user->setMail($_POST['mailInscription']);
+            $user->setPassword($_POST['passwordInscription']);
             $user->inscriptionUser();
-            $message = "Inscription réussie";
         } else {
             $message = "Les mots de passe ne correspondent pas";
         }
@@ -43,7 +42,7 @@ if (isset($_POST['subConnect'])) {
         $user->getPassword($_POST['passwordConnexion']);
         $connexion = $user->connexionUser($mail, $passwd);
         if ($connexion == TRUE) {
-            $_SESSION['mail'] = $_POST['emailConnexion'];
+            echo $_POST['emailConnexion'];
             header("Location: accueil.php");
         }
     } else {
@@ -108,9 +107,9 @@ $req->closeCursor();
                 <div class="mb-4-text-gray-700 text-center">
                     <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" name="subInscription" type="submit">Confirmer</button>
                 </div>
-                <h4><?php if (!empty($message)) {
+                <!--<h4><php if (!empty($message)) {
                         echo $message;
-                    } ?></h4>
+                    } ?></h4>-->
             </form>
         </div>
         <!-- FORMULAIRE CONNEXION -->

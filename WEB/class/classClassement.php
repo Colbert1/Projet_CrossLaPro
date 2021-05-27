@@ -117,65 +117,40 @@ SELECT
                          ON e.`cl_id` = a.`cl_id`
      
      ORDER BY 4**/
-    public function setClassement($course){
+    public function setClassement(){
         try{
-            $req = $this->_bdd->prepare("SELECT *
-            -- `dossard_tbl`.`ds_num`,
-     
-            -- `user_tbl`.`us_nom`,
-     
-            -- `user_tbl`.`us_prenom`,
-     
-            -- `classe_tbl`.`cl_nom`,
-     
-            -- si les temps sont au tour
-     
-            (
-     
-                  SELECT SUM(`ts_temps`)
-     
-                  FROM `temps_tbl` aa
-     
-                         INNER JOIN `tour_tbl` bb
-     
-                                ON bb.`tr_id` = aa.`tr_id`
-     
+            $req = $this->_bdd->prepare("SELECT
+            d.`ds_num`,
+            f.`us_nom`,
+            f.`us_prenom`,
+            e.`cl_nom`,
+            aa.`ts_temps`
+    FROM
+        `temps_tbl` aa,
+        `classeparticipante_tbl` a
+            INNER JOIN `course_tbl` b
+                ON b.`crs_id` = a.`crs_id`
+            INNER JOIN `participant_tbl` c
+                ON c.`crs_id` = b.`crs_id`
+            INNER JOIN `dossard_tbl` d
+                ON d.`ds_id` = c.`ds_id`
+            INNER JOIN `user_tbl` f
+                ON f.`us_id` = c.`us_id`
+            INNER JOIN `classe_tbl` e
+                ON e.`cl_id` = a.`cl_id`
+            
+    WHERE aa.`ts_temps` = (
+                            SELECT `ts_temps`
+                                FROM `temps_tbl` aa
+                                INNER JOIN `tour_tbl` bb
+                                    ON bb.`tr_id` = aa.`tr_id`
                                 INNER JOIN `course_tbl` cc
-     
-                                       ON cc.`crs_id` = bb.`crs_id`
-     
-                  WHERE aa.`pt_id` = c.`pt_id`
-     
-                  AND cc.`crs_id` = a.`crs_id`
-      
-            ) as 'Temps cumulés'
-     
-     FROM
-     
-            `classeparticipante_tbl` a
-     
-                  INNER JOIN `course_tbl` b
-     
-                         ON b.`crs_id` = a.`crs_id`
-     
-                  INNER JOIN `participant_tbl` c
-     
-                         ON c.`crs_id` = b.`crs_id`
-     
-                         INNER JOIN `dossard_tbl` d
-     
-                                ON d.`ds_id` = c.`ds_id`
-     
-                         INNER JOIN `user_tbl` f
-     
-                                ON f.`us_id` = c.`us_id`
-     
-                  INNER JOIN `classe_tbl` e
-     
-                         ON e.`cl_id` = a.`cl_id`
-     
+                                    ON cc.`crs_id` = bb.`crs_id`
+                                    WHERE aa.`pt_id` = c.`pt_id`
+                                    AND cc.`crs_id` = a.`crs_id`
+                    )
      GROUP BY `ts_temps`");
-            $req->bindParam("course",$course,PDO::PARAM_INT);
+            $req->bindParam("course",$this->_id_course,PDO::PARAM_INT);
             $req->execute();
             $data = $req->fetchAll(PDO::FETCH_ASSOC);
             $req->closeCursor();

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2021/05/26 10:35:17.228,=C:\Users\GARNON\Documents\Embarcadero\Studio\Projets\Project1PCH1.h</Transaction>
+    <Transaction>2021/05/26 10:35:17.245,=C:\Users\GARNON\Documents\Embarcadero\Studio\Projets\Unit1.cpp</Transaction>
+    <Transaction>2021/05/26 10:39:26.878,=S:\C++\RS232\rs232.cpp</Transaction>
+    <Transaction>2021/05/27 08:33:03.643,S:\C++\RS232\rs232.cpp=</Transaction>
+    <Transaction>2021/05/27 08:33:52.519,=S:\C++\RS232\Unit2.cpp</Transaction>
+    <Transaction>2021/05/27 08:41:53.627,S:\C++\RS232\Proj\Unit1.cpp=C:\Users\GARNON\Documents\Embarcadero\Studio\Projets\Unit1.cpp</Transaction>
+    <Transaction>2021/05/27 08:41:53.627,S:\C++\RS232\Proj\Unit1.h=C:\Users\GARNON\Documents\Embarcadero\Studio\Projets\Unit1.h</Transaction>
+    <Transaction>2021/05/27 08:41:53.627,S:\C++\RS232\Proj\Unit1.dfm=C:\Users\GARNON\Documents\Embarcadero\Studio\Projets\Unit1.dfm</Transaction>
+    <Transaction>2021/05/27 08:41:54.530,S:\C++\RS232\Proj\Project1PCH1.h=C:\Users\GARNON\Documents\Embarcadero\Studio\Projets\Project1PCH1.h</Transaction>
+    <Transaction>2021/05/27 08:41:57.267,S:\C++\RS232\Proj\Project1.cbproj=C:\Users\GARNON\Documents\Embarcadero\Studio\Projets\Project1.cbproj</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -18,7 +18,6 @@ if (!empty($_POST['listeCourse'])) {
 if (!empty($_POST['distanceTour'])) {
     $distance = $_POST['distanceTour'];
     $selecCourse = $_SESSION['$selecCourse'];
-
     $objTour = new Tour($bdd);
     $objTour->setCourse($selecCourse);
     $objTour->setDistance($distance);
@@ -29,7 +28,6 @@ if (!empty($_POST['distanceTour'])) {
         echo "Le tour n\'a pas été créé";
     }
 }
-
 
 ?>
 <html>

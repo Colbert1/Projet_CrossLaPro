@@ -11,9 +11,9 @@
 
 using namespace std;
 
-bool rs232::Ouvrirport()
+bool rs232::Ouvrirport(int portCOM)
 {
-  this->hcom = CreateFileA("COM9",GENERIC_READ | GENERIC_WRITE,0,NULL,OPEN_EXISTING,FILE_FLAG_NO_BUFFERING,NULL);   //3e valeur = sécu,4e = ouvrir un port existant
+  this->hcom = CreateFileA("COM"+portCOM,GENERIC_READ | GENERIC_WRITE,0,NULL,OPEN_EXISTING,FILE_FLAG_NO_BUFFERING,NULL);   //3e valeur = sécu,4e = ouvrir un port existant
 
   if(hcom == INVALID_HANDLE_VALUE)
   {

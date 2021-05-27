@@ -17,6 +17,5 @@ function getClassement() {
         });
 }
 
-
 setInterval(getClassement(), 5000);
 
