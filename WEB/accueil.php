@@ -28,6 +28,7 @@ require("class/classUser.php");
                     <a href="classement.php">Page classement</a>
                 </button>
             </div>
+        </ul>
     </div>
 </body>
 

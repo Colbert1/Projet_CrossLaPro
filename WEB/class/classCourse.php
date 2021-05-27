@@ -39,8 +39,8 @@ class Course
     {
         $req = $this->_bdd->query("SELECT DISTINCT `crs_nom`,`crs_date` FROM `course_tbl`");
         foreach ($req as  $infoCourse) {
-            echo "<div class='text-blue-700'><br> Nom de la course: </div>" . $infoCourse['crs_nom'] .
-                "<br> <div class='text-blue-800'>Date de la course: </div>" . $infoCourse['crs_date'];
+            echo "<div class='flex items-stretch rounded-sm bg-gray-300 border-2 border-black grid grid-cols-1 h-36 w-40'><div class='text-blue-700 self-stretch'> Nom de la course: </div>" . $infoCourse['crs_nom'] .
+                "<br> <div class='text-blue-800 '>Date de la course: </div>" . $infoCourse['crs_date']."</div></div>";
         }
     }
     public function setIdCourse($newIdCourse)

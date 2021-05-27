@@ -23,8 +23,9 @@ class Coureur
         $bdd = $this->_bdd;
         try {
             $req = $bdd->prepare("INSERT INTO `participant_tbl` (`pt_id`, `us_id`, `crs_id`, `ds_id`) 
-            VALUES (NULL, '" . $_SESSION['id'] . "',:course, NULL)");
-            $req->bindParam('course', $course, PDO::PARAM_STR);
+            VALUES (NULL, :user ,:course, NULL)");
+            $req->bindParam('course', $course, PDO::PARAM_INT);
+            $req->bindParam('user', $_SESSION['id'], PDO::PARAM_INT);
             $req->execute();
             header("Location: accueil.php");
         } catch (Exception $e) {

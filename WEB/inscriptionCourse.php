@@ -9,13 +9,16 @@ $result = $req->fetchAll();
 $req->closeCursor();
 
 if (isset($_POST['subInscriptCourse'])) {
-    if (!empty($_POST['listeCourseInscription'])) {
-        $paticipant = new Participant($bdd);
-        $paticipant->setCourse($_POST['listeCourseInscription']);
+    if (!empty($_POST['listeCourseInscription']) && !empty($_SESSION['id'])) {
+        $participant = new Coureur($bdd);
+        $participant->setCourse($_POST['listeCourseInscription']);
+        $course = $participant->getCourse();
+        $participant->inscriptionCoureur($course);
     } else {
         $message = "Problème d'inscription à la course";
     }
-   echo $_SESSION['id'];
+}
+echo $_SESSION['id'];
 ?>
 
 <!DOCTYPE html>
