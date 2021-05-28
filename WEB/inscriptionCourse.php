@@ -21,7 +21,7 @@ if (isset($_POST['subInscriptCourse'])) {
 }
 echo $_SESSION['id'];
 ?>
-<title>Profil</title>
+<title>Inscription Course</title>
 </head>
 
 <body class="bg-blue-300 h-screen">

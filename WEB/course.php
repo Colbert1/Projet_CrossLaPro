@@ -2,7 +2,7 @@
 include "header.php";
 include "navbar.php";
 ?>
-<title>Profil</title>
+<title>Course</title>
 </head>
 <html>
 

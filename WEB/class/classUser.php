@@ -71,6 +71,22 @@ class User
             echo "Les datas : ";
         }*/
     }
+    public function afficheInfoUser($mail, $nom, $prenom, $classe)
+    {
+        try {
+            $req = $this->_bdd->prepare("SELECT `us_nom`, `us_prenom`, `us_mail`,`cl_id` FROM `user_tbl` 
+            WHERE `us_id` = :user");
+            $req->bindParam('user', $_SESSION['id'], PDO::PARAM_INT);
+            $req->execute();
+            $result = $req->fetch(PDO::FETCH_ASSOC);
+            foreach ($result as  $infoUser) {
+                echo  $infoUser;
+            }
+        } catch (Exception $e) {
+            echo "Erreur ! " . $e->getMessage();
+            echo "Les datas : ";
+        }
+    }
     public function setMail($newMail)
     {
         $this->_mail = $newMail;

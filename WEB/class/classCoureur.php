@@ -54,6 +54,12 @@ class Coureur
         //$req->execute();
         //header("Location: accueil.php");
     }
+    public function afficheInfoCoureur()
+    {
+        foreach($this->_course as $crs){
+            echo $crs['crs_id'];
+        }
+    }
     public function setIdParticipant($newIdParticipant)
     {
         $this->_idparticipant = $newIdParticipant;
@@ -62,9 +68,19 @@ class Coureur
     {
         $this->_user = $newUser;
     }
-    public function setCourse($newCourse)
+    public function setCourse($id)
     {
-        $this->_course = $newCourse;
+        try {
+            $req = $this->_bdd->prepare("SELECT `crs_id` FROM `participant_tbl` WHERE `us_id` = :user");
+            $req->bindParam('user', $id, PDO::PARAM_INT);
+            $req->execute();
+            $result = $req->fetchAll(PDO::FETCH_ASSOC);
+            $this->_course = $result;
+            
+        } catch (Exception $e) {
+            echo "Erreur ! " . $e->getMessage();
+            echo "Les datas : ";
+        }
     }
     public function setDossard($newDossard)
     {

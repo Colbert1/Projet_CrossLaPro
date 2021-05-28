@@ -3,7 +3,7 @@ include "header.php";
 require_once("bdd.php");
 require("class/classCourse.php");
 include "navbar.php";
-?><title>Profil</title>
+?><title>Information(s) Course</title>
 </head>
 
 <body class="bg-blue-300 h-screen">
