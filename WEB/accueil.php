@@ -2,14 +2,10 @@
 include "header.php";
 require_once("bdd.php");
 require("class/classUser.php");
-
+include "navbar.php";
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="utf-8">
-    <title>Accueil</title>
+<title>Accueil</title>
+</head>
 </head>
 
 <body class="bg-blue-300 h-screen">

@@ -1,5 +1,19 @@
+function participant(data){
+
+
+}
+
 function getClassement() {
-    const table = document.querySelector('table');
+    const table = $('#tab');
+
+    $(document).ready( function () {
+        table.DataTable({
+            paging:false,
+            scrollY:400
+        });
+    } );
+
+    table.column("clRang").render()
 
     fetch('API/request.php')
         .then(resp => {

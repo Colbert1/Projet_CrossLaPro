@@ -1,7 +1,8 @@
 <?php
 require_once("bdd.php");
-require("class/classParticipant.php");
+require("class/classCoureur.php");
 include "header.php";
+include "navbar.php";
 $sql = 'SELECT crs_nom, crs_id FROM course_tbl';
 $req = $bdd->prepare($sql);
 $req->execute();
@@ -20,13 +21,7 @@ if (isset($_POST['subInscriptCourse'])) {
 }
 echo $_SESSION['id'];
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="utf-8">
-    <title>Page Principale</title>
+<title>Profil</title>
 </head>
 
 <body class="bg-blue-300 h-screen">

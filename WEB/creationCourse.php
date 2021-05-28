@@ -2,7 +2,7 @@
 require_once("bdd.php");
 require("class/classCourse.php");
 include "header.php";
-
+include "navbar.php";
 if (isset($_POST['subCreaCourse'])) {
     if (!empty($_POST['nomCourse']) && !empty($_POST['dateCourse'])) {
         $date = $_POST['dateCourse'];
@@ -16,12 +16,8 @@ if (isset($_POST['subCreaCourse'])) {
     }
 }
 
-?>
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-    <meta charset="utf-8">
+?>
     <title>Création d'une course</title>
 </head>
 

@@ -1,14 +1,10 @@
 <?php
 include "header.php";
+include "navbar.php";
 ?>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cross La Providence</title>
+<title>Profil</title>
 </head>
+<html>
 
 <body class="bg-blue-300 h-screen">
     <div class="container mx-auto flex justify-center grid justify-items-start m-56">

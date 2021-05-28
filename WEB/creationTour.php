@@ -2,6 +2,8 @@
 require_once("bdd.php");
 require("class/classTour.php");
 include "header.php";
+include "navbar.php";
+
 
 // Récupère les nom des courses dans la table course
 $sql = 'SELECT crs_nom, crs_id FROM course_tbl';
@@ -30,6 +32,8 @@ if (!empty($_POST['distanceTour'])) {
 }
 
 ?>
+<title>Création Tour</title>
+</head>
 <html>
 <!---------------------------------------------------------------- 
     SELECTIONNER LA COURSE 

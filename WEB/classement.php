@@ -1,12 +1,7 @@
 <?php
 include "header.php";
-
+include "navbar.php";
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="utf-8">
     <title>Classement</title>
 </head>
 
@@ -17,14 +12,20 @@ include "header.php";
     <!--Milieu de page-->
     <div class="mid">
         <script src="API/callRequest.js"></script>
-        <table id="tab">
-            <tr>
-                <th>Rang</th>
-                <th>Nom</th>
-                <th>Temps</th>
-                <th>Classe</th>
-                <th>Tour</th>
-            </tr>
+        <table id="tab" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+            <thead>
+                <tr>
+                    <th id="clRang" data-class-name="priority">Rang</th>
+                    <th id="clNom">Nom</th>
+                    <th id="clClasse">Classe</th>
+                    <th id="clTemps">Temps</th>
+                    <th id="clTour">Tour</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                </tr>
+            </tbody>
         </table>
     </div>
     <!--Bas de page-->

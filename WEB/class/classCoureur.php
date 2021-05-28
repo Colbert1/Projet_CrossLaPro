@@ -33,6 +33,27 @@ class Coureur
             echo "Les datas : ";
         }
     }
+    public function modifProfilCoureur($course)
+    {
+        $bdd = $this->_bdd;
+        try {
+            $req = $bdd->prepare("UPDATE `participant_tbl` SET `crs_id`=:course WHERE `us_id` = :user");
+            $req->bindParam('course', $course, PDO::PARAM_INT);
+            $req->bindParam('user', $_SESSION['id'], PDO::PARAM_INT);
+            $req->execute();
+            header("Location: accueil.php");
+        } catch (Exception $e) {
+            echo "Erreur ! " . $e->getMessage();
+            echo "Les datas : ";
+        }
+    }
+    public function suppProfilCoureur()
+    {
+        //DELETE FROM `participant_tbl` WHERE `us_id` = :user
+        //$req->bindParam('user', $_SESSION['id'], PDO::PARAM_INT);
+        //$req->execute();
+        //header("Location: accueil.php");
+    }
     public function setIdParticipant($newIdParticipant)
     {
         $this->_idparticipant = $newIdParticipant;
