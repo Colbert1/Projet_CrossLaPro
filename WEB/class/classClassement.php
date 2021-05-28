@@ -119,40 +119,32 @@ class Classement {
     public function setClassement(){
         try{
             /* 
-            SELECT
-            d.`ds_num`,
-            f.`us_nom`,
-            f.`us_prenom`,
-            e.`cl_nom`,
-            aa.`ts_temps`,
-            cc.`crs_id`
-    FROM
-        `temps_tbl` aa,
-        `course_tbl` cc,
-        `classeparticipante_tbl` a
-            INNER JOIN `course_tbl` b
-                ON b.`crs_id` = a.`crs_id`
-            INNER JOIN `participant_tbl` c
-                ON c.`crs_id` = b.`crs_id`
-            INNER JOIN `dossard_tbl` d
-                ON d.`ds_id` = c.`ds_id`
-            INNER JOIN `user_tbl` f
-                ON f.`us_id` = c.`us_id`
-            INNER JOIN `classe_tbl` e
-                ON e.`cl_id` = a.`cl_id`
-            
-    WHERE aa.`ts_temps` = (
-                            SELECT `ts_temps`
-                                FROM `temps_tbl` aa
-                                INNER JOIN `tour_tbl` bb
-                                    ON bb.`tr_id` = aa.`tr_id`
-                                INNER JOIN `course_tbl` cc
-                                    ON cc.`crs_id` = bb.`crs_id`
-                                    WHERE aa.`pt_id` = c.`pt_id`
-                                    AND cc.`crs_id` = a.`crs_id`
-                    )
-    AND cc.`crs_id` = :course
-    GROUP BY `ts_temps`
+SELECT 
+	ds.`ds_num`, 
+    us.`us_nom`, 
+    us.`us_prenom`, 
+    cl.`cl_nom`, 
+    MAX(ts_temps)
+FROM
+	`participant_tbl` pt
+    INNER JOIN `user_tbl` us
+    	ON pt.`us_id` = us.`us_id`
+    INNER JOIN `dossard_tbl` ds
+    	ON ds.`ds_id` = pt.`ds_id`
+    INNER JOIN `course_tbl` crs
+    	ON crs.`crs_id` = pt.`crs_id`
+    INNER JOIN `temps_tbl` ts
+    	ON ts.`pt_id` = pt.`pt_id`
+    INNER JOIN `classeparticipante_tbl` clp
+    	ON crs.`crs_id` = clp.`crs_id`
+    INNER JOIN `classe_tbl` cl
+    	ON cl.`cl_id` = us.`cl_id`
+    INNER JOIN `tour_tbl` tr
+    	ON crs.`crs_id` = tr.`crs_id`
+		AND tr.`tr_id` = ts.`tr_id`
+WHERE
+	crs.`crs_id` = 1
+GROUP BY `ts_temps`
             */
             $req = $this->_bdd->prepare("SELECT
             d.`ds_num`,
