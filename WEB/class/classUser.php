@@ -19,7 +19,7 @@ class User
     {
         $bdd = $this->_bdd;
 
-        $hashPasswd = password_hash($password, PASSWORD_ARGON2ID);
+        $hashPasswd = password_hash($password,  PASSWORD_BCRYPT);
 
         try {
             $req = $bdd->prepare("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) 

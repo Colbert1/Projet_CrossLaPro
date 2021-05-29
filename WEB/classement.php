@@ -12,19 +12,18 @@ include "navbar.php";
     <!--Milieu de page-->
     <div class="mid">
         <script src="API/callRequest2.js"></script>
-        <table id="tab" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+
+        <table>
             <thead>
-                <tr>
-                    <th data-class-name="priority">Rang</th>
-                    <th>Nom</th>
-                    <th>Classe</th>
-                    <th>Temps</th>
-                    <th>Tour</th>
+                <tr class="border border-blue-200 border-opacity-50 bg-gray-100">
+                    <th class="w-32">Rang</th>
+                    <th class="w-32">Nom</th>
+                    <th class="w-32">Prénom</th>
+                    <th class="w-32">Classe</th>
+                    <th class="w-32">Temps</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                </tr>
+            <tbody id="tab">
             </tbody>
         </table>
     </div>

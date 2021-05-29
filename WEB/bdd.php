@@ -1,7 +1,7 @@
 <?php
 $dsn = 'mysql:host=localhost;dbname=projetcross_lapro';
 $user = 'root';
-$password = 'root';
+$password = '';
 
 try {
     $bdd = new PDO($dsn, $user, $password);
@@ -11,4 +11,13 @@ try {
     $bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo 'Connexion échouée : ' . $e->getMessage();
+}
+
+function fetchAll($bdd, $request, $params = []) {
+    $req = $bdd->prepare($request);
+    $req->execute($params);
+    $data = $req->fetchAll(PDO::FETCH_ASSOC);
+    $req->closeCursor();
+
+    return $data;
 }

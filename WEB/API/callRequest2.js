@@ -1,9 +1,13 @@
-function showTab(jsonObj) {
-    const participants = jsonObj['ds_num'];
+function showTab(classement) {
+    // const participants = jsonObj['ds_num'];
     const table = document.getElementById('tab');
-
-    for (let i = 0; i < participants.length; i++) {
+    table.innerHTML = ""
+   
+    for (let i = 0; i < classement.length; i++) {
         const row = document.createElement('tr');
+
+        row.className = 'border-b border-blue-200 border-opacity-50 ' + ((i%2)?'bg-gray-100':'') ;
+
         const cellRank = document.createElement('td');
         const cellDossard = document.createElement('td');
         const cellName = document.createElement('td');
@@ -11,18 +15,20 @@ function showTab(jsonObj) {
         const cellGrade = document.createElement('td');
         const cellTime= document.createElement('td');
         
-        cellRank.textContent = participants[i].rank;
-        cellDossard.textContent = participants[i].ds_num;
-        cellName.textContent = participants[i].us_nom;
-        cellSurname.textContent = participants[i].us_prenom;
-        cellGrade.textContent = participants[i].cl_nom;
-        cellTime.textContent = participants[i].ts_temps;
+        cellRank.className = 'border-l text-center'
+        cellDossard.className = 'text-center'
+        cellName.className = 'text-center'
+        cellSurname.className = 'text-center'
+        cellGrade.className = 'text-center'
+        cellTime.className = 'border-r text-right font-mono'
+
+        cellRank.textContent = '#' + (i + 1);
+        cellDossard.textContent = classement[i].ds_num;
+        cellName.textContent = classement[i].us_nom;
+        cellSurname.textContent = classement[i].us_prenom;
+        cellGrade.textContent = classement[i].cl_nom;
+        cellTime.textContent = classement[i].ts_temps_total;
   
-        for (let j = 0; j < superPowers.length; j++) {
-            const listItem = document.createElement('li');
-            listItem.textContent = superPowers[j];
-            myList.appendChild(listItem);
-        }
         row.appendChild(cellRank);
         row.appendChild(cellName);
         row.appendChild(cellSurname);
@@ -42,9 +48,11 @@ function getClassement(){
     req.send();
 
     req.onload = function() {
-        const classement = req.response;
+        const classement = (req.response);
         showTab(classement);
+
+        setTimeout(() => getClassement(), 5000)
     }
 }
 
-setInterval(getClassement(), 5000);
+getClassement()
