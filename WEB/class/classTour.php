@@ -11,21 +11,22 @@ class Tour
     {
         $this->_bdd = $bdd;
     }
-    public function ajoutDistanceTour()
+    public function ajoutDistanceTour($nbTour)
     {
         try {
-            $pre = $this->_bdd->query("SELECT `crs_id` FROM `course_tbl` WHERE `crs_nom` = '".$this->_course."'");
+            $pre = $this->_bdd->query("SELECT `crs_id` FROM `course_tbl` WHERE `crs_nom` = '" . $this->_course . "'");
             $course = $pre->fetch();
             $pre->closeCursor();
+            
+            $reqTour = $this->_bdd->prepare("SELECT * FROM `tour_tbl` ORDER BY `tr_id` DESC LIMIT 1");
+            $reqTour->bindParam("tourId", $nbTour, PDO::PARAM_INT);
+            $returnTour = $reqTour->execute();
+            return $returnTour;
 
-            /***************************************************************************
-            A rajouter : sélectionner le nombre de tour
-            Changer la valeur de `tr_numero` + enlever les commentaires du 3ème bindParam()
-            ***************************************************************************/
-            $req = $this->_bdd->prepare("INSERT INTO `tour_tbl`(`tr_id`, `tr_distance`, `tr_numero`, `crs_id`) VALUES (NULL, :distance, '1', :course)");
-            $req->bindParam("distance",$this->_distance,PDO::PARAM_INT);
-            $req->bindParam("course",$course['crs_id'],PDO::PARAM_INT);
-            //$req->bindParam("nbTour",$nbTour,PDO::PARAM_INT);
+            $req = $this->_bdd->prepare("INSERT INTO `tour_tbl`(`tr_id`, `tr_distance`, `tr_numero`, `crs_id`) VALUES (NULL, :distance, :nbTour, :course)");
+            $req->bindParam("distance", $this->_distance, PDO::PARAM_INT);
+            $req->bindParam("course", $course['crs_id'], PDO::PARAM_INT);
+            $req->bindParam("nbTour", $nbTour, PDO::PARAM_INT);
             $return = $req->execute();
             return $return;
         } catch (Exception $e) {

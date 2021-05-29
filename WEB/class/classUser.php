@@ -80,7 +80,7 @@ class User
             $req->execute();
             $result = $req->fetch(PDO::FETCH_ASSOC);
             foreach ($result as  $infoUser) {
-                echo  $infoUser;
+                echo  '<br>'.$infoUser;
             }
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();

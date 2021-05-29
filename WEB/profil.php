@@ -3,7 +3,6 @@
     AFFICHAGE DES DONNEES DU USER
     AFFICHAGE DES DONNEES SI IL PARTICIPE A UNE COURSE
                 ON AFFICHERA QUE LES NOMS DES COURSES
-
  -->
 <?php
 require_once("bdd.php");
@@ -16,10 +15,10 @@ include "navbar.php";
 </head>
 
 <body class="bg-blue-300 h-screen">
-    <div class="container mx-auto flex justify-center grid justify-items-stretch m-40 relative grid grid-flow-col grid-cols-2 grid-rows-1 gap-4">
-        <!-- FORMULAIRE INSCRIPTION COURSE -->
-        <div class="w-full max-w-xs pt-6 bg-gray-300">
-            <div class="mb-4 text-center">
+    <div class="container mx-auto grid justify-items-stretch m-40 relative grid-cols-2 grid-rows-1">
+        <!-- AFFICHAGE DES DONNEES DE L'UTILISATEUR -->
+        <div class="w-full max-w-xs bg-gray-300 border-2 border-yellow-600">
+            <div class="mb-4 text-center border-b-2 border-yellow-600">
                 <p>Profil Utilisateur</p>
             </div>
             <div class="mb-4 text-center">
@@ -28,25 +27,22 @@ include "navbar.php";
                 $infoCourse->afficheInfoUser($mail, $nom, $prenom, $classe);
                 ?>
             </div>
-            <!-- AFFICHAGE DES DONNEES DE L'UTILISATEUR -->
+            <!-- AFFICHAGE DES DONNEES DE L'UTILISATEUR ET PEUT ETRE COUREUR -->
         </div>
-        <div class="w-full max-w-xs pt-6 bg-gray-300">
-            <div class="mb-4 text-center">
+        <div class="w-full max-w-xs bg-gray-300 border-2 border-yellow-600">
+            <div class="mb-4 text-center border-b-2 border-yellow-600">
                 <p>Profil Coureur</p>
             </div>
             <div class="mb-4 text-center">
-            Vous êtes inscrit pour la(les) course(s): 
+                Vous êtes inscrit pour la(les) course(s):
                 <?php
                 $participant = new Coureur($bdd);
                 $participant->setCourse($_SESSION['id']);
                 $participant->afficheInfoCoureur();
                 ?>
             </div>
-            <!-- AFFICHAGE DES DONNEES DU COUREUR AVEC LES COURSES AUQUELLES IL PARTICIPE
-                                      ET PEUT ETRE LES TEMPS QU'IL A FAIT A CELLES-CI -->
         </div>
     </div>
-
 </body>
 
 </html>
