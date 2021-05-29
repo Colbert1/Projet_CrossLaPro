@@ -56,8 +56,8 @@ class Coureur
     }
     public function afficheInfoCoureur()
     {
-        foreach($this->_course as $crs){
-            echo $crs['crs_id'];
+        foreach ($this->_course as $crs) {
+            echo '<br>' . $crs['crs_id'];
         }
     }
     public function setIdParticipant($newIdParticipant)
@@ -76,7 +76,6 @@ class Coureur
             $req->execute();
             $result = $req->fetchAll(PDO::FETCH_ASSOC);
             $this->_course = $result;
-            
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
             echo "Les datas : ";

@@ -23,7 +23,7 @@ if (!empty($_POST['distanceTour'])) {
     $objTour = new Tour($bdd);
     $objTour->setCourse($selecCourse);
     $objTour->setDistance($distance);
-    $return = $objTour->ajoutDistanceTour();
+    $return = $objTour->ajoutDistanceTour($nbTour);
     if ($return == TRUE) {
         echo "Création du tour effectuée";
     } else {
@@ -73,7 +73,7 @@ if (!empty($_POST['distanceTour'])) {
                     Selectionnez la distance en metres du tour //* PAS ENCORE CONFIGURE EN BASE 
                     De la course //* RECUPERE DANS LE FORM JUSTE AVANT 
                     ------------------------------------------------------------------------------->
-                    Selectionnez la distance en metres du tour de la course <?php echo $course ?>
+                    Selectionnez la distance en metres du tour <?php echo $nbTour ?> de la course <?php echo $course ?>
                 </p>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" type="number" name="distanceTour" placeholder="Distance du tour" required>
                 <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4" type="submit">Confirmer</button>
