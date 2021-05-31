@@ -1,6 +1,4 @@
 <?php
-require_once("bdd.php");
-require("class/classCourse.php");
 include "header.php";
 include "navbar.php";
 if (isset($_POST['subCreaCourse'])) {

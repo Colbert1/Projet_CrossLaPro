@@ -1,7 +1,5 @@
 <?php
 include "header.php";
-require_once("bdd.php");
-require("class/classUser.php");
 include "navbar.php";
 ?>
 <title>Accueil</title>

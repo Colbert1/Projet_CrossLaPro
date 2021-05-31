@@ -1,6 +1,4 @@
 <?php
-require_once("bdd.php");
-require("class/classCoureur.php");
 include "header.php";
 include "navbar.php";
 $sql = 'SELECT crs_nom, crs_id FROM course_tbl';

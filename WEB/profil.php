@@ -5,9 +5,6 @@
                 ON AFFICHERA QUE LES NOMS DES COURSES
  -->
 <?php
-require_once("bdd.php");
-require("class/classCoureur.php");
-require("class/classUser.php");
 include "header.php";
 include "navbar.php";
 ?>

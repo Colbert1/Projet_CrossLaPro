@@ -1,6 +1,4 @@
 <?php
-require_once("bdd.php");
-require("class/classTour.php");
 include "header.php";
 include "navbar.php";
 
