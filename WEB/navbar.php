@@ -1,7 +1,7 @@
 <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6 bg-blue-500">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
 
-        <span class="font-semibold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-white">Cross La Providence</span>
+        <span class="font-semibold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-white hover:text-white">Cross La Providence</span>
     </div>
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div class="text-sm lg:flex-grow">

@@ -45,8 +45,17 @@ bool liaison::ouvrirport(int portCOM){
 }
 
 void liaison::ecrireport(char * buffer){
+	char * buff[50];
+	buff[0] = "0x02";
+	buff[1] = "0";
+	buff[2] = "1";
+	buff[3] = "0x0D";
 	unsigned long sendLenght;
-	WriteFile(this->hcom,buffer, strlen(buffer),&sendLenght,NULL);
+	WriteFile(this->hcom,buff[0], 1,&sendLenght,NULL);
+	WriteFile(this->hcom,buff[1], 1,&sendLenght,NULL);
+	WriteFile(this->hcom,buff[2], 1,&sendLenght,NULL);
+	WriteFile(this->hcom,buff[3], 1,&sendLenght,NULL);
+
 }
 
 void liaison::fermerport(){

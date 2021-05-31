@@ -5,6 +5,7 @@ require("class/classCoureur.php");
 require("class/classTour.php");
 require("class/classCourse.php");
 require("class/classUser.php");
+require("class/classClassement.php");
 
 if (isset($_POST['destroy'])) {
     session_destroy();

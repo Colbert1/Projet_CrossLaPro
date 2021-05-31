@@ -1,6 +1,5 @@
 <?php
 include "header.php";
-include "navbar.php";
 ?>
     <title>Classement</title>
 </head>
@@ -8,6 +7,9 @@ include "navbar.php";
 <body>
     <!--Haut de page-->
     <div>
+        <?php 
+        include "navbar.php";
+        ?>
     </div>
     <!--Milieu de page-->
     <div class="mid">

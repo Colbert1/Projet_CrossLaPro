@@ -12,12 +12,12 @@ if (isset($_POST['subInscriptCourse'])) {
         $participant = new Coureur($bdd);
         $participant->setCourse($_POST['listeCourseInscription']);
         $course = $participant->getCourse();
-        $participant->inscriptionCoureur($course);
+        $participant->inscriptionCoureur($course,$_SESSION['id']);
     } else {
         $message = "Problème d'inscription à la course";
     }
 }
-echo $_SESSION['id'];
+//echo $_SESSION['id'];
 ?>
 <title>Inscription Course</title>
 </head>
@@ -35,8 +35,7 @@ echo $_SESSION['id'];
                         <?php
                         echo '<option value="0" selected>Sélectionner la course</option>';
                         foreach ($result as $ligne) {
-
-                            echo "<option value='{$ligne['crs_id']} - {$ligne['crs_nom']}'>"
+                            echo "<option value='{$ligne['crs_id']}'>"
                                 . $ligne['crs_nom'] . "</option>";
                         }
                         ?>

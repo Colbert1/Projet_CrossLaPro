@@ -18,14 +18,13 @@ class Coureur
     {
         $this->_bdd = $bdd;
     }
-    public function inscriptionCoureur($course)
+    public function inscriptionCoureur($course,$id)
     {
-        $bdd = $this->_bdd;
         try {
-            $req = $bdd->prepare("INSERT INTO `participant_tbl` (`pt_id`, `us_id`, `crs_id`, `ds_id`) 
+            $req = $this->_bdd->prepare("INSERT INTO `participant_tbl` (`pt_id`, `us_id`, `crs_id`, `ds_id`) 
             VALUES (NULL, :user ,:course, NULL)");
             $req->bindParam('course', $course, PDO::PARAM_INT);
-            $req->bindParam('user', $_SESSION['id'], PDO::PARAM_INT);
+            $req->bindParam('user', $id, PDO::PARAM_INT);
             $req->execute();
             header("Location: accueil.php");
         } catch (Exception $e) {
@@ -68,19 +67,11 @@ class Coureur
     {
         $this->_user = $newUser;
     }
-    public function setCourse($id)
+    public function setCourse($idCourse)
     {
-        try {
-            $req = $this->_bdd->prepare("SELECT `crs_id` FROM `participant_tbl` WHERE `us_id` = :user");
-            $req->bindParam('user', $id, PDO::PARAM_INT);
-            $req->execute();
-            $result = $req->fetchAll(PDO::FETCH_ASSOC);
-            $this->_course = $result;
-        } catch (Exception $e) {
-            echo "Erreur ! " . $e->getMessage();
-            echo "Les datas : ";
-        }
+        $this->_course = $idCourse;
     }
+
     public function setDossard($newDossard)
     {
         $this->_dossard = $newDossard;

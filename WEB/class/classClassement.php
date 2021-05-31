@@ -9,11 +9,13 @@ class Classement {
     private $_online;
     private $_bdd;
 
-    public function __construct($bdd) {
+    public function __construct($bdd)
+    {
         $this->_bdd = $bdd;
     }
 
-    public function setIdCourse(){
+    public function setIdCourse()
+    {
         $req = $this->_bdd->prepare("SELECT `crs_id` FROM `course_tbl` WHERE `crs_nom` = :course");
         $req->bindParam("course",$this->_nom_course,PDO::PARAM_STR);
         $req->execute();
@@ -34,11 +36,13 @@ class Classement {
         $this->_date_course = $date['crs_date'];
     }
 
-    public function setNomCourse($nomCourse){
+    public function setNomCourse($nomCourse)
+    {
         $this->_nom_course = $nomCourse;
     }
 
-    public function setParticipants(){
+    public function setParticipants()
+    {
         $req = $this->_bdd->prepare("SELECT us.`us_id` 
         FROM 
             `user_tbl` us
@@ -57,7 +61,8 @@ class Classement {
         $this->_participants = $participants['us_id'];
     }
 
-    public function setDistance(){
+    public function setDistance()
+    {
         $req = $this->_bdd->prepare("SELECT `tr_distance`
         FROM 
             `tour_tbl` tr
@@ -73,7 +78,8 @@ class Classement {
         $this->_distance = $distance['tr_distance'];
     }
 
-    public function setOnline(){
+    public function setOnline()
+    {
         $socket = fsockopen("localhost",3306);
 
         if(!$socket){
@@ -83,31 +89,38 @@ class Classement {
         }
     }
 
-    public function getIdCourse() {
+    public function getIdCourse()
+    {
         return $this->_id_course;
     }
 
-    public function getDateCourse(){
+    public function getDateCourse()
+    {
         return $this->_date_course;
     }
 
-    public function getNomCourse(){
+    public function getNomCourse()
+    {
         return $this->_nom_course;
     }
 
-    public function getParticipants(){
+    public function getParticipants()
+    {
         return $this->_participants;
     }
 
-    public function getDistance(){
+    public function getDistance()
+    {
         return $this->_distance;
     }
 
-    public function getClassement(){
+    public function getClassement()
+    {
         return $this->_classement;
     }
 
-    public function getOnline(){
+    public function getOnline()
+    {
         return $this->_online;
     }
 
@@ -117,7 +130,8 @@ class Classement {
     *Triage DECROISSANT par le temps
     ***************************************/
  
-    public function setClassement(){
+    public function setClassement()
+    {
         try{
             $this->_classement = fetchAll(
                 $this->_bdd,
@@ -141,7 +155,8 @@ class Classement {
     }
 
     //SetParticipants avant de triAlphaC
-    public function triAlphaC(){
+    public function triAlphaC()
+    {
         $tab = $this->_classement;
         $verif = sort($tab,SORT_STRING);
 
@@ -153,7 +168,8 @@ class Classement {
     }
 
     //SetParticipants avant de triAlphaD
-    public function triAlphaD(){
+    public function triAlphaD()
+    {
         $tabCoureursAlph2 = $this->_participants;
         $verif = rsort($tabCoureursAlph2,SORT_STRING);
 
@@ -164,12 +180,24 @@ class Classement {
         }
     }
 
-    public function triTempsC() {
+    public function triTempsC() 
+    {
         $tabCoureursAlph = $this->_participants;
         //A continuer
     }
 
-    public function triTempsD() {
+    public function triTempsD() 
+    {
         //A continuer
+    }
+
+    public function selectCourse()
+    {
+        $req = $this->_bdd->prepare("SELECT `crs_id`, `crs_nom` FROM `course_tbl`");
+        $req->execute();
+        $courses = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        
+        return $courses;
     }
 }

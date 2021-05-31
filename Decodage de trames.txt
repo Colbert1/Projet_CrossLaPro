@@ -1,0 +1,109 @@
+DETECTION (PAGE 4)
+
+00 00 00 15 21 01 00 00 00 00 00 52 31 82 09:58:49.87
+
+00 -> 00
+00 00 15 -> NN NN NN
+21 -> BB
+01 -> 00
+00 00 00 00 00 52 31 82 -> DD DD DD DD DD DD DD DD
+09:58:49.87 -> HH:MM:SS.CC
+
+NN NN NN = Nombre de détections
+BB = ID Black Box
+DD DD DD DD DD DD DD DD = ID Dossard
+HH:MM:SS.CC = Heure de détection (au centième près)
+
+---------------------------------------------------------------------------------
+
+BB SEND TEMPERATURE (PAGE 22)
+
+41 01 TP 00 06 6
+
+41 -> 41
+01 -> NUM_READER
+TP -> TP
+00 066 -> READER_TEMP
+
+NUM_READER = ID du lecteur (Ici la Black Box)
+READER_TEMP = Température du lecteur (0,5°C par unité)
+
+---------------------------------------------------------------------------------
+
+BB SEND INFO 1 (PAGE 22)
+
+41 01 I1 00 11 3
+
+41 -> 41
+01 -> NUM_READER
+I1 -> I1
+00 113 -> INFO 1
+
+NUM_READER = ID du lecteur (Ici la Black Box)
+INFO 1 = Information numéro 1 du reader (Pour trouver la qualité de l'antenne)
+
+Formule de la qualité d'antenne : (1-(INFO1/INFO2))*100
+
+---------------------------------------------------------------------------------
+
+BB SEND INFO 2 (PAGE 22)
+
+41 01 I2 00 612
+
+41 -> 41
+01 -> NUM_READER
+I2 -> I2
+00 612 -> INFO 2
+
+NUM_READER = ID du lecteur (Ici la Black Box)
+INFO 2 = Information numéro 2 du reader (Pour trouver la qualité de l'antenne)
+
+Formule de la qualité d'antenne : (1-(INFO1/INFO2))*100
+
+---------------------------------------------------------------------------------
+
+BB SEND INFO 3 (PAGE 22)
+
+41 01 I3 00 229 
+
+41 -> 41
+01 -> NUM_READER
+I3 -> I3
+00 229 -> INFO 3
+
+NUM_READER = ID du lecteur (Ici la Black Box)
+INFO 3 = Information numéro 3 du reader (But inconnu)
+
+---------------------------------------------------------------------------------
+
+BB SEND INFO 4 (PAGE 22)
+
+41 01 I4 00 974
+
+41 -> 41
+01 -> NUM_READER
+I4 -> I4
+00 974 -> INFO 4
+
+NUM_READER = ID du lecteur (Ici la Black Box)
+INFO 4 = Information numéro 4 du reader (Si la valeur n'est pas comprise entre 947 et 987, alors problème d'alimentation)
+
+---------------------------------------------------------------------------------
+
+REPONSE -> GET SYSTEM INFORMATION ((hex)02 39 (hex)0D)
+
+01 T: 000 13:28:43 05/27/2021
+
+01 -> 01
+
+T: -> T:
+
+000 -> TEMP
+
+13:28:43 -> HH:MM:SS
+
+05/27/2021 -> MM/JJ/AAAA
+
+TEMP = Useless
+HH:MM:SS = Heure de la Black Box
+MM/JJ/AAAA = Date de la Black Box
