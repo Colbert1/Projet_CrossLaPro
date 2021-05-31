@@ -11,23 +11,23 @@ class Tour
     {
         $this->_bdd = $bdd;
     }
-    public function ajoutDistanceTour($nbTour)
+    public function ajoutDistanceTour($distance)
     {
         try {
             $pre = $this->_bdd->query("SELECT `crs_id` FROM `course_tbl` WHERE `crs_nom` = '" . $this->_course . "'");
             $course = $pre->fetch();
             $pre->closeCursor();
-            
-            $reqTour = $this->_bdd->prepare("SELECT * FROM `tour_tbl` ORDER BY `tr_id` DESC LIMIT 1");
-            $reqTour->bindParam("tourId", $nbTour, PDO::PARAM_INT);
-            $returnTour = $reqTour->execute();
-            return $returnTour;
 
-            $req = $this->_bdd->prepare("INSERT INTO `tour_tbl`(`tr_id`, `tr_distance`, `tr_numero`, `crs_id`) VALUES (NULL, :distance, :nbTour, :course)");
-            $req->bindParam("distance", $this->_distance, PDO::PARAM_INT);
-            $req->bindParam("course", $course['crs_id'], PDO::PARAM_INT);
-            $req->bindParam("nbTour", $nbTour, PDO::PARAM_INT);
-            $return = $req->execute();
+            $reqTour = $this->_bdd->prepare("SELECT `tr_numero` FROM `tour_tbl` WHERE crs_id = :course ORDER BY `tr_id` DESC LIMIT 1");
+            $reqTour->bindParam("course", $course['crs_id'], PDO::PARAM_INT);
+            $reqTour->execute();
+            $result = $reqTour->fetchAll(PDO::FETCH_ASSOC);
+
+            $reqInsert = $this->_bdd->prepare("INSERT INTO `tour_tbl`(`tr_id`, `tr_distance`, `tr_numero`, `crs_id`) VALUES (NULL, :distance, :nbTour, :course)");
+            $reqInsert->bindParam("distance",$distance['distanceTour'], PDO::PARAM_INT);
+            $reqInsert->bindParam("course",$course['listeCourse'], PDO::PARAM_INT);
+            $reqInsert->bindParam("nbTour",$result['tr_numero'], PDO::PARAM_INT);
+            $return = $reqInsert->execute();
             return $return;
         } catch (Exception $e) {
             echo "Error : " . $e->getMessage();

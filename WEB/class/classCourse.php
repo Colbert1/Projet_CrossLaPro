@@ -37,10 +37,11 @@ class Course
     }
     public function afficheInfoCourse()
     {
-        $req = $this->_bdd->query("SELECT DISTINCT `crs_nom`,`crs_date` FROM `course_tbl`");
+        $req = $this->_bdd->query("SELECT course_tbl.crs_nom, course_tbl.crs_date, SUM(tour_tbl.tr_distance) 
+        AS distance_totale FROM course_tbl INNER JOIN tour_tbl ON tour_tbl.crs_id = course_tbl.crs_id GROUP BY tour_tbl.crs_id");
         foreach ($req as  $infoCourse) {
             echo "<div class='rounded-sm bg-gray-300 border-2 border-black h-36 w-40'><div class='text-blue-700 self-stretch'> Nom de la course: </div>" . $infoCourse['crs_nom'] .
-                "<div class='text-blue-800 '>Date de la course: </div>" . $infoCourse['crs_date'] . "</div></div>";
+                "<div class='text-blue-800 '>Date de la course: </div>" . $infoCourse['crs_date'] . "<div class='text-blue-800 '>Distance de la course: </div>" . $infoCourse['distance_totale'] . 'm'."</div></div>";
         }
     }
     public function suppCourse()
