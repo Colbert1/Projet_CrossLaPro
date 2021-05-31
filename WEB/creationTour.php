@@ -2,7 +2,6 @@
 include "header.php";
 include "navbar.php";
 
-
 // Récupère les nom des courses dans la table course
 $sql = 'SELECT crs_nom, crs_id FROM course_tbl';
 $req = $bdd->prepare($sql);
@@ -18,10 +17,13 @@ if (!empty($_POST['listeCourse'])) {
 if (!empty($_POST['distanceTour'])) {
     $distance = $_POST['distanceTour'];
     $selectCourse = $_SESSION['selectCourse'];
+
     $objTour = new Tour($bdd);
+    
     $objTour->setCourse($selectCourse);
+    $objTour->setNumTour($course);
     $objTour->setDistance($distance);
-    $return = $objTour->ajoutDistanceTour($nbTour);
+    $return = $objTour->getDistance();
     if ($return == TRUE) {
         echo "Création du tour effectuée";
     } else {
@@ -49,14 +51,14 @@ if (!empty($_POST['distanceTour'])) {
         <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gray-400" action="" method="post">
             <!-- Menu déroulant avec les noms -->
             <div class="mb-4-text-gray-700 text-center">
-                <p>Selectionnez la course que vous souhaitez configurée</p>
+                <p>Selectionnez la course que vous souhaitez configurer</p>
 
                 <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" name="listeCourse">
                     <?php
                     echo '<option value="0" selected>Sélectionner la course</option>';
                     foreach ($result as $ligne) {
 
-                        echo "<option value='{$ligne['crs_nom']}'>" . $ligne['crs_nom'] . "</option>";
+                        echo "<option value='{$ligne['crs_id']}'>" . $ligne['crs_nom'] . "</option>";
                     }
                     ?>
                 </select>
@@ -71,7 +73,7 @@ if (!empty($_POST['distanceTour'])) {
                     Selectionnez la distance en metres du tour //* PAS ENCORE CONFIGURE EN BASE 
                     De la course //* RECUPERE DANS LE FORM JUSTE AVANT 
                     ------------------------------------------------------------------------------->
-                    Selectionnez la distance en metres du tour n°<?php echo $result['tr_numero'] ?> de la course <?php echo $_POST['listeCourse'] ?>
+                    Selectionnez la distance en metres du tour n°<?php echo $return['tr_numero']; ?> de la course <?php echo $_POST['listeCourse']; ?>
                 </p>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" type="number" name="distanceTour" placeholder="Distance du tour" required>
                 <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4" type="submit">Confirmer</button>
@@ -83,4 +85,4 @@ if (!empty($_POST['distanceTour'])) {
     </div>
 </body>
 
-</ht
+</html>
