@@ -10,7 +10,7 @@ $result = $req->fetchAll();
 $req->closeCursor();
 $objTour = new Tour($bdd);
 $numTour = $objTour->setNumTour();
-$numTour = $_SESSION['tr_numero'];
+
 //Sélection course
 if (!empty($_POST['listeCourse'])) {
     $_SESSION['selectCourse'] = $_POST['listeCourse'];
@@ -19,16 +19,10 @@ if (!empty($_POST['listeCourse'])) {
 if (!empty($_POST['distanceTour'])) {
     $distance = $_POST['distanceTour'];
     $selectCourse = $_SESSION['selectCourse'];
-
-
-    $objTour->setCourse($selectCourse);
+    $numTour = $_SESSION['tr_numero'];
+    
+    $objTour->setCourse($_POST['listeCourse']);
     $objTour->setDistance($distance, $infoTour);
-    $return = $objTour->getDistance();
-    if ($return == TRUE) {
-        echo "Création du tour effectuée";
-    } else {
-        echo "Le tour n\'a pas été créé";
-    }
 }
 
 ?>
