@@ -1,7 +1,7 @@
 <?php
-$dsn = 'mysql:host=192.168.65.183;dbname=projetcross_lapro';
+$dsn = 'mysql:host=localhost;dbname=projetcross_lapro';
 $user = 'root';
-$password = 'root';
+$password = '';
 
 try {
     $bdd = new PDO($dsn, $user, $password);
