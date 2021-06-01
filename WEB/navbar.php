@@ -14,6 +14,9 @@
             <a href="classement.php" class="block mt-5 lg:inline-block lg:mt-0 text-teal-200 hover:text-yellow-400 mr-4">
                 Classements
             </a>
+            <a href="historique.php" class="block mt-5 lg:inline-block lg:mt-0 text-teal-200 hover:text-yellow-400 mr-4">
+                Historique
+            </a>
             <a href="profil.php" class="block mt-5 lg:inline-block lg:mt-0 text-teal-200 hover:text-yellow-400 mr-4">
                 Profil
             </a>

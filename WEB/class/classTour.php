@@ -36,11 +36,11 @@ class Tour
 
     public function setNumTour()
     {
-        $reqTour = $this->_bdd->prepare("SELECT `tr_numero` FROM `tour_tbl` WHERE crs_id = :course ORDER BY `tr_id` DESC LIMIT 1");
-        $reqTour->bindParam("course", $this->_course, PDO::PARAM_INT);
-        $reqTour->execute();
-        $result = $reqTour->fetchAll(PDO::FETCH_ASSOC);
-        $this->_numTour = $result;
+//
+        $reqTour = $this->_bdd->query("SELECT `tr_numero` FROM `tour_tbl` WHERE crs_id = '" . $this->_course . "' ORDER BY `tr_id` DESC LIMIT 1");
+        foreach ($reqTour as  $infoTour) {
+            echo $infoTour['tr_numero'];
+        }
     }
 
     public function setCourse($newCourse)
