@@ -34,7 +34,7 @@ if (isset($_POST['subCreaCourse'])) {
                 </div>
 
                 <div class="mb-4-text-gray-700 text-center">
-                    <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2" name="subCreaCourse" type="submit">Confirmer</button>
+                    <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" name="subCreaCourse" type="submit">Confirmer</button>
                 </div>
             </form>
         </div>

@@ -62,7 +62,7 @@ if (!empty($_POST['distanceTour'])) {
                     }
                     ?>
                 </select>
-                <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4" type="submit">Confirmer</button>
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" type="submit">Confirmer</button>
             </div>
         </form>
         <!--Distance tour-->
@@ -76,7 +76,7 @@ if (!empty($_POST['distanceTour'])) {
                     Selectionnez la distance en metres du tour n°<?php echo $result['tr_numero'] ?> de la course <?php echo $_POST['listeCourse']; ?>
                 </p>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" type="number" name="distanceTour" placeholder="Distance du tour" required>
-                <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4" type="submit">Confirmer</button>
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" type="submit">Confirmer</button>
             </div>
             <div>
             </div>
