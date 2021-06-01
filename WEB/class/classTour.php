@@ -16,17 +16,19 @@ class Tour
     {
         $this->_idtour = $newIdTour;
     }
-    
+
     public function setDistance($distance)
     {
         try {
-            $reqInsert = $this->_bdd->prepare("INSERT INTO `tour_tbl`(`tr_id`, `tr_distance`, `tr_numero`, `crs_id`) VALUES (NULL, :distance, :nbTour, :course)");
+            $reqInsert = $this->_bdd->prepare("INSERT INTO `tour_tbl`(`tr_id`, `tr_distance`, `tr_numero`, `crs_id`) VALUES (NULL, :distance, :numTour, :course)");
             $reqInsert->bindParam("distance", $distance['distanceTour'], PDO::PARAM_INT);
             $reqInsert->bindParam("course", $this->_course, PDO::PARAM_INT);
-            $reqInsert->bindParam("nbTour", $this->_numTour, PDO::PARAM_INT);
+            $reqInsert->bindParam("numTour", $this->_numTour, PDO::PARAM_INT);
             $reqInsert->execute();
-
-            if ($reqInsert === TRUE) $this->_distance = $distance;
+            
+            /* if ($reqInsert === TRUE) {
+                $this->_distance = $distance;
+            } */
         } catch (Exception $e) {
             echo "Error : " . $e->getMessage();
         }
@@ -65,7 +67,7 @@ class Tour
     {
         return $this->_course;
     }
-    
+
     public function init()
     {
         $req = $this->_bdd->query("SELECT `tr_id`, `tr_distance`, `crs_id` FROM `tour_tbl` WHERE crs_id = " . $this->_idcourse);
