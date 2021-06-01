@@ -19,9 +19,9 @@ if (!empty($_POST['distanceTour'])) {
     $selectCourse = $_SESSION['selectCourse'];
 
     $objTour = new Tour($bdd);
-    
+
     $objTour->setCourse($selectCourse);
-    $objTour->setNumTour($course);
+    $objTour->setNumTour();
     $objTour->setDistance($distance);
     $return = $objTour->getDistance();
     if ($return == TRUE) {
@@ -49,7 +49,7 @@ if (!empty($_POST['distanceTour'])) {
     <div class="container mx-auto flex justify-center grid justify-items-start m-40">
         <!--Course-->
         <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gray-400" action="" method="post">
-            <!-- Menu déroulant avec les noms -->
+            <!-- Menu déroulant avec les noms des courses-->
             <div class="mb-4-text-gray-700 text-center">
                 <p>Selectionnez la course que vous souhaitez configurer</p>
 
@@ -73,11 +73,10 @@ if (!empty($_POST['distanceTour'])) {
                     Selectionnez la distance en metres du tour //* PAS ENCORE CONFIGURE EN BASE 
                     De la course //* RECUPERE DANS LE FORM JUSTE AVANT 
                     ------------------------------------------------------------------------------->
-                    Selectionnez la distance en metres du tour n°<?php echo $return['tr_numero']; ?> de la course <?php echo $_POST['listeCourse']; ?>
+                    Selectionnez la distance en metres du tour n°<?php echo $result['tr_numero'] ?> de la course <?php echo $_POST['listeCourse']; ?>
                 </p>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" type="number" name="distanceTour" placeholder="Distance du tour" required>
                 <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4" type="submit">Confirmer</button>
-
             </div>
             <div>
             </div>
