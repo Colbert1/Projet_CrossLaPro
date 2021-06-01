@@ -10,20 +10,19 @@ $result = $req->fetchAll();
 $req->closeCursor();
 $objTour = new Tour($bdd);
 $numTour = $objTour->setNumTour();
+$numTour = $_SESSION['tr_numero'];
 //Sélection course
 if (!empty($_POST['listeCourse'])) {
     $_SESSION['selectCourse'] = $_POST['listeCourse'];
-    
 }
-
+//Sélection Distance
 if (!empty($_POST['distanceTour'])) {
     $distance = $_POST['distanceTour'];
     $selectCourse = $_SESSION['selectCourse'];
-    $numTour = $_SESSION['tr_numero'];
+
 
     $objTour->setCourse($selectCourse);
-
-    $objTour->setDistance($distance);
+    $objTour->setDistance($distance, $infoTour);
     $return = $objTour->getDistance();
     if ($return == TRUE) {
         echo "Création du tour effectuée";
@@ -74,7 +73,7 @@ if (!empty($_POST['distanceTour'])) {
                     Selectionnez la distance en metres du tour //* PAS ENCORE CONFIGURE EN BASE 
                     De la course //* RECUPERE DANS LE FORM JUSTE AVANT 
                     ------------------------------------------------------------------------------->
-                    Selectionnez la distance en metres du tour n°<?php echo $numTour ?> de la course <?php echo $_POST['listeCourse']; ?>
+                    Selectionnez la distance en metres du tour n°<?php echo $numTour['tr_numero']; ?> de la course <?php echo $_POST['listeCourse']; ?>
                 </p>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" type="number" name="distanceTour" placeholder="Distance du tour" required>
                 <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" type="submit">Confirmer</button>
