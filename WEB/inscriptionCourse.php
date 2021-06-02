@@ -12,7 +12,7 @@ if (isset($_POST['subInscriptCourse'])) {
         $participant = new Coureur($bdd);
         $participant->setCourse($_POST['listeCourseInscription']);
         $course = $participant->getCourse();
-        $participant->inscriptionCoureur($course,$_SESSION['id']);
+        $participant->inscriptionCoureur($course, $_SESSION['id']);
     } else {
         $message = "Problème d'inscription à la course";
     }

@@ -8,7 +8,7 @@ $result = $req->fetchAll();
 $req->closeCursor();
 
 if (isset($_POST['subSuppressionCourse'])) {
-    if (!empty($_POST['listeCourseInscription'])) {
+    if (!empty($_POST['listeCourseSuppression'])) {
         $supCourse = new Course($bdd);
         $supCourse->suppCourse();
     }
@@ -21,7 +21,7 @@ if (isset($_POST['subSuppressionCourse'])) {
     <div class="container mx-auto flex justify-center grid justify-items-start m-40">
         <!-- FORMULAIRE INSCRIPTION COURSE -->
         <div class="w-full max-w-xs pt-6">
-            <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gray-400" id="inscriptionCourse" action="" method="POST">
+            <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gray-400" id="suppressionCourse" action="" method="POST">
                 <div class="mb-4 text-center">
                     <p>Suppression Course</p>
                 </div>

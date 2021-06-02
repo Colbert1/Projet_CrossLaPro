@@ -26,9 +26,13 @@ class Course
             echo "Erreur ! " . $e->getMessage();
         }
     }
-    public function modifCourse()
+    public function modifCourse($date, $nom)
     {
-        
+        $req = $this->_bdd->prepare("UPDATE `course_tbl` SET `crs_date`= :date,`crs_nom`= :nom WHERE `crs_id` = :course");
+        $req->bindParam('date', $date, PDO::PARAM_STR);
+        $req->bindParam('nom', $nom, PDO::PARAM_STR);
+        $req->execute();
+
         /*----------------------------------------
         Modifier la date ou/et le nom de la course, la distance
         Depuis la table Tour et Course
@@ -40,12 +44,11 @@ class Course
         AS distance_totale FROM course_tbl INNER JOIN tour_tbl ON tour_tbl.crs_id = course_tbl.crs_id GROUP BY tour_tbl.crs_id");
         foreach ($req as  $infoCourse) {
             echo "<div class='rounded-sm bg-gray-300 border-2 border-black h-36 w-40'><div class='text-blue-700 self-stretch'> Nom de la course: </div>" . $infoCourse['crs_nom'] .
-                "<div class='text-blue-800 '>Date de la course: </div>" . $infoCourse['crs_date'] . "<div class='text-blue-800 '>Distance de la course: </div>" . $infoCourse['distance_totale'] . 'm' . "</div></div>";
+                "<div class='text-blue-800 '> Date de la course: </div>" . $infoCourse['crs_date'] . "<div class='text-blue-800 '> Distance de la course: </div>" . $infoCourse['distance_totale'] . 'm' . "</div></div>";
         }
     }
     public function suppCourse()
     {
-        
     }
     public function setIdCourse($newIdCourse)
     {
