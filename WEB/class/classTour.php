@@ -17,11 +17,19 @@ class Tour
         $this->_idtour = $newIdTour;
     }
 
-    public function setDistance($distance, $infoTour)
+    public function setDistance($distance)
     {
+        $nTour = $this->_numTour;
+        $nTour++;
         try {
-            $reqInsert = $this->_bdd->query("INSERT INTO `tour_tbl`(`tr_id`, `tr_distance`, `tr_numero`, `crs_id`) 
-            VALUES (NULL, " . $distance['distanceTour'] . ", " . $infoTour['tr_numero'] . ", '" . $this->_course . "'");
+            $reqInsert = $this->_bdd->prepare("INSERT INTO `tour_tbl`(`tr_id`, `tr_distance`, `tr_numero`, `crs_id`) VALUES (NULL, :distance, :numTour, :course)");
+            $reqInsert->bindParam("distance", $distance, PDO::PARAM_INT);
+            $reqInsert->bindParam("numTour", $nTour, PDO::PARAM_INT);
+            $reqInsert->bindParam("course", $this->_course, PDO::PARAM_INT);
+            $verif = $reqInsert->execute();
+
+            if ($verif === TRUE) $this->_distance = $distance;
+            echo "La distance de ". $this->_distance ."m a bien été inscrite";
         } catch (Exception $e) {
             echo "Error : " . $e->getMessage();
         }
@@ -29,10 +37,12 @@ class Tour
 
     public function setNumTour()
     {
-        $reqTour = $this->_bdd->query("SELECT `tr_numero` FROM `tour_tbl` WHERE crs_id = '" . $this->_course . "' ORDER BY `tr_id` DESC LIMIT 1");
-        foreach ($reqTour as  $infoTour) {
-            echo $infoTour['tr_numero'];
-        }
+        $req = $this->_bdd->prepare("SELECT COUNT(tr_numero) as nombre FROM `tour_tbl` WHERE `crs_id` = :course GROUP BY `crs_id` LIMIT 1");
+        $req->bindParam("course",$this->_course,PDO::PARAM_INT);
+        $req->execute();
+        $numTour = $req->fetch(PDO::FETCH_ASSOC);
+
+        $this->_numTour = $numTour['nombre'];
     }
 
     public function setCourse($newCourse)
