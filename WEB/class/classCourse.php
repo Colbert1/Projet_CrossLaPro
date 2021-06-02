@@ -28,11 +28,10 @@ class Course
     }
     public function modifCourse()
     {
+        
         /*----------------------------------------
-
         Modifier la date ou/et le nom de la course, la distance
         Depuis la table Tour et Course
-
         ------------------------------------------*/
     }
     public function afficheInfoCourse()
@@ -46,6 +45,7 @@ class Course
     }
     public function suppCourse()
     {
+        
     }
     public function setIdCourse($newIdCourse)
     {

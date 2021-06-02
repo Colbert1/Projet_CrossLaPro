@@ -1,5 +1,4 @@
 function showTab(classement) {
-    // const participants = jsonObj['ds_num'];
     const table = document.getElementById('tab');
     table.innerHTML = ""
    

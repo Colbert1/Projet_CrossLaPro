@@ -29,7 +29,7 @@ class Tour
             $verif = $reqInsert->execute();
 
             if ($verif === TRUE) $this->_distance = $distance;
-            echo "La distance de ". $this->_distance ."m a bien été inscrite";
+            echo "La distance de " . $this->_distance . "m a bien été inscrite";
         } catch (Exception $e) {
             echo "Error : " . $e->getMessage();
         }
@@ -38,7 +38,7 @@ class Tour
     public function setNumTour()
     {
         $req = $this->_bdd->prepare("SELECT COUNT(tr_numero) as nombre FROM `tour_tbl` WHERE `crs_id` = :course GROUP BY `crs_id` LIMIT 1");
-        $req->bindParam("course",$this->_course,PDO::PARAM_INT);
+        $req->bindParam("course", $this->_course, PDO::PARAM_INT);
         $req->execute();
         $numTour = $req->fetch(PDO::FETCH_ASSOC);
 
@@ -69,7 +69,6 @@ class Tour
     {
         return $this->_course;
     }
-
     public function init()
     {
         $req = $this->_bdd->query("SELECT `tr_id`, `tr_distance`, `crs_id` FROM `tour_tbl` WHERE crs_id = " . $this->_idcourse);

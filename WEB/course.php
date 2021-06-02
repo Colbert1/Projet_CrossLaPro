@@ -21,6 +21,16 @@ include "navbar.php";
             </div>
             <div class="text-center">
                 <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2">
+                    <a href="modificationCourse.php">Modification Course</a>
+                </button>
+            </div>
+            <div class="text-center">
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2">
+                    <a href="supressionCourse.php">Supression Course</a>
+                </button>
+            </div>
+            <div class="text-center">
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2">
                     <a href="creationTour.php">Création Tour</a>
                 </button>
             </div>
