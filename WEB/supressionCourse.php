@@ -8,10 +8,9 @@ $result = $req->fetchAll();
 $req->closeCursor();
 
 if (isset($_POST['subSuppressionCourse'])) {
-    if (!empty($_POST['listeCourseSuppression'])) {
-        $supCourse = new Course($bdd);
-        $supCourse->suppCourse();
-    }
+    $course = $_POST['listeCourseSuppression'];
+    $supCourse = new Course($bdd);
+    $supCourse->suppCourse($course);
 }
 ?>
 <title>Suppression Course</title>
@@ -25,7 +24,7 @@ if (isset($_POST['subSuppressionCourse'])) {
                 <div class="mb-4 text-center">
                     <p>Suppression Course</p>
                 </div>
-                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" name="listeCourseSuppression">
+                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" name="listeCm:ression">
                     <?php
                     echo '<option value="0" selected>Sélectionner la course</option>';
                     foreach ($result as $ligne) {

@@ -19,12 +19,13 @@ class Ecran
 
     public function setNom($nom)
     {
-        $req = $this->_bdd->prepare("UPDATE `ecran_tbl` SET `ec_nom` = 'test' WHERE `ecran_tbl`.`ec_id` = :id");
+        $req = $this->_bdd->prepare("UPDATE `ecran_tbl` SET `ec_nom` = :nom WHERE `ecran_tbl`.`ec_id` = :id");
         $req->bindParam("id",$this->_ec_id,PDO::PARAM_INT);
+        $req->bindParam("nom",$nom,PDO::PARAM_STR);
         $req->execute();
         $nom = $req->fetch(PDO::FETCH_ASSOC);
-        $this->_ec_nom = $nom;
 
+        $this->_ec_nom = $nom;
     }
 
     public function setCrsId($newCourse)

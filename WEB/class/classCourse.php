@@ -29,6 +29,7 @@ class Course
     public function modifCourse($date, $nom)
     {
         $req = $this->_bdd->prepare("UPDATE `course_tbl` SET `crs_date`= :date,`crs_nom`= :nom WHERE `crs_id` = :course");
+        $req->bindParam('course', $this->_course, PDO::PARAM_INT);
         $req->bindParam('date', $date, PDO::PARAM_STR);
         $req->bindParam('nom', $nom, PDO::PARAM_STR);
         $req->execute();
@@ -44,11 +45,21 @@ class Course
         AS distance_totale FROM course_tbl INNER JOIN tour_tbl ON tour_tbl.crs_id = course_tbl.crs_id GROUP BY tour_tbl.crs_id");
         foreach ($req as  $infoCourse) {
             echo "<div class='rounded-sm bg-gray-300 border-2 border-black h-36 w-40'><div class='text-blue-700 self-stretch'> Nom de la course: </div>" . $infoCourse['crs_nom'] .
-                "<div class='text-blue-800 '> Date de la course: </div>" . $infoCourse['crs_date'] . "<div class='text-blue-800 '> Distance de la course: </div>" . $infoCourse['distance_totale'] . 'm' . "</div></div>";
+                "<div class='text-blue-800 '> Date de la course: </div>" . $infoCourse['crs_date'] . "<div class='text-blue-800 '>
+                 Distance de la course: </div>" . $infoCourse['distance_totale'] . 'm' . "</div></div>";
         }
     }
-    public function suppCourse()
+    public function suppCourse($course)
     {
+        $req = $this->_bdd->prepare(
+        "DELETE FROM `participant_tbl` WHERE `crs_id` = :course;
+        DELETE FROM `tour_tbl` WHERE `crs_id` = :course; 
+        DELETE FROM `course_tbl` WHERE `crs_id` = :course;
+        DELETE FROM `classeparticipante_tbl` WHERE `crs_id` = :course; 
+        DELETE FROM `ecran_tbl` WHERE `crs_id` = :course;");
+        $req->bindParam('course', $course, PDO::PARAM_INT);
+        $req->execute();
+        echo "test";
     }
     public function setIdCourse($newIdCourse)
     {
