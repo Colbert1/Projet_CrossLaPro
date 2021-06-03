@@ -8,7 +8,7 @@
     */
 class Course
 {
-    private $_idcourse;
+    private $_course;
     private $_nom;
     private $_date;
     private $_bdd;
@@ -59,23 +59,28 @@ class Course
     */
     public function suppCourse($course)
     {
-        $req = $this->_bdd->prepare(
-            "DELETE FROM `participant_tbl` WHERE `crs_id` = :course;
-        DELETE FROM `tour_tbl` WHERE `crs_id` = :course; 
-        DELETE FROM `course_tbl` WHERE `crs_id` = :course;
-        DELETE FROM `classeparticipante_tbl` WHERE `crs_id` = :course; 
-        DELETE FROM `ecran_tbl` WHERE `crs_id` = :course;"
-        );
-        $req->bindParam('course', $course, PDO::PARAM_INT);
-        $req->execute();
-        echo "test";
+        try {
+            $req = $this->_bdd->prepare(
+                "DELETE FROM `temps_tbl` WHERE `pt_id`;
+                DELETE FROM `classeparticipante_tbl` WHERE `crs_id` = 1; 
+                DELETE FROM `ecran_tbl` WHERE `crs_id` = 1;
+                DELETE FROM `participant_tbl` WHERE `crs_id` = 1;
+                DELETE FROM `tour_tbl` WHERE `crs_id` = 1;
+                DELETE FROM `course_tbl` WHERE `crs_id` = 1;"
+            );
+            $req->bindParam('course', $course, PDO::PARAM_INT);
+            $verif = $req->execute();
+            echo $verif;
+        } catch (Exception $e) {
+            echo "Error : " . $e->getMessage();
+        }
     }
     /*
         INITIALISE L'ID DE LA COURSE
     */
-    public function setIdCourse($newIdCourse)
+    public function setCourse($newCourse)
     {
-        $this->_idcourse = $newIdCourse;
+        $this->_course = $newCourse;
     }
     /*
         INITIALISE LA DATE DE LA COURSE
@@ -94,9 +99,9 @@ class Course
     /*
         RECUPERE L'ID DE LA COURSE
     */
-    public function getIdCourse()
+    public function getCourse()
     {
-        return $this->_idcourse;
+        return $this->_course;
     }
     /*
         RECUPERE LE DATE DE LA COURSE

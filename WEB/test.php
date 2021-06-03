@@ -1,3 +1,2 @@
 <?php
-echo 'Participant : ' . $_SESSION['id'] . '<br>';
-echo 'Course : ' . $_POST["listeCourseInscription"] . '<br>';
+echo 'Course : ' . $_POST['listeCourseSuppression'] . '<br>';
