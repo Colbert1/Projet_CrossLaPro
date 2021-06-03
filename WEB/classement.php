@@ -20,7 +20,7 @@ include "header.php";
             . $ligne['crs_nom'] . "</option>";
         }
     ?>
-        <script src="API/callRequest2.js"></script>
+        <script src="API/callRequest.js"></script>
         <table>
             <thead>
                 <tr class="border border-blue-200 border-opacity-50 bg-gray-100">

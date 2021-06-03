@@ -1,4 +1,11 @@
 <?php
+/***********************************************************************************************************
+ * Fonctions set : Initialisent les méthodes de la classe 
+ *                  - 1+ paramètres de fonctions : récupération de données de formulaires liés à la méthode
+ *                  - 0 paramètre de fonction : appel en BDD pour initialiser les méthodes
+ * Fonctions get : Retournent les méthodes de la classe
+ * Fonctions auxiliaires : Intéragissent avec les méthodes de la classe 
+ ***********************************************************************************************************/
 class Classement {
     private $_id_course;
     private $_date_course;
@@ -14,6 +21,7 @@ class Classement {
         $this->_bdd = $bdd;
     }
 
+    //Nécessite setNomCourse() en pré-requis
     public function setIdCourse()
     {
         $req = $this->_bdd->prepare("SELECT `crs_id` FROM `course_tbl` WHERE `crs_nom` = :course");
@@ -25,6 +33,7 @@ class Classement {
         $this->_id_course = $id['crs_id'];
     }
 
+    //Nécessite setIdCourse() en pré-requis
     public function setDateCourse()
     {
         $req = $this->_bdd->prepare("SELECT `crs_date` FROM `course_tbl` WHERE `crs_id` = :id");
@@ -36,6 +45,7 @@ class Classement {
         $this->_date_course = $date['crs_date'];
     }
 
+    //Nécessite une valeur initialisée par l'utilisateur en formulaire
     public function setNomCourse($nomCourse)
     {
         $this->_nom_course = $nomCourse;
@@ -89,6 +99,36 @@ class Classement {
         }
     }
 
+    /****************************************
+    *Mise en place du classement :
+    *Sélection du N° de DOSSARD, NOM, PRENOM, CLASSE, TEMPS.
+    *Triage DECROISSANT par le temps
+    ***************************************/
+ 
+    public function setClassement()
+    {
+        try{
+            $this->_classement = fetchAll(
+                $this->_bdd,
+                'SELECT user_tbl.us_nom, user_tbl.us_prenom, ds_num, cl_nom, SEC_TO_TIME(SUM(TIME_TO_SEC(ts_temps))) AS ts_temps_total'
+                . ' FROM temps_tbl'
+                . ' INNER JOIN participant_tbl ON participant_tbl.pt_id = temps_tbl.pt_id'
+                . ' INNER JOIN user_tbl ON user_tbl.us_id = participant_tbl.us_id'
+                . ' INNER JOIN dossard_tbl ON dossard_tbl.ds_id = participant_tbl.ds_id'
+                . ' INNER JOIN classe_tbl ON classe_tbl.cl_id = user_tbl.cl_id'
+                . ' WHERE tr_id IN (SELECT tr_id FROM tour_tbl WHERE crs_id = :crs_id)'
+                . ' GROUP BY temps_tbl.pt_id'
+                . ' ORDER BY ts_temps_total ASC',
+                [ 'crs_id' => $this->_id_course ]
+            );
+            
+            return $this->_classement;
+        } catch (Exception $e) {
+            echo "Erreur ! " . $e->getMessage();
+            echo "Les datas : ";
+        }
+    }
+
     public function getIdCourse()
     {
         return $this->_id_course;
@@ -122,62 +162,6 @@ class Classement {
     public function getOnline()
     {
         return $this->_online;
-    }
-
-    /****************************************
-    *Mise en place du classement :
-    *Sélection du N° de DOSSARD, NOM, PRENOM, CLASSE, TEMPS.
-    *Triage DECROISSANT par le temps
-    ***************************************/
- 
-    public function setClassement()
-    {
-        try{
-            $this->_classement = fetchAll(
-                $this->_bdd,
-                'SELECT user_tbl.us_nom, user_tbl.us_prenom, ds_num, cl_nom, SEC_TO_TIME(SUM(TIME_TO_SEC(ts_temps))) AS ts_temps_total'
-                . ' FROM temps_tbl'
-                . ' INNER JOIN participant_tbl ON participant_tbl.pt_id = temps_tbl.pt_id'
-                . ' INNER JOIN user_tbl ON user_tbl.us_id = participant_tbl.us_id'
-                . ' INNER JOIN dossard_tbl ON dossard_tbl.ds_id = participant_tbl.ds_id'
-                . ' INNER JOIN classe_tbl ON classe_tbl.cl_id = user_tbl.cl_id'
-                . ' WHERE tr_id IN (SELECT tr_id FROM tour_tbl WHERE crs_id = :crs_id)'
-                . ' GROUP BY temps_tbl.pt_id'
-                . ' ORDER BY ts_temps_total ASC',
-                [ 'crs_id' => $this->_id_course ]
-            );
-            
-            return $this->_classement;
-        } catch (Exception $e) {
-            echo "Erreur ! " . $e->getMessage();
-            echo "Les datas : ";
-        }
-    }
-
-    //SetParticipants avant de triAlphaC
-    public function triAlphaC()
-    {
-        $tab = $this->_classement;
-        $verif = sort($tab,SORT_STRING);
-
-        if($verif == TRUE){
-            return $tab;
-        }else{
-            echo "Erreur du tri alphabétique croissant";
-        }
-    }
-
-    //SetParticipants avant de triAlphaD
-    public function triAlphaD()
-    {
-        $tabCoureursAlph2 = $this->_participants;
-        $verif = rsort($tabCoureursAlph2,SORT_STRING);
-
-        if($verif == TRUE){
-            return $tabCoureursAlph2;
-        }else{
-            echo "Erreur du tri alphabétique décroissant";
-        }
     }
 
     public function triTempsC() 
