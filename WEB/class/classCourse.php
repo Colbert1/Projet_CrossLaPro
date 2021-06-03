@@ -62,11 +62,11 @@ class Course
         try {
             $req = $this->_bdd->prepare(
                 "DELETE FROM `temps_tbl` WHERE `pt_id`;
-                DELETE FROM `classeparticipante_tbl` WHERE `crs_id` = 1; 
-                DELETE FROM `ecran_tbl` WHERE `crs_id` = 1;
-                DELETE FROM `participant_tbl` WHERE `crs_id` = 1;
-                DELETE FROM `tour_tbl` WHERE `crs_id` = 1;
-                DELETE FROM `course_tbl` WHERE `crs_id` = 1;"
+                DELETE FROM `classeparticipante_tbl` WHERE `crs_id` = :course; 
+                DELETE FROM `ecran_tbl` WHERE `crs_id` = :course;
+                DELETE FROM `participant_tbl` WHERE `crs_id` = :course;
+                DELETE FROM `tour_tbl` WHERE `crs_id` = :course;
+                DELETE FROM `course_tbl` WHERE `crs_id` = :course;"
             );
             $req->bindParam('course', $course, PDO::PARAM_INT);
             $verif = $req->execute();
