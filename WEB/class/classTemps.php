@@ -7,6 +7,7 @@ class Temps
     private $_tour;
     private $_bdd;
 
+    //Constructeur : Stockage du PDO
     public function __construct($bdd)
     {
         $this->_bdd = $bdd;

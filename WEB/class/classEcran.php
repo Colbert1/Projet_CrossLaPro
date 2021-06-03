@@ -6,6 +6,7 @@ class Ecran
     private $_crs_id;
     private $_bdd;
     
+    //Constructeur : Stockage du PDO
     public function __construct($bdd)
     {
         $this->_bdd = $bdd;

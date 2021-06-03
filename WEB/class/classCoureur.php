@@ -14,11 +14,16 @@ class Coureur
     private $_dossard;
     private $_bdd;
 
+    //Constructeur : Stockage du PDO
     public function __construct($bdd)
     {
         $this->_bdd = $bdd;
     }
-    public function inscriptionCoureur($course,$id)
+    /*
+        INSCRIPTION D'UN UTILISATEUR A UNE COURSE
+        (IL DEVIENT COURREUR ET UTILISATEUR)
+    */
+    public function inscriptionCoureur($course, $id)
     {
         try {
             $req = $this->_bdd->prepare("INSERT INTO `participant_tbl` (`pt_id`, `us_id`, `crs_id`, `ds_id`) 
@@ -32,6 +37,10 @@ class Coureur
             echo "Les datas : ";
         }
     }
+    /*
+        MODIFICATION DU PROFIL DU COUREUR
+        (CHANGER LA OU LES COURSES AUXQUELES LE COURREUR PARTICIPE)
+    */
     public function modifProfilCoureur($course)
     {
         $bdd = $this->_bdd;
@@ -46,48 +55,80 @@ class Coureur
             echo "Les datas : ";
         }
     }
+    /*
+        SUPPRESSION DU PROFIL COURREUR 
+        (LE COURREUR N'EST PLUS QU'UN UTILISATEUR SANS COURSE)
+    */
     public function suppProfilCoureur()
     {
-        //DELETE FROM `participant_tbl` WHERE `us_id` = :user
-        //$req->bindParam('user', $_SESSION['id'], PDO::PARAM_INT);
-        //$req->execute();
-        //header("Location: accueil.php");
+        /*         
+            DELETE FROM `participant_tbl` WHERE `us_id` = :user
+            $req->bindParam('user', $_SESSION['id'], PDO::PARAM_INT);
+            $req->execute();
+            header("Location: accueil.php"); 
+        */
     }
+    /* 
+    AFFICHAGE DES COURSES AUXQUELLES LE COURREUR PARTICIPENT
+    */
     public function afficheInfoCoureur()
     {
         foreach ($this->_course as $crs) {
             echo '<br>' . $crs['crs_id'];
         }
     }
+    /*
+        INITIALISE L'ID DU COURREUR
+    */
     public function setIdParticipant($newIdParticipant)
     {
         $this->_idparticipant = $newIdParticipant;
     }
+    /*
+        INITIALISE LE USER 
+    */
     public function setUser($newUser)
     {
         $this->_user = $newUser;
     }
+    /*
+        INITIALISE LA COURSE DU COURREUR
+    */
     public function setCourse($idCourse)
     {
         $this->_course = $idCourse;
     }
-
+    /*
+        INITIALISE LE DOSSARD DU COURREUR
+    */
     public function setDossard($newDossard)
     {
         $this->_dossard = $newDossard;
     }
+    /*
+        RECUPERE L'ID DU COURREUR
+    */
     public function getIdParticipant()
     {
         return $this->_idparticipant;
     }
+    /*
+        RECUPERE LE USER
+    */
     public function getUser()
     {
         return $this->_user;
     }
+    /*
+        RECUPERE LA COURSE DU COURREUR
+    */
     public function getCourse()
     {
         return $this->_course;
     }
+    /*
+        RECUPERE LE DOSSARD DU COURREUR
+    */
     public function getDossard()
     {
         return $this->_dossard;

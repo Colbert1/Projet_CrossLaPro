@@ -10,11 +10,15 @@ class User
     private $_classe;
     private $_bdd;
 
+    //Constructeur : Stockage du PDO
     public function __construct($bdd)
     {
         $this->_bdd = $bdd;
     }
-
+    /*
+        INSCRIPTION D'UN UTILISATEUR AU SITE
+        (IL A ACCES AU SITE)
+    */
     public function inscriptionUser($password, $mail, $nom, $prenom, $classe)
     {
         $bdd = $this->_bdd;
@@ -36,7 +40,10 @@ class User
             echo "Les datas : ";
         }
     }
-
+    /*
+        CONNEXION DE L'UTILISATEUR AU SITE
+        (IL A ACCES AU SITE)
+    */
     public function connexionUser($mail, $passwd)
     {
         try {
@@ -58,6 +65,11 @@ class User
             echo "Les datas : ";
         }
     }
+    /*
+        VERIFIER SI L'ADRESSE DE L'UTILISATEUR
+        EST DEJA ENTREE EN BASE
+        (IL DEVIENT COURREUR ET UTILISATEUR)
+    */
     public function verifMail($verifMail)
     {/*
 
@@ -71,6 +83,10 @@ class User
             echo "Les datas : ";
         }*/
     }
+    /*
+        AFFICHAGE DU PROFIL DE L'UTILISATEUR
+        (AVEC L'AFFICHAGE DU NOM,PRENOM,CLASSE,MAIL)
+    */
     public function afficheInfoUser($mail, $nom, $prenom, $classe)
     {
         try {
@@ -80,61 +96,100 @@ class User
             $req->execute();
             $result = $req->fetch(PDO::FETCH_ASSOC);
             foreach ($result as  $infoUser) {
-                echo  '<br>'.$infoUser;
+                echo  '<br>' . $infoUser;
             }
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
             echo "Les datas : ";
         }
     }
+    /*
+        INITIALISE L'ADRESSE MAIL DE L'UTILISATEUR
+    */
     public function setMail($newMail)
     {
         $this->_mail = $newMail;
     }
+    /*
+        INITIALISE LE MOT DE PASSE L'UTILISATEUR
+    */
     public function setPassword($newPassword)
     {
         $this->_password = $newPassword;
     }
+    /*
+        INITIALISE LE NOM DE L'UTILISATEUR
+    */
     public function setNom($newNom)
     {
         $this->_nom = $newNom;
     }
+    /*
+        INITIALISE LE PRENOM DE L'UTILISATEUR
+    */
     public function setPrenom($newPrenom)
     {
         $this->_prenom = $newPrenom;
     }
-    public function setStatus($newStatus)
+    /*
+        INITIALISE LE STATUT DE L'UTILISATEUR
+    */
+    public function setStatut($newStatut)
     {
-        $this->_status = $newStatus;
+        $this->_status = $newStatut;
     }
+    /*
+        INITIALISE LA CLASSE DE L'UTILISATEUR
+    */
     public function setClasse($newClasse)
     {
         $this->_classe = $newClasse;
     }
+    /*
+        RECUPERE L'ID DU USER
+    */
     public function getId()
     {
         return $this->_id;
     }
+    /*
+        RECUPERE LE NOM DE L'UTILISATEUR
+    */
     public function getNom()
     {
         return $this->_nom;
     }
+    /*
+        RECUPERE LE PRENOM DE L'UTILISATEUR
+    */
     public function getPrenom()
     {
         return $this->_prenom;
     }
+    /*
+        RECUPERE L'ADRESSE MAIL DE L'UTILISATEUR
+    */
     public function getMail()
     {
         return $this->_mail;
     }
+    /*
+        RECUPERE LE MOT DE PASSE DE L'UTILISATEUR
+    */
     public function getPassword()
     {
         return $this->_password;
     }
-    public function getStatus()
+    /*
+        RECUPERE LE STATUT DE L'UTILISATEUR
+    */
+    public function getStatut()
     {
-        return $this->_status;
+        return $this->_statut;
     }
+    /*
+        RECUPERE LA CLASSE DE L'UTILISATEUR
+    */
     public function getClasse()
     {
         return $this->_classe;

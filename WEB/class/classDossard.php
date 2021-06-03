@@ -4,6 +4,8 @@ class Dossard
     private $_iddossard;
     private $_numdossard;
     private $_bdd;
+
+    //Constructeur : Stockage du PDO
     public function __construct($bdd)
     {
         $this->_bdd = $bdd;

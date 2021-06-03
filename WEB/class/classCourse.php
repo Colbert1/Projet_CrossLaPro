@@ -1,11 +1,11 @@
 <?php
-/* -------------------------------------
+/*
         Class Course
         Avec la possibilité de :
         Créer une course
         Modifier ses informations
         Supprimer une course
-----------------------------------------*/
+    */
 class Course
 {
     private $_idcourse;
@@ -26,6 +26,10 @@ class Course
             echo "Erreur ! " . $e->getMessage();
         }
     }
+    /*
+        MODIFIER LE NOM ET LA DATE DE LA COURSE
+        DEPUIS LA TABLE COURSE
+    */
     public function modifCourse($date, $nom)
     {
         $req = $this->_bdd->prepare("UPDATE `course_tbl` SET `crs_date`= :date,`crs_nom`= :nom WHERE `crs_id` = :course");
@@ -33,12 +37,11 @@ class Course
         $req->bindParam('date', $date, PDO::PARAM_STR);
         $req->bindParam('nom', $nom, PDO::PARAM_STR);
         $req->execute();
-
-        /*----------------------------------------
-        Modifier la date ou/et le nom de la course, la distance
-        Depuis la table Tour et Course
-        ------------------------------------------*/
     }
+    /*
+        AFFICHAGE DU NOM, LA DATE ET LA DISTANCE DE LA COURSE
+        DEPUIS LA TABLE COURSE ET TOUR
+    */
     public function afficheInfoCourse()
     {
         $req = $this->_bdd->query("SELECT course_tbl.crs_nom, course_tbl.crs_date, SUM(tour_tbl.tr_distance) 
@@ -49,38 +52,62 @@ class Course
                  Distance de la course: </div>" . $infoCourse['distance_totale'] . 'm' . "</div></div>";
         }
     }
+    /*
+        SUPPRESSION DE LA COURSE 
+        DEPUIS LA TABLE PARTICIPANT,CLASSEPARTICIPANTE, ECRAN, COURSE ET TOUR
+        JE FAIS PLUSIEURS DELETE CAR L'ID DE LA COURSE ET EN RELATION TOUTES CES TABLES
+    */
     public function suppCourse($course)
     {
         $req = $this->_bdd->prepare(
-        "DELETE FROM `participant_tbl` WHERE `crs_id` = :course;
+            "DELETE FROM `participant_tbl` WHERE `crs_id` = :course;
         DELETE FROM `tour_tbl` WHERE `crs_id` = :course; 
         DELETE FROM `course_tbl` WHERE `crs_id` = :course;
         DELETE FROM `classeparticipante_tbl` WHERE `crs_id` = :course; 
-        DELETE FROM `ecran_tbl` WHERE `crs_id` = :course;");
+        DELETE FROM `ecran_tbl` WHERE `crs_id` = :course;"
+        );
         $req->bindParam('course', $course, PDO::PARAM_INT);
         $req->execute();
         echo "test";
     }
+    /*
+        INITIALISE L'ID DE LA COURSE
+    */
     public function setIdCourse($newIdCourse)
     {
         $this->_idcourse = $newIdCourse;
     }
+    /*
+        INITIALISE LA DATE DE LA COURSE
+    */
     public function setDate($newDate)
     {
         $this->_date = $newDate;
     }
+    /*
+        INITIALISE LE NOM DE LA COURSE
+    */
     public function setNom($newNom)
     {
         $this->_nom = $newNom;
     }
+    /*
+        RECUPERE L'ID DE LA COURSE
+    */
     public function getIdCourse()
     {
         return $this->_idcourse;
     }
+    /*
+        RECUPERE LE DATE DE LA COURSE
+    */
     public function getDate()
     {
         return $this->_date;
     }
+    /*
+        RECUPERE LE NOM DE LA COURSE
+    */
     public function getNom()
     {
         return $this->_nom;

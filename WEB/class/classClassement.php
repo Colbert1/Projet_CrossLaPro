@@ -16,6 +16,7 @@ class Classement {
     private $_online;
     private $_bdd;
 
+    //Base de données
     public function __construct($bdd)
     {
         $this->_bdd = $bdd;
@@ -51,6 +52,7 @@ class Classement {
         $this->_nom_course = $nomCourse;
     }
 
+    //Nécessite setIdCourse()
     public function setParticipants()
     {
         $req = $this->_bdd->prepare("SELECT us.`us_id` 
@@ -71,6 +73,7 @@ class Classement {
         $this->_participants = $participants['us_id'];
     }
 
+    //Nécessite setIdCourse()
     public function setDistance()
     {
         $req = $this->_bdd->prepare("SELECT `tr_distance`
@@ -88,6 +91,7 @@ class Classement {
         $this->_distance = $distance['tr_distance'];
     }
 
+    //Fonction test
     public function setOnline()
     {
         $socket = fsockopen("localhost",3306);
@@ -129,6 +133,9 @@ class Classement {
         }
     }
 
+    /**************
+     * Méthodes get
+     **************/
     public function getIdCourse()
     {
         return $this->_id_course;
