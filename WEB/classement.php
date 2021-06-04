@@ -13,6 +13,7 @@ include "header.php";
     </div>
     <!--Milieu de page-->
     <div class="mid">
+        <select>
     <?php
         echo '<option value="0" selected>Sélectionner la course</option>';
         foreach ($result as $ligne) {
@@ -20,6 +21,8 @@ include "header.php";
             . $ligne['crs_nom'] . "</option>";
         }
     ?>
+        </select>
+        <script></script>
         <script src="API/callRequest.js"></script>
         <table>
             <thead>

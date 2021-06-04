@@ -44,7 +44,7 @@ class Tour
     */
     public function setNumTour()
     {
-        $req = $this->_bdd->prepare("SELECT COUNT(tr_numero) as nombre FROM `tour_tbl` WHERE `crs_id` = :course GROUP BY `crs_id` LIMIT 1");
+        $req = $this->_bdd->prepare("SELECT COUNT(tr_numero) as nombre FROM `tour_tbl` WHERE `crs_id` = :course GROUP BY `crs_id`");
         $req->bindParam("course", $this->_course, PDO::PARAM_INT);
         $req->execute();
         $numTour = $req->fetch(PDO::FETCH_ASSOC);

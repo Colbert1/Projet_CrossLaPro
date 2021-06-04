@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/10/12 10:11:35.000.391,=C:\Users\Colbert\Documents\Embarcadero\Studio\Projets\Unit1.cpp</Transaction>
+    <Transaction>2020/10/12 10:11:35.000.380,=C:\Users\Colbert\Documents\Embarcadero\Studio\Projets\Project1PCH1.h</Transaction>
+    <Transaction>2020/11/03 08:17:16.000.400,=C:\Users\Colbert\Documents\Embarcadero\Studio\Projets\Unit1.cpp</Transaction>
+    <Transaction>2020/11/03 08:17:16.000.386,=C:\Users\Colbert\Documents\Embarcadero\Studio\Projets\Project1PCH1.h</Transaction>
+    <Transaction>2021/06/04 09:01:15.106,=C:\Users\Colbert\Documents\Embarcadero\Studio\Projets\Project1PCH1.h</Transaction>
+    <Transaction>2021/06/04 09:01:15.195,=C:\Users\Colbert\Documents\Embarcadero\Studio\Projets\Unit1.cpp</Transaction>
+    <Transaction>2021/06/04 09:09:49.004,Z:\Projet_CrossLaPro\C++\LecteurDossard\Unit1.h=C:\Users\Colbert\Documents\Embarcadero\Studio\Projets\Unit1.h</Transaction>
+    <Transaction>2021/06/04 09:09:49.004,Z:\Projet_CrossLaPro\C++\LecteurDossard\Unit1.dfm=C:\Users\Colbert\Documents\Embarcadero\Studio\Projets\Unit1.dfm</Transaction>
+    <Transaction>2021/06/04 09:09:49.004,Z:\Projet_CrossLaPro\C++\LecteurDossard\Unit1.cpp=C:\Users\Colbert\Documents\Embarcadero\Studio\Projets\Unit1.cpp</Transaction>
+    <Transaction>2021/06/04 09:09:54.191,Z:\Projet_CrossLaPro\C++\LecteurDossard\Project1PCH1.h=C:\Users\Colbert\Documents\Embarcadero\Studio\Projets\Project1PCH1.h</Transaction>
+    <Transaction>2021/06/04 09:09:58.567,Z:\Projet_CrossLaPro\C++\LecteurDossard\Project1.cbproj=C:\Users\Colbert\Documents\Embarcadero\Studio\Projets\Project1.cbproj</Transaction>
+  </Transactions>
+</BorlandProject>
