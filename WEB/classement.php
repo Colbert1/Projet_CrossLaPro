@@ -1,5 +1,7 @@
 <?php
 include "header.php";
+$req = $bdd->query("SELECT * FROM course_tbl");
+$result = $req->fetchAll(PDO::FETCH_ASSOC);
 ?>
     <title>Classement</title>
 </head>
@@ -13,7 +15,8 @@ include "header.php";
     </div>
     <!--Milieu de page-->
     <div class="mid">
-        <select>
+    <form method="POST" action="">
+        <select name="course" id="course">
     <?php
         echo '<option value="0" selected>Sélectionner la course</option>';
         foreach ($result as $ligne) {
@@ -22,8 +25,7 @@ include "header.php";
         }
     ?>
         </select>
-        <script></script>
-        <script src="API/callRequest.js"></script>
+    </form>
         <table>
             <thead>
                 <tr class="border border-blue-200 border-opacity-50 bg-gray-100">
@@ -40,7 +42,8 @@ include "header.php";
     </div>
     <!--Bas de page-->
     <div>
+        <script src="API/selectAuto.js"></script>
+        <script src="API/callRequest.js"></script>
     </div>
 </body>
-
 </html>
