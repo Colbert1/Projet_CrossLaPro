@@ -42,8 +42,10 @@ $result = $req->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <!--Bas de page-->
     <div>
-        <script src="API/selectAuto.js"></script>
-        <script src="API/callRequest.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+        <script src="API/jquerytest.js"></script>
     </div>
 </body>
 </html>
