@@ -1,0 +1,17 @@
+﻿
+	Debut de la trame : 00
+
+	Compteur de detection : 68
+
+	: AA55AA55AA55AA
+	: 893D7E55F93889
+
+
+
+	Debut de la trame : 00
+
+	Compteur de detection : B5
+
+	: AA55AA55AA55AA
+	: 86B64651765EF0
+

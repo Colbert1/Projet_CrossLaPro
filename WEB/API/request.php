@@ -8,7 +8,7 @@ $objClas = new Classement($bdd);
 $objEcr = new Ecran($bdd);
 
 //Valeur test
-$course = $_POST['data'];
+$course = "Course0";
 try{
     /*On récupère le nom de l'écran en bdd
     Récupération écran

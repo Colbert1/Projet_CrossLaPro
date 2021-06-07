@@ -114,15 +114,15 @@ class Classement {
         try{
             $this->_classement = fetchAll(
                 $this->_bdd,
-                'SELECT user_tbl.us_nom, user_tbl.us_prenom, ds_num, cl_nom, SEC_TO_TIME(SUM(TIME_TO_SEC(ts_temps))) AS ts_temps_total'
-                . ' FROM temps_tbl'
-                . ' INNER JOIN participant_tbl ON participant_tbl.pt_id = temps_tbl.pt_id'
-                . ' INNER JOIN user_tbl ON user_tbl.us_id = participant_tbl.us_id'
-                . ' INNER JOIN dossard_tbl ON dossard_tbl.ds_id = participant_tbl.ds_id'
-                . ' INNER JOIN classe_tbl ON classe_tbl.cl_id = user_tbl.cl_id'
-                . ' WHERE tr_id IN (SELECT tr_id FROM tour_tbl WHERE crs_id = :crs_id)'
-                . ' GROUP BY temps_tbl.pt_id'
-                . ' ORDER BY ts_temps_total ASC',
+                    'SELECT user_tbl.us_nom, user_tbl.us_prenom, ds_num, cl_nom, SEC_TO_TIME(SUM(TIME_TO_SEC(ts_temps))) AS ts_temps_total'
+                    . ' FROM temps_tbl'
+                    . ' INNER JOIN participant_tbl ON participant_tbl.pt_id = temps_tbl.pt_id'
+                    . ' INNER JOIN user_tbl ON user_tbl.us_id = participant_tbl.us_id'
+                    . ' INNER JOIN dossard_tbl ON dossard_tbl.ds_id = participant_tbl.ds_id'
+                    . ' INNER JOIN classe_tbl ON classe_tbl.cl_id = user_tbl.cl_id'
+                    . ' WHERE tr_id IN (SELECT tr_id FROM tour_tbl WHERE crs_id = :crs_id)'
+                    . ' GROUP BY temps_tbl.pt_id'
+                    . ' ORDER BY ts_temps_total ASC',
                 [ 'crs_id' => $this->_id_course ]
             );
             

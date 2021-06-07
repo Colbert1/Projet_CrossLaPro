@@ -5,6 +5,13 @@ class Image
     private $_idImage;
     private $_image;
     private $_course;
+    private $_bdd;
+
+    public function __construc($bdd)
+    {
+        $this->_bdd = $bdd;
+    }
+
     public function enregistrerFichier($filename, $declaId, $connexionBdd, $type)
     {
         $insertFichier = $connexionBdd->prepare("INSERT INTO `imagecourse_tbl`(`imgc_fichier`, `imgc_extension`,`imgc_id` ) VALUES (?,?,?)");
@@ -12,6 +19,7 @@ class Image
         $insertFichier->execute();
         $fichierId = $insertFichier->insert_id;
     }
+    
     public function getFichier($connexionBdd, $idImage)
     {
 ?>

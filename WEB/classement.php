@@ -15,7 +15,7 @@ $result = $req->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <!--Milieu de page-->
     <div class="mid">
-    <form method="POST" action="">
+    <!--<form method="POST" action="">
         <select name="course" id="course">
     <?php
         echo '<option value="0" selected>Sélectionner la course</option>';
@@ -25,7 +25,7 @@ $result = $req->fetchAll(PDO::FETCH_ASSOC);
         }
     ?>
         </select>
-    </form>
+    </form>-->
         <table>
             <thead>
                 <tr class="border border-blue-200 border-opacity-50 bg-gray-100">
@@ -42,10 +42,7 @@ $result = $req->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <!--Bas de page-->
     <div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
-        <script src="API/jquerytest.js"></script>
+    <script src="API/callRequest.js"></script>
     </div>
 </body>
 </html>
