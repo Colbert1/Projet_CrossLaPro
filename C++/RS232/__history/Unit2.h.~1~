@@ -1,17 +1,3 @@
-
-//*********************************************************************************************
-//* Programme : GPS : 10/11/2020
-//*---------------------------------------------------------------------------------------------------------
-//* dernière mise a jour : 09/11/2020
-//*
-//*Programmeurs : Colbert Grégoire,Garcia Florian,Prieux Pierre Louis classe : BTSSN2
-//
-//*--------------------------------------------------------------------------------------------------------
-//* BUT : Afficher, découper et convertir une trame de GPS NMEA.
-//*Programmes associés : AUCUN
-//*********************************************************************************************
-//---------------------------------------------------------------------------------------------//---------------------------------------------------------------------------
-
 #ifndef Unit2H
 #define Unit2H
 #include <windows.h>
@@ -24,7 +10,7 @@ class liaison{
 
 	public:
 		liaison();
-		bool ouvrirport(char *buffer); //On appel la fonction en booléen pour qu'il y'ai que 2 choix possibles
+		bool ouvrirport(int portCOM); //On appel la fonction en booléen pour qu'il y'ai que 2 choix possibles
 		void ecrireport(char *buffer);
 		void fermerport();
 		void recep(char *buffer);

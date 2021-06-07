@@ -15,8 +15,15 @@ liaison::liaison(){
 }
 
 bool liaison::ouvrirport(int portCOM){
-
-	this->hcom = CreateFileA("COM"+portCOM,GENERIC_READ | GENERIC_WRITE,0,NULL,OPEN_EXISTING,FILE_FLAG_NO_BUFFERING,NULL);
+	char COM[50];
+	int length;
+	if(portCOM > 9){
+		length = 5;
+	}else{
+		length = 4;
+	}
+	snprintf(COM,100,"COM%d",portCOM);
+	this->hcom = CreateFileA(COM,GENERIC_READ | GENERIC_WRITE,0,NULL,OPEN_EXISTING,FILE_FLAG_NO_BUFFERING,NULL);
 
 	if(hcom == INVALID_HANDLE_VALUE){
 		return false;
@@ -24,10 +31,10 @@ bool liaison::ouvrirport(int portCOM){
 
 	GetCommState(this->hcom,&this->dcb);   //On configure les paramètres du port série
 
-	this->dcb.BaudRate = CBR_115200;    //9600 de baud rate
-	this->dcb.ByteSize = 8;            //8 de Data size
-	this->dcb.Parity = NOPARITY;
-	this->dcb.StopBits = ONESTOPBIT;
+	this->dcb.BaudRate = CBR_115200;    //115200 de baud rate
+	this->dcb.ByteSize = 8;             //8 de Data size
+	this->dcb.Parity = NOPARITY;        //Pas de bit de parité
+	this->dcb.StopBits = ONESTOPBIT;    //Un bit de stop
 
 	SetCommState(this->hcom,&this->dcb);
 
@@ -44,19 +51,22 @@ bool liaison::ouvrirport(int portCOM){
 	return true;
 }
 
-void liaison::ecrireport(char * buffer){
+void liaison::ecrireport(char buffer[], int longueurBuffer){
+
 	unsigned long sendLenght;
-	WriteFile(this->hcom,buffer, strlen(buffer),&sendLenght,NULL);
+	WriteFile(this->hcom,buffer, 4,&sendLenght,NULL);
 }
 
 void liaison::fermerport(){
 	CloseHandle(this->hcom);
 }
 
-void liaison::recep(char *buffer){
-
+void liaison::recep(char * buffer, int longueurBuffer){
 	unsigned long sendLenght;
-	ReadFile(this->hcom,buffer, 800,&sendLenght,NULL);
+	ReadFile(this->hcom,buffer,longueurBuffer,&sendLenght,NULL);
+	if(buffer){
+		int a = 0;
+	}
 }
 
 

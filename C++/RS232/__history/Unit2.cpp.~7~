@@ -14,9 +14,16 @@ liaison::liaison(){
 	this->buffer = new char[500];
 }
 
-bool liaison::ouvrirport(int portCOM){
-
-	this->hcom = CreateFileA("COM"+portCOM,GENERIC_READ | GENERIC_WRITE,0,NULL,OPEN_EXISTING,FILE_FLAG_NO_BUFFERING,NULL);
+bool liaison::ouvrirport(char * portCOM){
+	char COM[50];
+	int length;
+	if(portCOM > 9){
+		length = 5;
+	}else{
+		length = 4;
+	}
+	snprintf(portCOM,length,"COM%d",portCOM);
+	this->hcom = CreateFileA(COM,GENERIC_READ | GENERIC_WRITE,0,NULL,OPEN_EXISTING,FILE_FLAG_NO_BUFFERING,NULL);
 
 	if(hcom == INVALID_HANDLE_VALUE){
 		return false;
@@ -44,15 +51,10 @@ bool liaison::ouvrirport(int portCOM){
 	return true;
 }
 
-void liaison::ecrireport(char * buff){
+void liaison::ecrireport(char *buffer){
 
 	unsigned long sendLenght;
-	char buffer[50];
-	buffer[0] = 0x02;
-	buffer[1] = '0';
-	buffer[2] = '1';
-	buffer[3] = 0x0D;
-	WriteFile(this->hcom,buffer, 4,&sendLenght,NULL);
+	WriteFile(this->hcom,buffer, strlen(buffer),&sendLenght,NULL);
 
 }
 
