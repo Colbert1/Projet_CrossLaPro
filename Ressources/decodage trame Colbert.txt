@@ -1,17 +1,30 @@
-﻿
-	Debut de la trame : 00
+﻿Début de la trame : 00
 
-	Compteur de detection : 68
+Compteur de detection : 0E
 
-	: AA55AA55AA55AA
-	: 893D7E55F93889
+N° DE SERIE ? : AA55AA55AA55AA
+
+DATA ? : 893D7E55F93889
 
 
 
-	Debut de la trame : 00
+Dossard : 51 76 86
 
-	Compteur de detection : B5
+Début de la trame : {02}{30}{30}{09}
+Compteur de detection : {41}{41}{09}
+Numero de serie ? : {41}{41}{35}{35}{41}{41}{35}{35}{41}{41}{35}{35}{41}{41}
+Data ? : {38}{39}{33}{44}{37}{45}{35}{35}{46}{39}{33}{38}{38}{39}{0D}{0A} => 74733768492401953952494559500871208202    => ???
 
-	: AA55AA55AA55AA
-	: 86B64651765EF0
 
+893D7E55F93889
+
+893d7	=>	562135
+93d7e	=>	605566
+3d7e5	=>	251877
+d7e55	=>	884309
+7e55f	=>	517471   => celui qui se rapproche le plus que les chiffres sur le dossard
+e55f9	=>	939513
+55f93	=>	352147
+5f938	=>	391480
+f9388	=>	1020808
+93889	=>	604297
