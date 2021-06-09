@@ -9,7 +9,6 @@
 class ThreadDetectionDossard : public TThread
 {
 private:
-liaison * RS232;
 protected:
 	void __fastcall Execute();
 public:

@@ -117,6 +117,20 @@ object Form1: TForm1
     Caption = 'Dernier dossard d'#233'tect'#233
     Visible = False
   end
+  object Label15: TLabel
+    Left = 189
+    Top = 200
+    Width = 129
+    Height = 13
+    Caption = 'Heure du tour pr'#233'c'#233'dent : '
+    Visible = False
+  end
+  object Label16: TLabel
+    Left = 324
+    Top = 200
+    Width = 3
+    Height = 13
+  end
   object Edit1: TEdit
     Left = 216
     Top = 136

@@ -10,6 +10,13 @@
 #include "Unit2.h"
 #include "Unit3.h"
 //---------------------------------------------------------------------------
+
+typedef struct{
+	char idDossard[6];
+	int nbTours;
+	char tempsTour[][12];
+}coureur;
+
 class TForm1 : public TForm
 {
 __published:	// Composants gérés par l'EDI
@@ -33,6 +40,8 @@ __published:	// Composants gérés par l'EDI
 	TLabel *Label12;
 	TLabel *Label13;
 	TLabel *Label14;
+	TLabel *Label15;
+	TLabel *Label16;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -41,10 +50,10 @@ __published:	// Composants gérés par l'EDI
 	void __fastcall Label13Click(TObject *Sender);
 private:	// Déclarations utilisateur
 	ThreadDetectionDossard *th;
-	liaison *RS232;
 	bool acquisitionStarted;
 public:		// Déclarations utilisateur
 	__fastcall TForm1(TComponent* Owner);
+	liaison *RS232;;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm1 *Form1;

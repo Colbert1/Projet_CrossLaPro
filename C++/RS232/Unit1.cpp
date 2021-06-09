@@ -133,6 +133,8 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 			Label12->Visible = true;
 			Label13->Visible = true;
 			Label14->Visible = true;
+			Label15->Visible = true;
+			Label16->Visible = true;
 			Button5->Visible = true;
 		}
 		Label2->Visible = false;
@@ -219,6 +221,8 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
 		Label12->Visible = false;
 		Label13->Visible = false;
 		Label14->Visible = false;
+		Label15->Visible = false;
+		Label16->Visible = false;
 		Label2->Caption = "Erreur de connexion";
 	} else {
 		snprintf(date,10,"%c%c%c%c%c%c%c%c%c%c",bufferRecepFinal[22],bufferRecepFinal[23],bufferRecepFinal[21],bufferRecepFinal[19],bufferRecepFinal[20],bufferRecepFinal[24],bufferRecepFinal[25],bufferRecepFinal[26],bufferRecepFinal[27],bufferRecepFinal[28]);
@@ -257,6 +261,8 @@ void __fastcall TForm1::Button4Click(TObject *Sender)
 	Label12->Visible = true;
 	Label13->Visible = true;
 	Label14->Visible = true;
+	Label15->Visible = true;
+	Label16->Visible = true;
 
 	th = new ThreadDetectionDossard(true);
 	th->Priority = tpNormal;
@@ -266,7 +272,7 @@ void __fastcall TForm1::Button4Click(TObject *Sender)
 
 void __fastcall TForm1::Button5Click(TObject *Sender)
 {
-    th->Terminate(); // arrêt du thread
+	th->Terminate();
 	delete th; // libération mémoire
 
 	int longueurBuffer = 4;
@@ -292,6 +298,8 @@ void __fastcall TForm1::Button5Click(TObject *Sender)
 	Label12->Visible = false;
 	Label13->Visible = false;
 	Label14->Visible = false;
+	Label15->Visible = false;
+	Label16->Visible = false;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Label13Click(TObject *Sender)
