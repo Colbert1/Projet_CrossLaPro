@@ -7,6 +7,7 @@
 <?php
 include "header.php";
 include "navbar.php";
+
 ?>
 <title>Profil</title>
 </head>
@@ -21,7 +22,7 @@ include "navbar.php";
             <div class="mb-4 text-center">
                 <?php
                 $infoCourse = new User($bdd);
-                $infoCourse->afficheInfoUser($mail, $nom, $prenom, $classe);
+                $infoCourse->afficheInfoUser();
                 ?>
             </div>
             <!-- AFFICHAGE DES DONNEES DE L'UTILISATEUR ET PEUT ETRE COUREUR -->
@@ -35,7 +36,7 @@ include "navbar.php";
                 <?php
                 $participant = new Coureur($bdd);
                 $participant->setCourse($_SESSION['id']);
-                $participant->afficheInfoCoureur();
+                //$participant->suppProfilCoureur();
                 ?>
             </div>
         </div>

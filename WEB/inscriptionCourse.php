@@ -1,23 +1,39 @@
 <?php
 include "header.php";
 include "navbar.php";
-$sql = 'SELECT crs_nom, crs_id FROM course_tbl';
-$req = $bdd->prepare($sql);
+//SELECTION DU NOM DE LA COURSE POUR LE MENU DEROULANT DE LA SELECTION DE COURSE POUR S'INSCRIRE 
+$sqlCourse = 'SELECT crs_nom, crs_id FROM course_tbl';
+$req = $bdd->prepare($sqlCourse);
 $req->execute();
 $result = $req->fetchAll();
 $req->closeCursor();
+//SELECTION DE L'ID DE LA COURSE POUR VOIR SI LE PARTICPANT EST DEJA INSCRIT
+/* $sqlVerifCoureur = 'SELECT crs_id FROM participant_tbl';
+$reqVerifCoureur = $bdd->prepare($sqlVerifCoureur);
+$reqVerifCoureur->execute();
+$resultVerifCoureur = $reqVerifCoureur->fetchAll();
+$reqVerifCoureur->closeCursor(); */
 
-if (isset($_POST['subInscriptCourse'])) {
-    if (!empty($_POST['listeCourseInscription']) && !empty($_SESSION['id'])) {
-        $participant = new Coureur($bdd);
-        $participant->setCourse($_POST['listeCourseInscription']);
-        $course = $participant->getCourse();
-        $participant->inscriptionCoureur($course, $_SESSION['id']);
-    } else {
-        $message = "Problème d'inscription à la course";
+$sqlVerifCourse = $_POST['listeCourseInscription'];
+//$reqVerifCoureur = $_SESSION['id'];
+$stmt = $bdd->prepare("SELECT crs_id FROM participant_tbl");
+$stmt->execute([$sqlVerifCourse]);
+$sqlVerifCourse = $stmt->fetch();
+if ($sqlVerifCourse) {
+    echo " le nom d'utilisateur existe déjà";
+} else {
+    if (isset($_POST['subInscriptCourse'])) {
+        if (!empty($_POST['listeCourseInscription']) && !empty($_SESSION['id'])) {
+            $participant = new Coureur($bdd);
+            $participant->setCourse($_POST['listeCourseInscription']);
+            $course = $participant->getCourse();
+            $participant->inscriptionCoureur($course, $_SESSION['id']);
+        } else {
+            $message = "Problème d'inscription à la course";
+        }
     }
 }
-//echo $_SESSION['id'];
+
 ?>
 <title>Inscription Course</title>
 </head>

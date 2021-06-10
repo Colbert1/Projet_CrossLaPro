@@ -61,6 +61,7 @@ class Coureur
     */
     public function suppProfilCoureur()
     {
+        echo "coucou";
         /*         
             DELETE FROM `participant_tbl` WHERE `us_id` = :user
             $req->bindParam('user', $_SESSION['id'], PDO::PARAM_INT);
@@ -71,12 +72,12 @@ class Coureur
     /* 
     AFFICHAGE DES COURSES AUXQUELLES LE COURREUR PARTICIPENT
     */
-    public function afficheInfoCoureur()
+/*     public function afficheInfoCoureur()
     {
         foreach ($this->_course as $crs) {
-            echo '<br>' . $crs['crs_id'];
+            echo "<p>" . $crs['crs_nom'] . "</p>";
         }
-    }
+    } */
     /*
         INITIALISE L'ID DU COURREUR
     */
@@ -96,7 +97,17 @@ class Coureur
     */
     public function setCourse($idCourse)
     {
-        $this->_course = $idCourse;
+        $req = $this->_bdd->prepare("SELECT pt.`crs_id`, crs.`crs_nom` 
+        FROM participant_tbl AS pt 
+        INNER JOIN user_tbl AS us ON pt.`us_id` = us.`us_id` 
+        INNER JOIN course_tbl AS crs ON pt.`crs_id` = crs.`crs_id` 
+        WHERE pt.us_id = :coureur");
+        $req->bindParam('coureur', $idCourse, PDO::PARAM_INT);
+        $req->execute();
+        $result = $req->fetchAll();
+        foreach ($result as $infoCoureur) {
+            echo  "<p>" . $infoCoureur['crs_nom'];
+        }
     }
     /*
         INITIALISE LE DOSSARD DU COURREUR

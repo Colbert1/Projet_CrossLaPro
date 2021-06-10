@@ -56,6 +56,7 @@ class User
                 $_SESSION['id'] = $result['us_id'];
                 $_SESSION['nom'] = $result['us_nom'];
                 $_SESSION['prenom'] = $result['us_prenom'];
+                $this->_id = $result['us_id'];
                 header("Location: accueil.php");
             } else {
                 echo "<div style='color:red'>Identifiants incorrects !</div>";
@@ -87,16 +88,22 @@ class User
         AFFICHAGE DU PROFIL DE L'UTILISATEUR
         (AVEC L'AFFICHAGE DU NOM,PRENOM,CLASSE,MAIL)
     */
-    public function afficheInfoUser($mail, $nom, $prenom, $classe)
+    public function afficheInfoUser()
     {
         try {
-            $req = $this->_bdd->prepare("SELECT `us_nom`, `us_prenom`, `us_mail`,`cl_id` FROM `user_tbl` 
+            $req = $this->_bdd->prepare("SELECT us.`us_nom`, us.`us_prenom`,us.`us_mail`,cl.`cl_nom` 
+            FROM `user_tbl` as us 
+            INNER JOIN `classe_tbl` as cl 
+                ON us.cl_id = cl.cl_id 
             WHERE `us_id` = :user");
             $req->bindParam('user', $_SESSION['id'], PDO::PARAM_INT);
             $req->execute();
-            $result = $req->fetch(PDO::FETCH_ASSOC);
-            foreach ($result as  $infoUser) {
-                echo  '<br>' . $infoUser;
+            $result = $req->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result as $infoUser) {
+                echo  "<p>Nom: " . $infoUser['us_nom'];
+                echo  "<p>Prénom: " . $infoUser['us_prenom'];
+                echo  "<p>Mail: " . $infoUser['us_mail'];
+                echo  "<p>Classe: " . $infoUser['cl_nom'];
             }
         } catch (Exception $e) {
             echo "Erreur ! " . $e->getMessage();
