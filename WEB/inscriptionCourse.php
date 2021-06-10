@@ -8,32 +8,33 @@ $req->execute();
 $result = $req->fetchAll();
 $req->closeCursor();
 //SELECTION DE L'ID DE LA COURSE POUR VOIR SI LE PARTICPANT EST DEJA INSCRIT
-/* $sqlVerifCoureur = 'SELECT crs_id FROM participant_tbl';
+$sqlVerifCoureur = 'SELECT crs_id FROM participant_tbl';
 $reqVerifCoureur = $bdd->prepare($sqlVerifCoureur);
 $reqVerifCoureur->execute();
 $resultVerifCoureur = $reqVerifCoureur->fetchAll();
-$reqVerifCoureur->closeCursor(); */
+$reqVerifCoureur->closeCursor();
 
-$sqlVerifCourse = $_POST['listeCourseInscription'];
-//$reqVerifCoureur = $_SESSION['id'];
-$stmt = $bdd->prepare("SELECT crs_id FROM participant_tbl");
-$stmt->execute([$sqlVerifCourse]);
-$sqlVerifCourse = $stmt->fetch();
-if ($sqlVerifCourse) {
-    echo " le nom d'utilisateur existe déjà";
+/* $username = $_POST['username'];
+$stmt = $pdo->prepare("SELECT * FROM users WHERE username=?");
+$stmt->execute([$username]); 
+$user = $stmt->fetch();
+if ($user) {
+    // le nom d'utilisateur existe déjà
 } else {
-    if (isset($_POST['subInscriptCourse'])) {
-        if (!empty($_POST['listeCourseInscription']) && !empty($_SESSION['id'])) {
-            $participant = new Coureur($bdd);
-            $participant->setCourse($_POST['listeCourseInscription']);
-            $course = $participant->getCourse();
-            $participant->inscriptionCoureur($course, $_SESSION['id']);
-        } else {
-            $message = "Problème d'inscription à la course";
-        }
+    // le nom d'utilisateur n'existe pas
+}  */
+
+if (isset($_POST['subInscriptCourse'])) {
+    if (!empty($_POST['listeCourseInscription']) && !empty($_SESSION['id'])) {
+        $participant = new Coureur($bdd);
+        $participant->setCourse($_POST['listeCourseInscription']);
+        $course = $participant->getCourse();
+        $participant->inscriptionCoureur($course, $_SESSION['id']);
+    } else {
+        $message = "Problème d'inscription à la course";
     }
 }
-
+//echo $_SESSION['id'];
 ?>
 <title>Inscription Course</title>
 </head>
