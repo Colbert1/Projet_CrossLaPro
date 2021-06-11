@@ -6,7 +6,6 @@ class User
     private $_prenom;
     private $_mail;
     private $_password;
-    private $_status;
     private $_classe;
     private $_bdd;
 

@@ -11,37 +11,18 @@ class Image
     {
         $this->_bdd = $bdd;
     }
-
-    public function enregistrerFichier($filename, $declaId, $connexionBdd, $type)
+    //Insertion en base des fichiers de la déclaration
+    public function enregistrerFichier($nomFichier, $extenFichier)
     {
-        $insertFichier = $connexionBdd->prepare("INSERT INTO `imagecourse_tbl`(`imgc_fichier`, `imgc_extension`,`imgc_id` ) VALUES (?,?,?)");
-        $insertFichier->bind_param('ssd', $filename, $type, $declaId);
-        $insertFichier->execute();
-        $fichierId = $insertFichier->insert_id;
+        $req = $this->_bdd->prepare("INSERT INTO `imagecourse_tbl`(`imgc_fichier`, `imgc_extension`,`imgc_id` ) VALUES imgc_fichier = :nom , imgc_extension = :extens");
+        $req->bindParam('nom', $nomFichier, PDO::PARAM_STR);
+        $req->bindParam('extens', $extenFichier, PDO::PARAM_STR);
+        $req->execute();
     }
-    
-    public function getFichier($connexionBdd, $idImage)
+    //RECUPERER LES NOMS ET L'EXTENSION DES FICHIERS JOINTS DE LA COURSE S'IL Y EN A
+    public function getFichier()
     {
-?>
-        <div class="container">
-            <?php
-            $requetefichier = "SELECT * FROM `imagecourse_tbl` WHERE imgc_id = $idImage ";
-            $result = $connexionBdd->query($requetefichier);
-            while ($ligne = $result->fetch_assoc()) {
-                echo $this->afficheFichier($ligne);
-            }
-            ?>
-        </div>
-<?php
-    }
-    public function afficheFichier($ligne)
-    {
-        $type = $ligne['imgc_extension'];
-        $icon = "";
-        if ($type == "Image") {
-            $icon = '<ion-icon name="image-outline"></ion-icon>';
-        }
-        $link = '<a href="/Projet_CrossLaPro/upload/"' . $ligne['imgc_fichier'] . '">' . $icon . ' - '  . $ligne['fichierjoint'] . '</a><br>';
-        return $link;
+        $req = $this->_bdd->prepare("SELECT `imgc_fichier`, `imgc_extension` FROM `imagecourse_tbl` WHERE crs_id = :course");
+        $req->bindParam('course',);
     }
 }
