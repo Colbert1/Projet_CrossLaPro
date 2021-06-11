@@ -20,9 +20,10 @@ class Image
         $req->execute();
     }
     //RECUPERER LES NOMS ET L'EXTENSION DES FICHIERS JOINTS DE LA COURSE S'IL Y EN A
-    public function getFichier()
+    public function getFichier($course)
     {
         $req = $this->_bdd->prepare("SELECT `imgc_fichier`, `imgc_extension` FROM `imagecourse_tbl` WHERE crs_id = :course");
-        $req->bindParam('course',);
+        $req->bindParam('course', $course, PDO::PARAM_INT);
+        $req->execute();
     }
 }
