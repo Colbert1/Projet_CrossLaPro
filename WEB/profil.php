@@ -35,7 +35,7 @@ include "navbar.php";
                 Vous êtes inscrit pour la(les) course(s):
                 <?php
                 $participant = new Coureur($bdd);
-                $participant->setCourse($_SESSION['id']);
+                $participant->afficheInfoCoureur($_SESSION['id']);
                 //$participant->suppProfilCoureur();
                 ?>
             </div>

@@ -14,12 +14,11 @@ if (!empty($_POST['listeCourse'])) {
 
 if (isset($_POST['subModifCourse'])) {
     if (!empty($_POST['ModifnomCourse']) && !empty($_POST['ModifdateCourse'])) {
-         $modifcourse = new Course($bdd);
-         $_SESSION['idCourse'];
+        $modifcourse = new Course($bdd);
+        $_SESSION['idCourse'];
         $date = $_POST['ModifdateCourse'];
         $nom = $_POST['ModifnomCourse'];
         $modifcourse->modifCourse($date, $nom);
-        
     } else {
         echo "<div>Echec modification de la course</div>";
     }

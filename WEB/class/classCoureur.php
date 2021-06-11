@@ -23,18 +23,22 @@ class Coureur
         INSCRIPTION D'UN UTILISATEUR A UNE COURSE
         (IL DEVIENT COURREUR ET UTILISATEUR)
     */
-    public function inscriptionCoureur($course, $id)
+    public function inscriptionCoureur($idUser)
     {
-        try {
+            $prep = $this->_bdd->prepare("SELECT * FROM `participant_tbl` WHERE `crs_id` = :course AND `us_id` = :user");
+            $prep->bindParam('course',$this->_course,PDO::PARAM_INT);
+            $prep->bindParam('user',$idUser,PDO::PARAM_INT);
+            $prep->execute();
+            $result = $prep->fetch();
+        if ($result) {
+            echo "Déjà inscrit ! ";
+        } else {
             $req = $this->_bdd->prepare("INSERT INTO `participant_tbl` (`pt_id`, `us_id`, `crs_id`, `ds_id`) 
             VALUES (NULL, :user ,:course, NULL)");
-            $req->bindParam('course', $course, PDO::PARAM_INT);
-            $req->bindParam('user', $id, PDO::PARAM_INT);
-            $req->execute();
-            header("Location: accueil.php");
-        } catch (Exception $e) {
-            echo "Erreur ! " . $e->getMessage();
-            echo "Les datas : ";
+            $req->bindParam('user', $idUser, PDO::PARAM_INT);
+            $req->bindParam('course', $this->_course, PDO::PARAM_INT);
+            $verif = $req->execute();
+            if($verif == TRUE) header("Location: accueil.php");
         }
     }
     /*
@@ -70,14 +74,23 @@ class Coureur
         */
     }
     /* 
-    AFFICHAGE DES COURSES AUXQUELLES LE COURREUR PARTICIPENT
+        AFFICHAGE DES COURSES AUXQUELLES LE COURREUR PARTICIPENT
     */
-/*     public function afficheInfoCoureur()
+    public function afficheInfoCoureur($idCourse)
     {
-        foreach ($this->_course as $crs) {
-            echo "<p>" . $crs['crs_nom'] . "</p>";
+        $req = $this->_bdd->prepare("SELECT pt.`crs_id`, crs.`crs_nom` 
+        FROM participant_tbl AS pt 
+        INNER JOIN user_tbl AS us ON pt.`us_id` = us.`us_id` 
+        INNER JOIN course_tbl AS crs ON pt.`crs_id` = crs.`crs_id` 
+        WHERE pt.us_id = :coureur");
+        $req->bindParam('coureur', $idCourse, PDO::PARAM_INT);
+        $req->execute();
+        $result = $req->fetchAll();
+        foreach ($result as $infoCoureur) {
+            echo  "<p>" . $infoCoureur['crs_nom'];
         }
-    } */
+    }
+
     /*
         INITIALISE L'ID DU COURREUR
     */
@@ -95,19 +108,9 @@ class Coureur
     /*
         INITIALISE LA COURSE DU COURREUR
     */
-    public function setCourse($idCourse)
+    public function setCourse($coureur)
     {
-        $req = $this->_bdd->prepare("SELECT pt.`crs_id`, crs.`crs_nom` 
-        FROM participant_tbl AS pt 
-        INNER JOIN user_tbl AS us ON pt.`us_id` = us.`us_id` 
-        INNER JOIN course_tbl AS crs ON pt.`crs_id` = crs.`crs_id` 
-        WHERE pt.us_id = :coureur");
-        $req->bindParam('coureur', $idCourse, PDO::PARAM_INT);
-        $req->execute();
-        $result = $req->fetchAll();
-        foreach ($result as $infoCoureur) {
-            echo  "<p>" . $infoCoureur['crs_nom'];
-        }
+        $this->_course = $coureur;
     }
     /*
         INITIALISE LE DOSSARD DU COURREUR
