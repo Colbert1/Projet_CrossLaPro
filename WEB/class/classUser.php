@@ -17,15 +17,23 @@ class User
     }
     /*
         INSCRIPTION D'UN UTILISATEUR AU SITE
+        VERIFIER SI L'ADRESSE DE L'UTILISATEUR
+        EST DEJA ENTREE EN BASE
         (IL A ACCES AU SITE)
     */
-    public function inscriptionUser($password, $mail, $nom, $prenom, $classe)
+    public function inscriptionUser($nom, $prenom,  $mail, $classe, $password)
     {
         $bdd = $this->_bdd;
 
         $hashPasswd = password_hash($password,  PASSWORD_BCRYPT);
 
-        try {
+        $prep = $this->_bdd->prepare("SELECT * FROM `user_tbl` WHERE us_mail = :mail");
+        $prep->bindParam('mail', $mail, PDO::PARAM_STR);
+        $prep->execute();
+        $result = $prep->fetch();
+        if ($result) {
+            echo "Mail déjà utilisé ! ";
+        } else {
             $req = $bdd->prepare("INSERT INTO `user_tbl` (`us_id`, `us_nom`, `us_prenom`, `us_mail`, `us_passwd`, `us_status`, `cl_id`) 
             VALUES (NULL, :nom, :prenom, :mail, :password, '0', :classe);");
             $req->bindParam('nom', $nom, PDO::PARAM_STR);
@@ -33,11 +41,8 @@ class User
             $req->bindParam('mail', $mail, PDO::PARAM_STR);
             $req->bindParam('password', $hashPasswd, PDO::PARAM_STR);
             $req->bindParam('classe', $classe, PDO::PARAM_STR);
-            $req->execute();
-            header("Location: accueil.php");
-        } catch (Exception $e) {
-            echo "Erreur ! " . $e->getMessage();
-            echo "Les datas : ";
+            $verif = $req->execute();
+            if ($verif == TRUE) header("Location: accueil.php");
         }
     }
     /*
@@ -65,24 +70,6 @@ class User
             echo "Erreur ! " . $e->getMessage();
             echo "Les datas : ";
         }
-    }
-    /*
-        VERIFIER SI L'ADRESSE DE L'UTILISATEUR
-        EST DEJA ENTREE EN BASE
-        (IL DEVIENT COURREUR ET UTILISATEUR)
-    */
-    public function verifMail($verifMail)
-    {/*
-
-        try {
-            $req = $this->_bdd->prepare("SELECT us_mail FROM user_tbl WHERE us_mail = :mail");
-            $req->bindParam('mail', $verifMail, PDO::PARAM_STR);
-            $req->execute();
-            $result = $req->fetch(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            echo "Erreur ! " . $e->getMessage();
-            echo "Les datas : ";
-        }*/
     }
     /*
         AFFICHAGE DU PROFIL DE L'UTILISATEUR

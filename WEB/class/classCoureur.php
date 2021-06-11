@@ -65,13 +65,7 @@ class Coureur
     */
     public function suppProfilCoureur()
     {
-        echo "coucou";
-        /*         
-            DELETE FROM `participant_tbl` WHERE `us_id` = :user
-            $req->bindParam('user', $_SESSION['id'], PDO::PARAM_INT);
-            $req->execute();
-            header("Location: accueil.php"); 
-        */
+        
     }
     /* 
         AFFICHAGE DES COURSES AUXQUELLES LE COURREUR PARTICIPENT

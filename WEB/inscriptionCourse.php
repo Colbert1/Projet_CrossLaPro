@@ -7,15 +7,8 @@ $req = $bdd->prepare($sqlCourse);
 $req->execute();
 $result = $req->fetchAll();
 $req->closeCursor();
-//SELECTION DE L'ID DE LA COURSE POUR VOIR SI LE PARTICPANT EST DEJA INSCRIT
-/* $sqlVerifCoureur = 'SELECT crs_id FROM participant_tbl';
-$reqVerifCoureur = $bdd->prepare($sqlVerifCoureur);
-$reqVerifCoureur->execute();
-$resultVerifCoureur = $reqVerifCoureur->fetchAll();
-$reqVerifCoureur->closeCursor(); 
-*/
- 
-
+//TRAITEMENT DE L'INSCRIPTION A UNE COURSE AVEC VERIFICATION POUR VOIR
+//SI IL ES DEJA INSCRIT A UNE COURSE
 if (isset($_POST['subInscriptCourse'])) {
     if (!empty($_POST['listeCourseInscription']) && !empty($_SESSION['id'])) {
         $participant = new Coureur($bdd);
@@ -25,7 +18,6 @@ if (isset($_POST['subInscriptCourse'])) {
         $message = "Problème d'inscription à la course";
     }
 }
-//echo $_SESSION['id'];
 ?>
 <title>Inscription Course</title>
 </head>

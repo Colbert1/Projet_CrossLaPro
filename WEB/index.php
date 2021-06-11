@@ -16,17 +16,10 @@ if (
     $nom       = $_POST['nomInscription'];
     $prenom    = $_POST['prenomInscription'];
     $classe    = $_POST['listeClasseInscription'];
-/*
-    $verifMail = new User($bdd);
-    $verifMail->verifMail($verifMail);
-    if (isset($_POST['mailInscription'])) {
-        if (!($exist['mailInscription'] == 0)) {
-            echo "Ce mail est déjà utilisé !";
-        }
-    }*/
+
     if ($password == $Cpassword) {
         $user = new User($bdd);
-        $user->inscriptionUser($password, $mail, $nom, $prenom, $classe);
+        $user->inscriptionUser($nom, $prenom,  $mail, $classe, $password);
     } else {
         echo "<div>Confirmation de mot de passe incorrect</div>";
     }
