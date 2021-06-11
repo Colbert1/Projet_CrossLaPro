@@ -20,6 +20,9 @@
             <a href="profil.php" class="block mt-5 lg:inline-block lg:mt-0 text-teal-200 hover:text-yellow-400 mr-4">
                 Profil
             </a>
+            <a href="uploadImage.php" class="block mt-5 lg:inline-block lg:mt-0 text-teal-200 hover:text-yellow-400 mr-4">
+                Upload Image
+            </a>
         </div>
         <div>
             <form method="POST" action="">
