@@ -15,10 +15,10 @@ if (!empty($_POST['listeCourse'])) {
 if (isset($_POST['subModifCourse'])) {
     if (!empty($_POST['ModifnomCourse']) && !empty($_POST['ModifdateCourse'])) {
         $modifcourse = new Course($bdd);
-        $_SESSION['idCourse'];
+        $course = $_SESSION['idCourse'];
         $date = $_POST['ModifdateCourse'];
         $nom = $_POST['ModifnomCourse'];
-        $modifcourse->modifCourse($date, $nom);
+        $modifcourse->modifCourse($course ,$date, $nom);
     } else {
         echo "<div>Echec modification de la course</div>";
     }
@@ -47,7 +47,7 @@ if (isset($_POST['subModifCourse'])) {
         <div class="w-full max-w-xs pt-6">
             <form class="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gray-400" action="" method="POST">
                 <div class="mb-4 text-center">
-                    <p>Modification Course <?php echo $_SESSION['idCourse'] ?></p>
+                    <p>Modification Course <?php echo $_POST['listeCourse'] ?></p>
                 </div>
                 <div>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" type="text" name="ModifnomCourse" placeholder="Nom" required>

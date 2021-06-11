@@ -30,10 +30,10 @@ class Course
         MODIFIER LE NOM ET LA DATE DE LA COURSE
         DEPUIS LA TABLE COURSE
     */
-    public function modifCourse($date, $nom)
+    public function modifCourse($course, $date, $nom)
     {
         $req = $this->_bdd->prepare("UPDATE `course_tbl` SET `crs_date`= :date,`crs_nom`= :nom WHERE `crs_id` = :course");
-        $req->bindParam('course', $this->_course, PDO::PARAM_INT);
+        $req->bindParam('course', $course, PDO::PARAM_INT);
         $req->bindParam('date', $date, PDO::PARAM_STR);
         $req->bindParam('nom', $nom, PDO::PARAM_STR);
         $req->execute();
