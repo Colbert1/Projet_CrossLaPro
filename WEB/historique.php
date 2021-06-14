@@ -14,7 +14,7 @@ include "header.php";
     <div class="mid">
         <div>
             <form method="GET" action="">
-                <select name="course">
+                <select class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight" name="course">
                     <?php 
                         $classement = new Classement($bdd);
                         $courses = $classement->selectCourse();
@@ -26,7 +26,7 @@ include "header.php";
                         }
                     ?>
                 </select>
-                <button type="submit">Choisir</button>
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" type="submit">Choisir</button>
             </form>
         </div>
         <script src="API/callRequestHistorique.js"></script>
