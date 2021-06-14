@@ -27,7 +27,7 @@ if (isset($_POST['subImageCourse'])) {
                     </div>
                 </div>
             </div>
-            <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" name="subImageCourse" type="submit">Valider</button>
+            <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2" name="subImageCourse" type="submit">Confirmer</button>
         </form>
     </div>
 </body>

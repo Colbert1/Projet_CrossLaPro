@@ -107,7 +107,6 @@ object Form1: TForm1
     Width = 37
     Height = 13
     Caption = 'Label13'
-    OnClick = Label13Click
   end
   object Label14: TLabel
     Left = 258

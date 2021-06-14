@@ -23,7 +23,7 @@ bool liaison::ouvrirport(int portCOM){
 		length = 4;
 	}
 	snprintf(COM,100,"COM%d",portCOM);
-	this->hcom = CreateFileA(COM,GENERIC_READ | GENERIC_WRITE,0,NULL,OPEN_EXISTING,FILE_FLAG_NO_BUFFERING,NULL);
+	this->hcom = CreateFileA("COM15",GENERIC_READ | GENERIC_WRITE,0,NULL,OPEN_EXISTING,FILE_FLAG_NO_BUFFERING,NULL);
 
 	if(hcom == INVALID_HANDLE_VALUE){
 		return false;

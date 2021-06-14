@@ -40,14 +40,22 @@ function showTab(classement)
     }
 }
 
-function getClassement()
+function getHistorique()
 {
-    const url = "./API/request.php";
+    const url = "./API/requestHisto.php";
     const req = new XMLHttpRequest();
+    const getUrl = document.URL;
 
-    req.open('GET',url);
+    const formData = new FormData();
+    let tab = getUrl.split("=");
+    let data;
+
+    formData.set("course", tab[1]);
+    data = formData.get("course");
+
+    req.open('POST',url);
     req.responseType = 'json';
-    req.send();
+    req.send(data);
 
     req.onload = function() {
         const classement = (req.response);
@@ -55,18 +63,4 @@ function getClassement()
     }
 }
 
-function callHistorique()
-{
-    const form = document.getElementById("form");
-    const link = "./API/request.php?course=";
-    const reqs = new XMLHttpRequest();
-
-    document.getElementById("course").addEventListener("click", function(){
-        form.submit().getClassement();
-        
-        reqs.open('POST',link);
-        reqs.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        reqs.send();
-    });
-}
-
+getHistorique()

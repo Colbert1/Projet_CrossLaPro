@@ -13,20 +13,20 @@ include "header.php";
     <!--Body-->
     <div class="mid">
         <div>
-            <form method="POST" action="">
-                <select name="selector">
+            <form method="GET" action="">
+                <select name="course">
                     <?php 
                         $classement = new Classement($bdd);
                         $courses = $classement->selectCourse();
                         echo '<option value="0" selected>Sélectionner la course</option>';
-                        $i=1;
                         foreach($courses as $course)
                         {
-                            echo "<option id='option    {$i}' value='{$course['crs_nom']}'>{$course['crs_nom']}</option>"; 
-                            $i++;
+                            echo "<option value='{$course['crs_nom']}'>
+                            {$course['crs_nom']}</option>"; 
                         }
                     ?>
                 </select>
+                <button type="submit">Choisir</button>
             </form>
         </div>
         <script src="API/callRequestHistorique.js"></script>

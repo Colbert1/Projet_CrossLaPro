@@ -18,7 +18,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 }
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
-	RS232 = new liaison();
+	Serial = new liaison();
 	int portCOM;
 	char * temp[50];
 	if(Edit1->Text == "1"){
@@ -55,7 +55,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		portCOM = 999;
 	}
 	if(portCOM >= 1 && portCOM <= 15){
-		bool reussiteOuvrirPort = RS232->ouvrirport(portCOM);
+		bool reussiteOuvrirPort = Serial->ouvrirport(portCOM);
 		if(reussiteOuvrirPort == false){
 			Label2->Caption = "Ouverture échouée";
 		}else{
@@ -83,13 +83,13 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 	buffer[2] = 0x39;
 	buffer[3] = 0x0D;
 
-	RS232->ecrireport(buffer,longueurBuffer);
+	Serial->ecrireport(buffer,longueurBuffer);
 
 	Sleep(1000);
 
 	int nb = 0, timeout = 0;
 	do{
-		RS232->recep(bufferRecep,longueurBufferRecep);
+		Serial->recep(bufferRecep,longueurBufferRecep);
 		for(int i = 0; i < longueurBufferRecep; i++){
 			if(bufferRecep[i] == 0x02 && finTrame == false && debutTrame == false){
 				debutTrame = true;
@@ -169,13 +169,13 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
 	buffer[2] = 0x39;
 	buffer[3] = 0x0D;
 
-	RS232->ecrireport(buffer,longueurBuffer);
+	Serial->ecrireport(buffer,longueurBuffer);
 
 	Sleep(1000);
 
 	int nb = 0, timeout = 0;
 	do{
-		RS232->recep(bufferRecep,longueurBufferRecep);
+		Serial->recep(bufferRecep,longueurBufferRecep);
 		for(int i = 0; i < longueurBufferRecep; i++){
 			if(bufferRecep[i] == 0x02 && finTrame == false && debutTrame == false){
 				debutTrame = true;
@@ -252,7 +252,7 @@ void __fastcall TForm1::Button4Click(TObject *Sender)
 	buffer[3] = 0x0D;
 
 	//Envoi de la trame
-	RS232->ecrireport(buffer,longueurBuffer);
+	Serial->ecrireport(buffer,longueurBuffer);
 
 	this->acquisitionStarted = true;
 	Button4->Visible = false;
@@ -304,69 +304,6 @@ void __fastcall TForm1::Button5Click(TObject *Sender)
 	Label14->Visible = false;
 	Label15->Visible = false;
 	Label16->Visible = false;
-}
-//---------------------------------------------------------------------------
-void __fastcall TForm1::Label13Click(TObject *Sender)
-{
-	/*int nb = 0, longueurBufferRecep = 23, n = 0, timeout = 0;
-	char bufferRecep[23], bufferRecepFinal[46], nombreDetection[2], idDossard[7], heureDetection[12];
-	bool debutTrame, finTrame;
-	debutTrame = false;
-	finTrame = false;
-	while(finTrame == false && timeout < 3){
-		Sleep(1000);
-		RS232->recep(bufferRecep,longueurBufferRecep);
-		for(int i = 0; i < longueurBufferRecep; i++){
-			if(bufferRecep[i] == 0x02 && finTrame == false && debutTrame == false){
-				debutTrame = true;
-				bufferRecepFinal[nb] = bufferRecep[i];
-				nb++;
-			}else if(debutTrame == true && finTrame == false && bufferRecepFinal[nb-1] == 0x02 && bufferRecep[i] != 0x30){
-				debutTrame = false;
-				nb -= 1;
-			}else if(debutTrame == true && finTrame == false && bufferRecepFinal[nb-1] == 0x02 && bufferRecep[i] == 0x30){
-				bufferRecepFinal[nb] = bufferRecep[i];
-				nb++;
-			}else if(debutTrame == true && finTrame == false && bufferRecepFinal[nb-2] == 0x02 && bufferRecepFinal[nb-1] == 0x30 && bufferRecep[i] != 0x30){
-				debutTrame = false;
-				nb -= 2;
-			}else if(debutTrame == true && finTrame == false && bufferRecepFinal[nb-2] == 0x02 && bufferRecepFinal[nb-1] == 0x30 && bufferRecep[i] == 0x30){
-				bufferRecepFinal[nb] = bufferRecep[i];
-				nb++;
-			}else if(debutTrame == true && finTrame == false && bufferRecepFinal[nb-2] != 0x02 && bufferRecepFinal[nb-1] != 0x30 && bufferRecepFinal[nb-1] != 0x02 && bufferRecep[i] != 0x0D){
-				bufferRecepFinal[nb] = bufferRecep[i];
-				nb++;
-			}else if(debutTrame == true && bufferRecep[i] == 0x0D){
-				bufferRecepFinal[nb] = bufferRecep[i];
-				nb++;
-				finTrame = true;
-			}else if(debutTrame == true && finTrame == false){
-				if(bufferRecep[i] == 0x31 && bufferRecep[i-1] == 0x32 && nb == 13){
-					bufferRecepFinal[nb] = bufferRecep[i];
-					nb++;
-				} else if(nb == 13 && bufferRecep[i] != 0x31 && bufferRecep[i-1] != 0x32){
-					nb -= 13;
-				} else {
-					bufferRecepFinal[nb] = bufferRecep[i];
-					nb++;
-				}
-			}
-		}
-		timeout++;
-	}
-	if(finTrame == true){
-		snprintf(nombreDetection,2,"%c%c",bufferRecepFinal[8],bufferRecepFinal[9]);
-		snprintf(idDossard,6,"%c%c%c%c%c%c",bufferRecepFinal[27],bufferRecepFinal[28],bufferRecepFinal[29],bufferRecepFinal[30],bufferRecepFinal[31],bufferRecepFinal[32]);
-		snprintf(heureDetection,11,"%c%c%c%c%c%c%c%c%c%c%c",bufferRecepFinal[34],bufferRecepFinal[35],bufferRecepFinal[36],bufferRecepFinal[37],bufferRecepFinal[38],bufferRecepFinal[39],bufferRecepFinal[40],bufferRecepFinal[41],bufferRecepFinal[42],bufferRecepFinal[43],bufferRecepFinal[44]);
-
-		std::string nbDetectionS(nombreDetection);
-		Label12->Caption = nbDetectionS.c_str();
-		std::string idDossardS(idDossard);
-		Label8->Caption = idDossardS.c_str();
-		std::string heureDetectionS(heureDetection);
-		Label10->Caption = heureDetectionS.c_str();
-	}      */
-
 }
 //---------------------------------------------------------------------------
 

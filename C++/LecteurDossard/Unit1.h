@@ -47,13 +47,12 @@ __published:	// Composants gérés par l'EDI
 	void __fastcall Button3Click(TObject *Sender);
 	void __fastcall Button4Click(TObject *Sender);
 	void __fastcall Button5Click(TObject *Sender);
-	void __fastcall Label13Click(TObject *Sender);
 private:	// Déclarations utilisateur
 	ThreadDetectionDossard *th;
 	bool acquisitionStarted;
 public:		// Déclarations utilisateur
 	__fastcall TForm1(TComponent* Owner);
-	liaison *RS232;;
+	liaison *Serial;;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm1 *Form1;
