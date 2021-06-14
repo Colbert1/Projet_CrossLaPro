@@ -15,8 +15,8 @@ $result = $req->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <!--Milieu de page-->
     <div class="mid">
-    <!--<form method="POST" action="">
-        <select name="course" id="course">
+    <form method="POST" action="" id="form">
+        <select name="course" id="course" onclick="callHistorique()" onerror="">
     <?php
         echo '<option value="0" selected>Sélectionner la course</option>';
         foreach ($result as $ligne) {
@@ -25,7 +25,7 @@ $result = $req->fetchAll(PDO::FETCH_ASSOC);
         }
     ?>
         </select>
-    </form>-->
+    </form>
         <table>
             <thead>
                 <tr class="border border-blue-200 border-opacity-50 bg-gray-100">
