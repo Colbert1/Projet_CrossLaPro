@@ -39,6 +39,11 @@ include "navbar.php";
                     <a href="infoCourse.php">Information Course</a>
                 </button>
             </div>
+            <div class="text-center">
+                <button class="bg-blue-800 hover:bg-yellow-300 text-white hover:text-black font-bold py-2 px-4 rounded m-2">
+                    <a href="gererCourse.php">Gérer Course</a>
+                </button>
+            </div>
         </ul>
     </div>
 </body>

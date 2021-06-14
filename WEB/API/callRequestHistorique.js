@@ -1,4 +1,5 @@
-function showTab(classement) {
+function showTab(classement) 
+{
     // const participants = jsonObj['ds_num'];
     const table = document.getElementById('tab');
     table.innerHTML = ""
@@ -39,7 +40,8 @@ function showTab(classement) {
     }
 }
 
-function getClassement(){
+function getClassement()
+{
     const url = "./API/request.php";
     const req = new XMLHttpRequest();
 
@@ -53,4 +55,18 @@ function getClassement(){
     }
 }
 
-getClassement()
+function callHistorique()
+{
+    const form = document.getElementById("form");
+    const link = "./API/request.php?course=";
+    const reqs = new XMLHttpRequest();
+
+    document.getElementById("course").addEventListener("click", function(){
+        form.submit().getClassement();
+        
+        reqs.open('POST',link);
+        reqs.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        reqs.send();
+    });
+}
+
