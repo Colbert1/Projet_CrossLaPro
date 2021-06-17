@@ -11,14 +11,10 @@ $objEcr = new Ecran($bdd);
 
 
 try{
-    /*On récupère le nom de l'écran en bdd
-    Récupération écran
-    $objEcr->setId();
-    $objEcr->setNom();
-    $course = $objEcr->getNom();
-    */
-    $course = "course11";
-    $objClas->setNomCourse($course);
+    $headers = getallheaders();
+    $course = explode("=", $headers['Referer']);
+    
+    $objClas->setNomCourse($course[1]);
     $objClas->setIdCourse();
     $classement = $objClas->setClassement();
 } catch (PDOException $e) {
